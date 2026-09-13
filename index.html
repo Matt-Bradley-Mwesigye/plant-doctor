@@ -1,5 +1,7 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,12 +17,12 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg, #e8f7ee, #f7fff9);
+    background: #eaf7ee;
     color: #173b27;
 }
 
 .app {
-    width: min(430px, 100%);
+    width: min(460px, 100%);
     min-height: 100vh;
     margin: auto;
     background: white;
@@ -30,26 +32,26 @@ body {
 /* HEADER */
 
 header {
-    padding: 30px 22px 24px;
-    background: linear-gradient(135deg, #197a45, #42b96f);
+    padding: 30px 22px;
+    background: linear-gradient(135deg, #197a45, #48c878);
     color: white;
-    border-radius: 0 0 28px 28px;
+    border-radius: 0 0 30px 30px;
 }
 
 header h1 {
     margin: 0;
-    font-size: 32px;
+    font-size: 34px;
 }
 
 header p {
     margin: 8px 0 0;
-    opacity: 0.9;
+    font-size: 15px;
 }
 
 /* MAIN */
 
 main {
-    padding: 22px;
+    padding: 20px;
 }
 
 .card {
@@ -61,8 +63,7 @@ main {
 }
 
 .card h2 {
-    margin: 0 0 8px;
-    font-size: 20px;
+    margin-top: 0;
 }
 
 .small {
@@ -104,17 +105,17 @@ button:active {
 }
 
 .problem {
-    text-align: left;
     background: white;
     border: 1px solid #d9eadf;
     color: #173b27;
+    text-align: left;
 }
 
 /* CAMERA */
 
 #cameraPreview {
     width: 100%;
-    min-height: 220px;
+    min-height: 240px;
     object-fit: cover;
     border-radius: 18px;
     background: #111;
@@ -125,17 +126,51 @@ button:active {
 
 #preview {
     width: 100%;
-    max-height: 300px;
+    max-height: 320px;
     object-fit: cover;
     border-radius: 18px;
     margin-top: 15px;
 }
 
+/* SEARCH */
+
+.searchBox {
+    display: flex;
+    gap: 8px;
+}
+
+.searchBox input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #cfe4d5;
+    font-size: 15px;
+}
+
+.searchBox button {
+    width: 100px;
+    margin-top: 0;
+}
+
+/* PLANT RESULTS */
+
+.plantResult {
+    background: white;
+    border: 1px solid #d9eadf;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 12px;
+}
+
+.plantResult h3 {
+    margin-top: 0;
+}
+
 /* RESULT */
 
 .result {
-    border-left: 5px solid #42a765;
     background: #effaf2;
+    border-left: 5px solid #42a765;
 }
 
 .badge {
@@ -148,6 +183,46 @@ button:active {
     font-weight: bold;
 }
 
+.infoBox {
+    background: white;
+    border-radius: 15px;
+    padding: 14px;
+    margin-top: 12px;
+    border: 1px solid #dcefe2;
+}
+
+.infoBox h3 {
+    margin: 0 0 6px;
+}
+
+/* PHOTO CHECK */
+
+.photoTools {
+    margin-top: 15px;
+}
+
+.photoTip {
+    background: white;
+    border: 1px solid #dcefe2;
+    border-radius: 15px;
+    padding: 14px;
+    margin-top: 10px;
+}
+
+/* HISTORY */
+
+.historyItem {
+    background: white;
+    border: 1px solid #dcefe2;
+    border-radius: 15px;
+    padding: 14px;
+    margin-top: 10px;
+}
+
+.historyItem strong {
+    color: #176438;
+}
+
 /* HIDDEN */
 
 .hidden {
@@ -158,10 +233,10 @@ button:active {
 
 footer {
     text-align: center;
-    padding: 20px 22px 28px;
+    padding: 25px 20px 30px;
     color: #789081;
     font-size: 12px;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 footer strong {
@@ -178,16 +253,14 @@ footer strong {
 <div class="app">
 
 
-<!-- =========================
-     HEADER
-========================= -->
+<!-- HEADER -->
 
 <header>
 
     <h1>🌱 Plant Doctor</h1>
 
     <p>
-        Check your plant's health.
+        Simple plant care help for everyone.
     </p>
 
 </header>
@@ -196,23 +269,22 @@ footer strong {
 <main>
 
 
-<!-- =========================
-     HOME SCREEN
-========================= -->
+<!-- HOME -->
 
 <section id="home">
+
+
+    <!-- TAKE PHOTO -->
 
     <div class="card">
 
         <h2>📸 Check Your Plant</h2>
 
         <p class="small">
-            Use your computer camera, phone camera,
-            or choose a photo.
+            Take a picture of your plant or choose
+            one from your device.
         </p>
 
-
-        <!-- START COMPUTER CAMERA -->
 
         <button
             class="primary"
@@ -222,16 +294,12 @@ footer strong {
         </button>
 
 
-        <!-- LIVE CAMERA -->
-
         <video
             id="cameraPreview"
             autoplay
             playsinline
         ></video>
 
-
-        <!-- TAKE PHOTO -->
 
         <button
             class="primary"
@@ -241,8 +309,6 @@ footer strong {
         </button>
 
 
-        <!-- STOP CAMERA -->
-
         <button
             class="secondary"
             onclick="stopCamera()"
@@ -250,8 +316,6 @@ footer strong {
             ✖ Stop Camera
         </button>
 
-
-        <!-- PHONE CAMERA -->
 
         <button
             class="secondary"
@@ -270,8 +334,6 @@ footer strong {
         >
 
 
-        <!-- CHOOSE PHOTO -->
-
         <button
             class="secondary"
             onclick="openGallery()"
@@ -288,28 +350,22 @@ footer strong {
         >
 
 
-        <!-- HIDDEN CANVAS -->
-
         <canvas
             id="photoCanvas"
-            style="display:none;"
+            style="display:none"
         ></canvas>
 
     </div>
 
 
-
-    <!-- =========================
-         QUICK CHECK
-    ========================= -->
+    <!-- QUICK CHECK -->
 
     <div class="card">
 
         <h2>🔎 Quick Check</h2>
 
         <p class="small">
-            Don't have a photo?
-            Choose the symptom you can see.
+            Choose what you see on your plant.
         </p>
 
 
@@ -317,7 +373,7 @@ footer strong {
             class="problem"
             onclick="showProblem('yellow')"
         >
-            🟡 Yellow Leaves
+            🟡 My leaves are yellow
         </button>
 
 
@@ -325,7 +381,7 @@ footer strong {
             class="problem"
             onclick="showProblem('brown')"
         >
-            🟤 Brown Spots
+            🟤 My leaves have brown spots
         </button>
 
 
@@ -333,7 +389,7 @@ footer strong {
             class="problem"
             onclick="showProblem('wilt')"
         >
-            🥀 Wilting
+            🥀 My plant is weak or drooping
         </button>
 
 
@@ -341,18 +397,74 @@ footer strong {
             class="problem"
             onclick="showProblem('pests')"
         >
-            🐛 Insects or Pests
+            🐛 I see bugs
         </button>
 
     </div>
 
+
+    <!-- PLANT SEARCH -->
+
+    <div class="card">
+
+        <h2>🔍 Find a Plant</h2>
+
+        <p class="small">
+            Search for a plant to learn how to care for it.
+        </p>
+
+
+        <div class="searchBox">
+
+            <input
+                id="plantSearch"
+                type="text"
+                placeholder="Example: tomato"
+            >
+
+            <button
+                class="primary"
+                onclick="searchPlant()"
+            >
+                Search
+            </button>
+
+        </div>
+
+
+        <div id="searchResult"></div>
+
+    </div>
+
+
+    <!-- HISTORY -->
+
+    <div class="card">
+
+        <h2>📊 My Plant History</h2>
+
+        <p class="small">
+            Your recent checks are saved on this device.
+        </p>
+
+
+        <div id="historyList"></div>
+
+
+        <button
+            class="secondary"
+            onclick="clearHistory()"
+        >
+            🗑️ Clear History
+        </button>
+
+    </div>
+
+
 </section>
 
 
-
-<!-- =========================
-     PHOTO SCREEN
-========================= -->
+<!-- PHOTO SCREEN -->
 
 <section
     id="photoSection"
@@ -362,29 +474,110 @@ footer strong {
     <div class="card">
 
         <span class="badge">
-            PHOTO READY
+            🌿 PHOTO READY
         </span>
+
+
+        <h2>🌱 Your Plant</h2>
+
+
+        <p class="small">
+            Look at your photo and compare it with
+            the problems below.
+        </p>
 
 
         <img
             id="preview"
-            alt="Plant photo"
+            alt="Your plant photo"
         >
 
 
-        <button
-            class="primary"
-            onclick="analyzePhoto()"
-        >
-            🔬 Analyze Plant
-        </button>
+        <div class="photoTools">
+
+            <div class="photoTip">
+
+                <strong>🟡 Yellow leaves?</strong>
+
+                <p class="small">
+                    Your plant may have a water,
+                    sunlight, or soil problem.
+                </p>
+
+                <button
+                    class="secondary"
+                    onclick="showProblem('yellow')"
+                >
+                    Check Yellow Leaves
+                </button>
+
+            </div>
+
+
+            <div class="photoTip">
+
+                <strong>🟤 Brown spots?</strong>
+
+                <p class="small">
+                    Check the leaves for damage,
+                    too much sun, or bugs.
+                </p>
+
+                <button
+                    class="secondary"
+                    onclick="showProblem('brown')"
+                >
+                    Check Brown Spots
+                </button>
+
+            </div>
+
+
+            <div class="photoTip">
+
+                <strong>🥀 Drooping?</strong>
+
+                <p class="small">
+                    Check the soil and see if it
+                    is too dry or too wet.
+                </p>
+
+                <button
+                    class="secondary"
+                    onclick="showProblem('wilt')"
+                >
+                    Check Drooping
+                </button>
+
+            </div>
+
+
+            <div class="photoTip">
+
+                <strong>🐛 Bugs?</strong>
+
+                <p class="small">
+                    Look under the leaves and
+                    around the stem.
+                </p>
+
+                <button
+                    class="secondary"
+                    onclick="showProblem('pests')"
+                >
+                    Check for Bugs
+                </button>
+
+            </div>
+
+        </div>
 
 
         <button
             class="secondary"
             onclick="goHome()"
         >
-            ← Back
+            ← Back Home
         </button>
 
     </div>
@@ -392,10 +585,7 @@ footer strong {
 </section>
 
 
-
-<!-- =========================
-     RESULT SCREEN
-========================= -->
+<!-- RESULT -->
 
 <section
     id="resultSection"
@@ -405,36 +595,63 @@ footer strong {
     <div class="card result">
 
         <span class="badge">
-            PLANT DOCTOR RESULT
+            🩺 PLANT DOCTOR
         </span>
 
 
         <h2 id="resultTitle">
-            🌿 Plant Result
+            🌿 What might be wrong
         </h2>
 
 
-        <p>
-            <strong>Possible cause:</strong>
-        </p>
+        <div class="infoBox">
+
+            <h3>🪴 Plant</h3>
+
+            <p id="resultPlant"></p>
+
+        </div>
 
 
-        <p id="resultCause"></p>
+        <div class="infoBox">
+
+            <h3>🔎 What we found</h3>
+
+            <p id="resultCause"></p>
+
+        </div>
 
 
-        <p>
-            <strong>What you can try:</strong>
-        </p>
+        <div class="infoBox">
+
+            <h3>💧 How much water</h3>
+
+            <p id="resultWater"></p>
+
+        </div>
 
 
-        <p id="resultAdvice"></p>
+        <div class="infoBox">
+
+            <h3>☀️ How much sunlight</h3>
+
+            <p id="resultLight"></p>
+
+        </div>
+
+
+        <div class="infoBox">
+
+            <h3>✅ What you can do</h3>
+
+            <p id="resultAdvice"></p>
+
+        </div>
 
 
         <p class="small">
-
-            ⚠️ This is an educational guide,
-            not a professional plant diagnosis.
-
+            Plant Doctor gives simple plant-care advice.
+            Different plants can need different care.
         </p>
 
     </div>
@@ -444,7 +661,7 @@ footer strong {
         class="primary"
         onclick="goHome()"
     >
-        🏠 Back to Home
+        🏠 Back Home
     </button>
 
 </section>
@@ -453,9 +670,7 @@ footer strong {
 </main>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
+<!-- FOOTER -->
 
 <footer>
 
@@ -464,9 +679,11 @@ footer strong {
     </div>
 
     <div>
+
         <strong>
             Made by Matt Bradley Mwesigye
         </strong>
+
     </div>
 
     <div>
@@ -479,13 +696,10 @@ footer strong {
 </div>
 
 
-
 <script>
 
 
-/* =================================
-   ELEMENTS
-================================= */
+/* CAMERA */
 
 const cameraPreview =
     document.getElementById("cameraPreview");
@@ -502,18 +716,10 @@ const galleryInput =
 const phoneCameraInput =
     document.getElementById("phoneCameraInput");
 
-
-/* =================================
-   CAMERA STREAM
-================================= */
-
 let cameraStream = null;
 
 
-
-/* =================================
-   START COMPUTER CAMERA
-================================= */
+/* START CAMERA */
 
 async function startCamera() {
 
@@ -523,7 +729,7 @@ async function startCamera() {
             await navigator.mediaDevices.getUserMedia({
 
                 video: {
-                    facingMode: "user"
+                    facingMode: "environment"
                 },
 
                 audio: false
@@ -534,11 +740,12 @@ async function startCamera() {
         cameraPreview.srcObject =
             cameraStream;
 
+    }
 
-    } catch (error) {
+    catch (error) {
 
         alert(
-            "Camera access was blocked. Please allow camera permission and try again."
+            "We could not open the camera. Please allow camera access."
         );
 
         console.error(error);
@@ -548,17 +755,14 @@ async function startCamera() {
 }
 
 
-
-/* =================================
-   TAKE PICTURE
-================================= */
+/* TAKE PICTURE */
 
 function takePicture() {
 
     if (!cameraStream) {
 
         alert(
-            "Please click Start Camera first."
+            "Click Start Camera first."
         );
 
         return;
@@ -586,12 +790,8 @@ function takePicture() {
     );
 
 
-    const picture =
-        photoCanvas.toDataURL("image/png");
-
-
     preview.src =
-        picture;
+        photoCanvas.toDataURL("image/png");
 
 
     stopCamera();
@@ -603,21 +803,13 @@ function takePicture() {
 
 
     document
-        .getElementById("resultSection")
-        .classList.add("hidden");
-
-
-    document
         .getElementById("photoSection")
         .classList.remove("hidden");
 
 }
 
 
-
-/* =================================
-   STOP CAMERA
-================================= */
+/* STOP CAMERA */
 
 function stopCamera() {
 
@@ -631,7 +823,6 @@ function stopCamera() {
 
             });
 
-
         cameraStream = null;
 
     }
@@ -642,10 +833,7 @@ function stopCamera() {
 }
 
 
-
-/* =================================
-   PHONE CAMERA
-================================= */
+/* PHONE CAMERA */
 
 function openPhoneCamera() {
 
@@ -654,10 +842,7 @@ function openPhoneCamera() {
 }
 
 
-
-/* =================================
-   GALLERY
-================================= */
+/* GALLERY */
 
 function openGallery() {
 
@@ -666,21 +851,12 @@ function openGallery() {
 }
 
 
-
-/* =================================
-   PHONE PHOTO
-================================= */
+/* PHOTO INPUTS */
 
 phoneCameraInput.addEventListener(
     "change",
     handlePhoto
 );
-
-
-
-/* =================================
-   GALLERY PHOTO
-================================= */
 
 galleryInput.addEventListener(
     "change",
@@ -688,10 +864,7 @@ galleryInput.addEventListener(
 );
 
 
-
-/* =================================
-   HANDLE PHOTO
-================================= */
+/* HANDLE PHOTO */
 
 function handlePhoto(event) {
 
@@ -700,9 +873,7 @@ function handlePhoto(event) {
 
 
     if (!file) {
-
         return;
-
     }
 
 
@@ -716,83 +887,37 @@ function handlePhoto(event) {
 
 
     document
-        .getElementById("resultSection")
-        .classList.add("hidden");
-
-
-    document
         .getElementById("photoSection")
         .classList.remove("hidden");
 
 }
 
 
-
-/* =================================
-   ANALYZE PHOTO
-================================= */
-
-function analyzePhoto() {
-
-    /*
-       DEMO MODE
-
-       The photo is captured and displayed,
-       but no AI vision model is connected yet.
-    */
-
-
-    document
-        .getElementById("photoSection")
-        .classList.add("hidden");
-
-
-    document
-        .getElementById("resultSection")
-        .classList.remove("hidden");
-
-
-    document
-        .getElementById("resultTitle")
-        .textContent =
-        "🌿 Possible Plant Stress";
-
-
-    document
-        .getElementById("resultCause")
-        .textContent =
-        "The plant should be checked for visible signs such as yellowing, brown spots, wilting, pests, or unusual growth.";
-
-
-    document
-        .getElementById("resultAdvice")
-        .textContent =
-        "Check the soil moisture, lighting, leaves, and drainage. Compare the symptoms with a trusted plant-care guide.";
-
-}
-
-
-
-/* =================================
-   QUICK SYMPTOM CHECKER
-================================= */
+/* QUICK CHECK */
 
 function showProblem(type) {
 
-
     const problems = {
-
 
         yellow: {
 
             title:
-                "🟡 Yellow Leaves",
+                "🟡 Your leaves are yellow",
+
+            plant:
+                "Plant not known",
 
             cause:
-                "Overwatering, underwatering, poor nutrition, or natural ageing can cause yellow leaves.",
+                "Yellow leaves can happen when a plant gets too much water, too little water, or does not get enough nutrients.",
+
+            water:
+                "Check the soil first. If it is dry, water the plant. If it is already wet, wait before watering again.",
+
+            light:
+                "Make sure the plant gets the right amount of sunlight.",
 
             advice:
-                "Check the soil before watering. Make sure the pot drains properly and that the plant gets suitable light."
+                "Check the soil, leaves, and sunlight. Remove leaves that are badly damaged."
 
         },
 
@@ -800,13 +925,22 @@ function showProblem(type) {
         brown: {
 
             title:
-                "🟤 Brown Spots",
+                "🟤 Brown spots on leaves",
+
+            plant:
+                "Plant not known",
 
             cause:
-                "Brown spots can be caused by water stress, leaf damage, fungal problems, or too much direct sunlight.",
+                "Brown spots can happen because of too much sun, water problems, leaf damage, or plant sickness.",
+
+            water:
+                "Do not keep the soil too wet. Check the soil before watering.",
+
+            light:
+                "If the leaves look burned, move the plant away from very strong direct sunlight.",
 
             advice:
-                "Check the leaves and soil carefully. Avoid keeping leaves constantly wet and make sure the plant gets the right amount of light."
+                "Look closely at the spots and check under the leaves for bugs."
 
         },
 
@@ -814,13 +948,22 @@ function showProblem(type) {
         wilt: {
 
             title:
-                "🥀 Wilting",
+                "🥀 Your plant is drooping",
+
+            plant:
+                "Plant not known",
 
             cause:
-                "Wilting can happen when a plant lacks water, has damaged roots, or is under environmental stress.",
+                "A plant can droop when it needs water, has too much water, or is under stress.",
+
+            water:
+                "Touch the soil. If it is dry, the plant may need water. If it is very wet, wait before watering.",
+
+            light:
+                "Keep the plant in a place with the right amount of light.",
 
             advice:
-                "Check the soil moisture and drainage. If the soil is dry, water appropriately. If it is very wet, check that water can drain away."
+                "Check the soil, roots, pot, and leaves."
 
         },
 
@@ -828,13 +971,22 @@ function showProblem(type) {
         pests: {
 
             title:
-                "🐛 Possible Pests",
+                "🐛 You may have plant bugs",
+
+            plant:
+                "Plant not known",
 
             cause:
-                "Small insects, holes, sticky residue, or damaged leaves can be signs of pests.",
+                "Small bugs, holes, or sticky leaves can mean that pests are on the plant.",
+
+            water:
+                "Keep watering normally. Do not overwater the plant.",
+
+            light:
+                "Give the plant its normal amount of sunlight.",
 
             advice:
-                "Inspect the underside of leaves and separate badly affected plants if necessary. Ask an adult or gardening expert about a suitable treatment."
+                "Look under the leaves and around the stem. Ask an adult or gardening expert before using any pest treatment."
 
         }
 
@@ -844,6 +996,35 @@ function showProblem(type) {
     const result =
         problems[type];
 
+
+    saveHistory(
+        result.title,
+        result.plant
+    );
+
+
+    showResult(
+        result.title,
+        result.plant,
+        result.cause,
+        result.water,
+        result.light,
+        result.advice
+    );
+
+}
+
+
+/* SHOW RESULT */
+
+function showResult(
+    title,
+    plant,
+    cause,
+    water,
+    light,
+    advice
+) {
 
     document
         .getElementById("home")
@@ -863,27 +1044,417 @@ function showProblem(type) {
     document
         .getElementById("resultTitle")
         .textContent =
-        result.title;
+        title;
+
+
+    document
+        .getElementById("resultPlant")
+        .textContent =
+        plant;
 
 
     document
         .getElementById("resultCause")
         .textContent =
-        result.cause;
+        cause;
+
+
+    document
+        .getElementById("resultWater")
+        .textContent =
+        water;
+
+
+    document
+        .getElementById("resultLight")
+        .textContent =
+        light;
 
 
     document
         .getElementById("resultAdvice")
         .textContent =
-        result.advice;
+        advice;
 
 }
 
 
+/* PLANT DATABASE */
 
-/* =================================
-   HOME
-================================= */
+const plants = {
+
+    tomato: {
+
+        name:
+            "🍅 Tomato",
+
+        water:
+            "Water when the top of the soil starts to feel dry.",
+
+        light:
+            "Tomatoes like lots of sunlight.",
+
+        care:
+            "Give tomatoes enough water and sunlight. Support the plant as it grows."
+
+    },
+
+
+    banana: {
+
+        name:
+            "🍌 Banana",
+
+        water:
+            "Bananas need regular water, especially when the weather is hot.",
+
+        light:
+            "Bananas like plenty of sunlight.",
+
+        care:
+            "Keep the soil moist but not flooded."
+
+    },
+
+
+    maize: {
+
+        name:
+            "🌽 Maize",
+
+        water:
+            "Maize needs water while it is growing, especially during dry weather.",
+
+        light:
+            "Maize grows best with lots of sunlight.",
+
+        care:
+            "Give maize enough space, sunlight, water, and healthy soil."
+
+    },
+
+
+    potato: {
+
+        name:
+            "🥔 Potato",
+
+        water:
+            "Keep the soil slightly moist but do not flood it.",
+
+        light:
+            "Potatoes need good sunlight.",
+
+        care:
+            "Keep the soil healthy and watch the leaves for bugs or spots."
+
+    },
+
+
+    bean: {
+
+        name:
+            "🫘 Bean",
+
+        water:
+            "Water when the soil starts to dry.",
+
+        light:
+            "Beans grow well with good sunlight.",
+
+        care:
+            "Give beans water, sunlight, and support if the plant needs it."
+
+    },
+
+
+    rose: {
+
+        name:
+            "🌹 Rose",
+
+        water:
+            "Water when the soil starts to dry.",
+
+        light:
+            "Roses like plenty of sunlight.",
+
+        care:
+            "Remove dead leaves and flowers and check for bugs."
+
+    },
+
+
+    apple: {
+
+        name:
+            "🍎 Apple",
+
+        water:
+            "Young apple trees need regular water.",
+
+        light:
+            "Apple trees need plenty of sunlight.",
+
+        care:
+            "Keep the soil healthy and check the leaves for bugs or spots."
+
+    },
+
+
+    cassava: {
+
+        name:
+            "🌿 Cassava",
+
+        water:
+            "Cassava can handle some dry weather, but young plants still need water.",
+
+        light:
+            "Cassava grows well with plenty of sunlight.",
+
+        care:
+            "Keep the area around the plant clear of weeds and check the leaves for bugs."
+
+    },
+
+
+    avocado: {
+
+        name:
+            "🥑 Avocado",
+
+        water:
+            "Young avocado plants need regular water, but the soil should not stay flooded.",
+
+        light:
+            "Avocado plants like plenty of sunlight.",
+
+        care:
+            "Give the plant good soil, enough water, and enough space to grow."
+
+    }
+
+};
+
+
+/* SEARCH PLANTS */
+
+function searchPlant() {
+
+    const input =
+        document
+        .getElementById("plantSearch")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const resultBox =
+        document.getElementById("searchResult");
+
+
+    if (!input) {
+
+        resultBox.innerHTML =
+            "<p class='small'>Type a plant name first.</p>";
+
+        return;
+
+    }
+
+
+    let plant = null;
+
+
+    for (const key in plants) {
+
+        if (
+            key.includes(input) ||
+            plants[key].name
+                .toLowerCase()
+                .includes(input)
+        ) {
+
+            plant = plants[key];
+
+            break;
+
+        }
+
+    }
+
+
+    if (!plant) {
+
+        resultBox.innerHTML = `
+
+            <div class="plantResult">
+
+                <h3>🌱 Plant not found</h3>
+
+                <p>
+                    We do not have this plant yet.
+                </p>
+
+                <p class="small">
+                    Try tomato, banana, maize,
+                    potato, bean, rose, apple,
+                    cassava, or avocado.
+                </p>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    resultBox.innerHTML = `
+
+        <div class="plantResult">
+
+            <h3>${plant.name}</h3>
+
+            <p>
+                <strong>💧 Water:</strong>
+                ${plant.water}
+            </p>
+
+            <p>
+                <strong>☀️ Sunlight:</strong>
+                ${plant.light}
+            </p>
+
+            <p>
+                <strong>✅ Care:</strong>
+                ${plant.care}
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+
+/* HISTORY */
+
+function saveHistory(title, plant) {
+
+    let history =
+        JSON.parse(
+            localStorage.getItem("plantDoctorHistory")
+        ) || [];
+
+
+    history.unshift({
+
+        title: title,
+
+        plant: plant,
+
+        date:
+            new Date().toLocaleDateString()
+
+    });
+
+
+    history =
+        history.slice(0, 10);
+
+
+    localStorage.setItem(
+        "plantDoctorHistory",
+        JSON.stringify(history)
+    );
+
+
+    loadHistory();
+
+}
+
+
+/* LOAD HISTORY */
+
+function loadHistory() {
+
+    const list =
+        document.getElementById("historyList");
+
+
+    let history =
+        JSON.parse(
+            localStorage.getItem("plantDoctorHistory")
+        ) || [];
+
+
+    if (history.length === 0) {
+
+        list.innerHTML =
+            "<p class='small'>No checks yet.</p>";
+
+        return;
+
+    }
+
+
+    list.innerHTML = "";
+
+
+    history.forEach(function(item) {
+
+        const div =
+            document.createElement("div");
+
+
+        div.className =
+            "historyItem";
+
+
+        div.innerHTML = `
+
+            <strong>
+                ${item.title}
+            </strong>
+
+            <br>
+
+            🌱 ${item.plant}
+
+            <br>
+
+            <span class="small">
+                ${item.date}
+            </span>
+
+        `;
+
+
+        list.appendChild(div);
+
+    });
+
+}
+
+
+/* CLEAR HISTORY */
+
+function clearHistory() {
+
+    localStorage.removeItem(
+        "plantDoctorHistory"
+    );
+
+
+    loadHistory();
+
+}
+
+
+/* GO HOME */
 
 function goHome() {
 
@@ -913,7 +1484,13 @@ function goHome() {
 
 }
 
+
+/* LOAD HISTORY */
+
+loadHistory();
+
 </script>
 
 </body>
 </html>
+```
