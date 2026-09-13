@@ -2,900 +2,789 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0d6b45">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Plant Doctor</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
-
-:root {
-    --green: #0d6b45;
-    --green-dark: #08472f;
-    --green-light: #e9f7ef;
-    --green-soft: #f3fbf6;
-    --white: #ffffff;
-    --black: #15201b;
-    --gray: #6d7772;
-    --light: #f4f7f5;
-    --border: #e1e9e4;
-    --yellow: #f3b62f;
-    --red: #d9534f;
-    --shadow: 0 12px 35px rgba(15, 67, 45, 0.10);
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #eef3f0;
-    color: var(--black);
-    min-height: 100vh;
-}
-
-button,
-input {
-    font-family: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-/* APP */
-
-.app {
-    width: min(100%, 1500px);
-    min-height: 100vh;
-    margin: auto;
-    background: var(--light);
-    position: relative;
-    overflow-x: hidden;
-}
-
-/* TOP BAR */
-
-.topbar {
-    height: 76px;
-    background: white;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 clamp(18px, 4vw, 55px);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.logo {
-    width: 43px;
-    height: 43px;
-    border-radius: 14px;
-    background: var(--green);
-    color: white;
-    display: grid;
-    place-items: center;
-    font-size: 23px;
-    box-shadow: 0 6px 15px rgba(13, 107, 69, .2);
-}
-
-.brand-text strong {
-    display: block;
-    font-size: 19px;
-    letter-spacing: -.5px;
-}
-
-.brand-text span {
-    color: var(--gray);
-    font-size: 11px;
-}
-
-.top-status {
-    background: var(--green-light);
-    color: var(--green);
-    padding: 8px 13px;
-    border-radius: 30px;
-    font-size: 12px;
-    font-weight: bold;
+
+:root{
+    --green:#126b3a;
+    --green2:#1c8a4d;
+    --lightgreen:#eaf7ef;
+    --dark:#123225;
+    --text:#20342a;
+    --muted:#718078;
+    --white:#ffffff;
+    --bg:#f4f8f5;
+    --card:#ffffff;
+    --border:#e2ebe5;
+    --yellow:#f4b942;
+    --red:#df5a52;
+    --blue:#4d91d9;
+    --shadow:0 8px 25px rgba(18,107,58,.08);
+}
+
+body.dark{
+    --bg:#101914;
+    --card:#17231c;
+    --white:#17231c;
+    --text:#eef7f1;
+    --dark:#eef7f1;
+    --muted:#a5b5ac;
+    --border:#293a30;
+    --lightgreen:#193a28;
+    --shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    transition:.25s;
+}
+
+button,input{
+    font:inherit;
 }
-
-/* PAGES */
-
-.page {
-    display: none;
-    padding: clamp(20px, 4vw, 45px);
-    padding-bottom: 110px;
-    animation: pageIn .25s ease;
+
+button{
+    cursor:pointer;
 }
 
-.page.active {
-    display: block;
+.app{
+    width:100%;
+    min-height:100vh;
+}
+
+.topbar{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 5%;
 }
 
-@keyframes pageIn {
-    from {
-        opacity: 0;
-        transform: translateY(8px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    cursor:pointer;
+}
 
-.page-header {
-    max-width: 1000px;
-    margin: 0 auto 25px;
+.logo{
+    width:44px;
+    height:44px;
+    border-radius:14px;
+    background:var(--green);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
 }
 
-.page-header h1 {
-    font-size: clamp(25px, 4vw, 36px);
-    margin-bottom: 7px;
+.brand h1{
+    font-size:20px;
+    color:var(--dark);
 }
 
-.page-header p {
-    color: var(--gray);
+.brand small{
+    color:var(--muted);
 }
-
-/* HOME */
 
-.home-grid {
-    max-width: 1150px;
-    margin: auto;
+.top-actions{
+    display:flex;
+    gap:10px;
 }
 
-.welcome {
-    margin-bottom: 25px;
+.icon-btn{
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
 }
 
-.welcome small {
-    color: var(--green);
-    font-weight: bold;
+.main{
+    width:90%;
+    max-width:1250px;
+    margin:auto;
+    padding:30px 0 100px;
 }
 
-.welcome h1 {
-    font-size: clamp(28px, 5vw, 43px);
-    margin-top: 5px;
+.hero{
+    background:linear-gradient(135deg,#0d6334,#219653);
+    color:white;
+    border-radius:28px;
+    padding:34px;
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:25px;
+    overflow:hidden;
+    position:relative;
 }
 
-.welcome p {
-    color: var(--gray);
-    margin-top: 8px;
+.hero:after{
+    content:"🌿";
+    position:absolute;
+    right:35px;
+    bottom:-20px;
+    font-size:150px;
+    opacity:.13;
 }
 
-/* MAIN CHECK CARD */
-
-.check-card {
-    background: linear-gradient(135deg, #0d6b45, #08472f);
-    color: white;
-    border-radius: 28px;
-    padding: clamp(25px, 5vw, 42px);
-    min-height: 270px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 25px;
-    box-shadow: 0 20px 45px rgba(7, 73, 48, .22);
-    overflow: hidden;
-    position: relative;
+.hero h2{
+    font-size:clamp(30px,5vw,52px);
+    margin-bottom:12px;
 }
 
-.check-card::after {
-    content: "🌿";
-    position: absolute;
-    right: -20px;
-    bottom: -55px;
-    font-size: 190px;
-    opacity: .09;
-    transform: rotate(-20deg);
+.hero p{
+    line-height:1.6;
+    max-width:600px;
+    color:#e3f6ea;
 }
 
-.check-content {
-    position: relative;
-    z-index: 2;
-    max-width: 600px;
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    margin-top:25px;
+    flex-wrap:wrap;
 }
 
-.check-label {
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    opacity: .75;
-    font-weight: bold;
+.primary{
+    background:white;
+    color:var(--green);
+    border:0;
+    padding:13px 19px;
+    border-radius:13px;
+    font-weight:bold;
 }
 
-.check-card h2 {
-    font-size: clamp(27px, 5vw, 42px);
-    margin: 8px 0;
+.secondary{
+    background:rgba(255,255,255,.14);
+    color:white;
+    border:1px solid rgba(255,255,255,.35);
+    padding:13px 19px;
+    border-radius:13px;
+    font-weight:bold;
 }
 
-.check-card p {
-    opacity: .82;
-    line-height: 1.5;
-    max-width: 550px;
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:32px 0 15px;
 }
 
-.primary-btn {
-    margin-top: 23px;
-    background: white;
-    color: var(--green);
-    border: none;
-    padding: 14px 22px;
-    border-radius: 13px;
-    font-weight: bold;
-    font-size: 14px;
-    box-shadow: 0 8px 18px rgba(0,0,0,.12);
-    transition: .2s;
+.section-title h2{
+    font-size:23px;
 }
 
-.primary-btn:hover {
-    transform: translateY(-2px);
+.section-title button{
+    border:0;
+    background:none;
+    color:var(--green2);
+    font-weight:bold;
 }
 
-/* DASHBOARD CARDS */
-
-.section-title {
-    margin: 32px 0 14px;
-    font-size: 18px;
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-top:22px;
 }
 
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
+.stat{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:20px;
+    box-shadow:var(--shadow);
 }
 
-.info-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 19px;
-    padding: 20px;
-    box-shadow: 0 5px 18px rgba(0,0,0,.03);
+.stat-icon{
+    font-size:26px;
+    margin-bottom:12px;
 }
 
-.info-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-    background: var(--green-light);
-    display: grid;
-    place-items: center;
-    font-size: 20px;
-    margin-bottom: 15px;
+.stat strong{
+    display:block;
+    font-size:27px;
+    color:var(--dark);
 }
 
-.info-card small {
-    color: var(--gray);
-    display: block;
-    margin-bottom: 5px;
+.stat span{
+    color:var(--muted);
+    font-size:14px;
 }
 
-.info-card strong {
-    font-size: 20px;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
 }
 
-.info-card p {
-    color: var(--gray);
-    font-size: 12px;
-    margin-top: 6px;
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:20px;
+    box-shadow:var(--shadow);
 }
-
-/* HEALTH SCORE */
 
-.health-box {
-    margin-top: 25px;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    padding: 23px;
-    display: flex;
-    align-items: center;
-    gap: 25px;
+.card h3{
+    color:var(--dark);
+    margin-bottom:7px;
 }
 
-.health-ring {
-    width: 85px;
-    height: 85px;
-    border-radius: 50%;
-    background: conic-gradient(var(--green) 0deg 300deg, #dce8e1 300deg);
-    display: grid;
-    place-items: center;
-    flex-shrink: 0;
+.card p{
+    color:var(--muted);
+    line-height:1.5;
 }
 
-.health-ring-inner {
-    width: 67px;
-    height: 67px;
-    border-radius: 50%;
-    background: white;
-    display: grid;
-    place-items: center;
-    font-size: 19px;
-    font-weight: bold;
+.action-card{
+    cursor:pointer;
+    transition:.2s;
 }
 
-.health-box p {
-    color: var(--gray);
-    margin-top: 5px;
-    font-size: 14px;
+.action-card:hover{
+    transform:translateY(-4px);
 }
 
-/* SEARCH */
-
-.search-box {
-    background: white;
-    border: 1px solid var(--border);
-    padding: 18px;
-    border-radius: 20px;
-    display: flex;
-    gap: 10px;
+.big-icon{
+    font-size:38px;
+    margin-bottom:14px;
 }
 
-.search-box input {
-    flex: 1;
-    min-width: 0;
-    border: none;
-    outline: none;
-    background: var(--light);
-    border-radius: 12px;
-    padding: 14px;
-    font-size: 14px;
+.search-box{
+    display:flex;
+    gap:10px;
+    margin-bottom:18px;
 }
 
-.search-btn {
-    border: none;
-    background: var(--green);
-    color: white;
-    padding: 0 20px;
-    border-radius: 12px;
-    font-weight: bold;
+.search-box input{
+    flex:1;
+    padding:14px 16px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:var(--card);
+    color:var(--text);
+    outline:none;
 }
 
-.plant-results {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
-    margin-top: 15px;
+.green-btn{
+    background:var(--green);
+    color:white;
+    border:0;
+    border-radius:13px;
+    padding:12px 17px;
+    font-weight:bold;
 }
 
-.plant-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 17px;
-    padding: 18px;
-    cursor: pointer;
-    transition: .2s;
+.problem-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
 }
 
-.plant-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow);
+.problem{
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:18px;
+    padding:17px;
+    text-align:left;
+    color:var(--text);
+    transition:.2s;
 }
 
-.plant-card .plant-icon {
-    font-size: 30px;
-    margin-bottom: 12px;
+.problem:hover{
+    transform:translateY(-3px);
+    border-color:var(--green2);
 }
 
-.plant-card strong {
-    display: block;
+.problem span{
+    font-size:30px;
+    display:block;
+    margin-bottom:9px;
 }
 
-.plant-card span {
-    font-size: 12px;
-    color: var(--gray);
+.problem strong{
+    display:block;
+    margin-bottom:4px;
 }
-
-/* CHECK PAGE */
 
-.check-layout {
-    max-width: 950px;
-    margin: auto;
+.problem small{
+    color:var(--muted);
 }
 
-.camera-box {
-    background: #15231d;
-    border-radius: 28px;
-    min-height: min(65vh, 600px);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.camera-box{
+    background:#102019;
+    border-radius:24px;
+    padding:18px;
+    overflow:hidden;
 }
 
-#cameraVideo {
-    width: 100%;
-    height: 100%;
-    min-height: min(65vh, 600px);
-    object-fit: cover;
-    display: none;
+video{
+    width:100%;
+    max-height:440px;
+    object-fit:cover;
+    border-radius:18px;
+    background:#08100c;
+    display:none;
 }
 
-.camera-placeholder {
-    text-align: center;
-    color: white;
-    padding: 30px;
+.camera-placeholder{
+    min-height:300px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    color:white;
+    text-align:center;
+    border:1px dashed #496456;
+    border-radius:18px;
 }
 
-.camera-placeholder .camera-icon {
-    font-size: 65px;
-    margin-bottom: 15px;
+.camera-placeholder div{
+    font-size:65px;
+    margin-bottom:12px;
 }
 
-.camera-placeholder h2 {
-    margin-bottom: 8px;
+.camera-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:15px;
 }
 
-.camera-placeholder p {
-    color: #c8d1cd;
-    font-size: 14px;
+.camera-buttons button{
+    border:0;
+    border-radius:12px;
+    padding:12px 15px;
+    font-weight:bold;
 }
 
-.camera-guide {
-    position: absolute;
-    width: min(70%, 360px);
-    aspect-ratio: 1 / 1;
-    border: 2px solid rgba(255,255,255,.75);
-    border-radius: 25px;
-    pointer-events: none;
-    display: none;
+input[type=file]{
+    display:none;
 }
 
-.camera-guide::before,
-.camera-guide::after {
-    content: "";
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    border-color: white;
+.result{
+    display:none;
 }
 
-.camera-guide::before {
-    left: -2px;
-    top: -2px;
-    border-left: 4px solid;
-    border-top: 4px solid;
+.result-head{
+    background:linear-gradient(135deg,#eaf8ef,#ffffff);
+    border:1px solid #d7eadd;
+    border-radius:24px;
+    padding:25px;
 }
 
-.camera-guide::after {
-    right: -2px;
-    bottom: -2px;
-    border-right: 4px solid;
-    border-bottom: 4px solid;
+body.dark .result-head{
+    background:#193025;
+    border-color:#294637;
 }
 
-.camera-controls {
-    margin-top: 18px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
+.score{
+    display:flex;
+    align-items:center;
+    gap:20px;
 }
 
-.control-btn {
-    border: 1px solid var(--border);
-    background: white;
-    padding: 13px 18px;
-    border-radius: 12px;
-    font-weight: bold;
-    color: var(--black);
+.score-circle{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    background:var(--green);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+    font-weight:bold;
 }
 
-.control-btn.green {
-    background: var(--green);
-    color: white;
-    border-color: var(--green);
+.advice-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-top:18px;
 }
 
-.control-btn.red {
-    background: #fff0f0;
-    color: var(--red);
+.advice{
+    padding:20px;
+    border-radius:18px;
+    background:var(--card);
+    border:1px solid var(--border);
 }
 
-/* REVIEW */
-
-.review-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 25px;
-    overflow: hidden;
-    max-width: 700px;
-    margin: auto;
-    box-shadow: var(--shadow);
+.advice-icon{
+    font-size:30px;
+    margin-bottom:10px;
 }
 
-.review-card img {
-    width: 100%;
-    max-height: 500px;
-    object-fit: cover;
-    display: block;
+.advice h3{
+    margin-bottom:7px;
 }
 
-.review-info {
-    padding: 25px;
+.advice p{
+    color:var(--muted);
+    line-height:1.5;
 }
 
-.review-info h2 {
-    margin-bottom: 7px;
+.action-list{
+    list-style:none;
+    margin-top:12px;
 }
 
-.review-info p {
-    color: var(--gray);
+.action-list li{
+    padding:10px 0;
+    border-bottom:1px solid var(--border);
 }
 
-/* RESULT */
-
-.result-wrap {
-    max-width: 900px;
-    margin: auto;
+.action-list li:last-child{
+    border:0;
 }
 
-.result-top {
-    background: linear-gradient(135deg, #0d6b45, #087d50);
-    color: white;
-    border-radius: 25px;
-    padding: 30px;
-    display: flex;
-    align-items: center;
-    gap: 22px;
+.plant-card{
+    position:relative;
 }
 
-.result-icon {
-    width: 70px;
-    height: 70px;
-    background: rgba(255,255,255,.14);
-    border-radius: 20px;
-    display: grid;
-    place-items: center;
-    font-size: 35px;
+.plant-icon{
+    width:65px;
+    height:65px;
+    border-radius:20px;
+    background:var(--lightgreen);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:36px;
+    margin-bottom:14px;
 }
 
-.result-top h2 {
-    margin-bottom: 6px;
+.fav{
+    position:absolute;
+    top:15px;
+    right:15px;
+    border:0;
+    background:none;
+    font-size:22px;
 }
 
-.result-top p {
-    opacity: .82;
+.progress{
+    width:100%;
+    height:8px;
+    background:var(--border);
+    border-radius:20px;
+    margin:12px 0;
+    overflow:hidden;
 }
 
-.result-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-top: 16px;
+.progress span{
+    display:block;
+    height:100%;
+    background:var(--green2);
+    border-radius:20px;
 }
 
-.result-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 22px;
+.plant-buttons{
+    display:flex;
+    gap:7px;
+    flex-wrap:wrap;
 }
 
-.result-card h3 {
-    margin-bottom: 9px;
+.small-btn{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    padding:8px 11px;
+    border-radius:10px;
+    font-size:13px;
 }
 
-.result-card p {
-    color: var(--gray);
-    line-height: 1.55;
-    font-size: 14px;
+.library{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
 }
 
-.result-card.full {
-    grid-column: 1 / -1;
+.library-card{
+    cursor:pointer;
 }
 
-.advice-list {
-    list-style: none;
+.calendar{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:7px;
 }
 
-.advice-list li {
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-    color: #4e5954;
-    font-size: 14px;
+.day{
+    min-height:65px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:8px;
+    background:var(--card);
 }
 
-.advice-list li:last-child {
-    border-bottom: none;
+.day.today{
+    border:2px solid var(--green2);
 }
-
-/* HISTORY */
 
-.history-list {
-    max-width: 900px;
-    margin: auto;
+.day.watered{
+    background:var(--lightgreen);
 }
 
-.history-item {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 18px;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
+.day small{
+    display:block;
+    color:var(--muted);
 }
 
-.history-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    background: var(--green-light);
-    display: grid;
-    place-items: center;
-    font-size: 22px;
-    flex-shrink: 0;
+.tip{
+    background:linear-gradient(135deg,#fff7db,#fffdf4);
+    border:1px solid #f1dfa3;
 }
 
-.history-item strong {
-    display: block;
-    margin-bottom: 5px;
+body.dark .tip{
+    background:#332d18;
+    border-color:#514820;
 }
 
-.history-item span {
-    font-size: 12px;
-    color: var(--gray);
+.note{
+    width:100%;
+    min-height:130px;
+    padding:15px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:var(--card);
+    color:var(--text);
+    resize:vertical;
 }
 
-.empty-history {
-    background: white;
-    border: 1px dashed #cdd9d2;
-    border-radius: 20px;
-    padding: 45px 20px;
-    text-align: center;
-    color: var(--gray);
+.history-item{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    border-bottom:1px solid var(--border);
+    padding:15px 0;
 }
 
-/* CARE PAGE */
-
-.care-grid {
-    max-width: 1000px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+.history-item:last-child{
+    border:0;
 }
 
-.care-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 21px;
-    padding: 23px;
+.history-icon{
+    width:48px;
+    height:48px;
+    border-radius:15px;
+    background:var(--lightgreen);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
 }
 
-.care-card .big-icon {
-    font-size: 35px;
-    margin-bottom: 12px;
+.settings-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:17px 0;
+    border-bottom:1px solid var(--border);
 }
 
-.care-card h3 {
-    margin-bottom: 7px;
+.switch{
+    width:48px;
+    height:26px;
+    background:#aab8b0;
+    border-radius:20px;
+    padding:3px;
+    cursor:pointer;
 }
 
-.care-card p {
-    color: var(--gray);
-    line-height: 1.5;
-    font-size: 14px;
+.switch span{
+    width:20px;
+    height:20px;
+    background:white;
+    display:block;
+    border-radius:50%;
+    transition:.2s;
 }
 
-.progress {
-    height: 9px;
-    background: #e7eee9;
-    border-radius: 20px;
-    overflow: hidden;
-    margin-top: 15px;
+.switch.active{
+    background:var(--green2);
 }
 
-.progress span {
-    display: block;
-    height: 100%;
-    width: 75%;
-    background: var(--green);
-    border-radius: inherit;
+.switch.active span{
+    transform:translateX(22px);
 }
-
-/* NOTES */
 
-.notes-box {
-    max-width: 900px;
-    margin: 20px auto;
-    background: white;
-    padding: 22px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
+.toast{
+    position:fixed;
+    right:20px;
+    bottom:25px;
+    background:#123225;
+    color:white;
+    padding:14px 18px;
+    border-radius:14px;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+    z-index:100;
 }
 
-.notes-box textarea {
-    width: 100%;
-    min-height: 120px;
-    border: 1px solid var(--border);
-    background: var(--light);
-    border-radius: 13px;
-    padding: 14px;
-    resize: vertical;
-    outline: none;
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
 }
 
-/* BOTTOM NAV */
-
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(100%, 1500px);
-    height: 72px;
-    background: rgba(255,255,255,.96);
-    backdrop-filter: blur(12px);
-    border-top: 1px solid var(--border);
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    z-index: 200;
+.empty{
+    text-align:center;
+    padding:35px;
+    color:var(--muted);
 }
 
-.nav-btn {
-    border: none;
-    background: transparent;
-    color: #7b8580;
-    font-size: 11px;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
+footer{
+    text-align:center;
+    color:var(--muted);
+    padding:30px 10px 100px;
+    font-size:13px;
 }
 
-.nav-btn span {
-    font-size: 21px;
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(700px,94%);
+    height:70px;
+    background:var(--card);
+    border:1px solid var(--border);
+    box-shadow:0 -5px 25px rgba(0,0,0,.08);
+    border-radius:22px 22px 0 0;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    z-index:40;
 }
 
-.nav-btn.active {
-    color: var(--green);
+.nav-btn{
+    border:0;
+    background:none;
+    color:var(--muted);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    font-size:11px;
 }
 
-/* FOOTER */
-
-footer {
-    text-align: center;
-    color: #87928d;
-    font-size: 11px;
-    padding: 25px 15px 95px;
+.nav-btn span{
+    font-size:22px;
 }
 
-footer strong {
-    color: var(--green);
+.nav-btn.active{
+    color:var(--green2);
+    font-weight:bold;
 }
-
-/* RESPONSIVE */
 
-@media (max-width: 900px) {
-    .dashboard-grid {
-        grid-template-columns: repeat(2, 1fr);
+@media(max-width:900px){
+    .hero{
+        grid-template-columns:1fr;
     }
 
-    .plant-results {
-        grid-template-columns: repeat(2, 1fr);
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .grid,
+    .library{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .problem-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .advice-grid{
+        grid-template-columns:1fr;
     }
 }
 
-@media (max-width: 650px) {
-    body {
-        background: var(--light);
+@media(max-width:600px){
+    .topbar{
+        padding:0 4%;
+        height:65px;
     }
 
-    .topbar {
-        height: 68px;
-        padding: 0 16px;
+    .brand h1{
+        font-size:17px;
     }
 
-    .top-status {
-        display: none;
+    .brand small{
+        display:none;
     }
 
-    .page {
-        padding: 20px 15px 100px;
+    .main{
+        width:92%;
+        padding-top:20px;
     }
 
-    .check-card {
-        min-height: 300px;
-        border-radius: 22px;
-        padding: 25px;
+    .hero{
+        padding:25px;
+        border-radius:22px;
     }
 
-    .check-card::after {
-        font-size: 130px;
+    .hero h2{
+        font-size:32px;
     }
 
-    .dashboard-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
+    .stats{
+        gap:9px;
     }
 
-    .info-card {
-        padding: 15px;
+    .stat{
+        padding:15px;
     }
 
-    .health-box {
-        padding: 18px;
+    .stat strong{
+        font-size:22px;
     }
 
-    .plant-results {
-        grid-template-columns: 1fr;
+    .grid,
+    .library{
+        grid-template-columns:1fr;
     }
 
-    .result-grid,
-    .care-grid {
-        grid-template-columns: 1fr;
+    .problem-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .result-card.full {
-        grid-column: auto;
+    .problem{
+        padding:13px;
     }
 
-    .camera-box {
-        min-height: 58vh;
-        border-radius: 22px;
+    .calendar{
+        gap:4px;
     }
 
-    #cameraVideo {
-        min-height: 58vh;
+    .day{
+        min-height:50px;
+        padding:5px;
+        font-size:12px;
     }
 
-    .search-box {
-        padding: 12px;
-    }
-
-    .search-btn {
-        padding: 0 15px;
-    }
-
-    .bottom-nav {
-        height: 68px;
-    }
-}
-
-@media (max-width: 390px) {
-    .brand-text strong {
-        font-size: 17px;
-    }
-
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .welcome h1 {
-        font-size: 29px;
-    }
-
-    .check-card h2 {
-        font-size: 27px;
-    }
-
-    .camera-controls {
-        flex-direction: column;
-    }
-
-    .control-btn {
-        width: 100%;
-    }
-}
-
-@media (min-width: 1200px) {
-    .app {
-        box-shadow: 0 0 50px rgba(0,0,0,.08);
+    .bottom-nav{
+        height:66px;
     }
 }
 </style>
@@ -905,890 +794,1274 @@ footer strong {
 
 <div class="app">
 
-<!-- TOP BAR -->
-
 <header class="topbar">
-    <div class="brand">
+    <div class="brand" onclick="goHome()">
         <div class="logo">🌿</div>
-        <div class="brand-text">
-            <strong>Plant Doctor</strong>
-            <span>Plant health & care</span>
+        <div>
+            <h1>Plant Doctor</h1>
+            <small>Your plant care helper</small>
         </div>
     </div>
 
-    <div class="top-status">● Plant care ready</div>
+    <div class="top-actions">
+        <button class="icon-btn" onclick="toggleDark()" title="Dark mode">🌙</button>
+        <button class="icon-btn" onclick="showSection('settings')" title="Settings">⚙️</button>
+    </div>
 </header>
 
+<main class="main">
 
 <!-- HOME -->
+<section id="home">
 
-<section id="homePage" class="page active">
+    <div class="hero">
+        <div>
+            <h2>Keep your plants happy. 🌱</h2>
+            <p>
+                Check plant problems, learn how to care for plants,
+                track watering and keep your little green family organised.
+            </p>
 
-    <div class="home-grid">
+            <div class="hero-buttons">
+                <button class="primary" onclick="showSection('check')">
+                    🩺 Check a Plant
+                </button>
 
-        <div class="welcome">
-            <small>WELCOME BACK</small>
-            <h1>Keep your plants healthy.</h1>
-            <p>Check your plant, learn what it needs, and keep track of its care.</p>
-        </div>
-
-        <div class="check-card">
-
-            <div class="check-content">
-                <div class="check-label">PLANT HEALTH CHECK</div>
-
-                <h2>Is your plant okay?</h2>
-
-                <p>
-                    Take a clear picture of your plant and use Plant Doctor
-                    to check common plant problems.
-                </p>
-
-                <button class="primary-btn" onclick="showPage('checkPage')">
-                    📷 Check my plant
+                <button class="secondary" onclick="showSection('library')">
+                    📚 Explore Plants
                 </button>
             </div>
+        </div>
+    </div>
 
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-icon">🌱</div>
+            <strong id="plantCount">0</strong>
+            <span>My plants</span>
         </div>
 
-
-        <h2 class="section-title">Your plant dashboard</h2>
-
-        <div class="dashboard-grid">
-
-            <div class="info-card">
-                <div class="info-icon">💧</div>
-                <small>Water</small>
-                <strong>Check today</strong>
-                <p>Feel the soil before watering.</p>
-            </div>
-
-            <div class="info-card">
-                <div class="info-icon">☀️</div>
-                <small>Light</small>
-                <strong>Bright</strong>
-                <p>Give your plant enough light.</p>
-            </div>
-
-            <div class="info-card">
-                <div class="info-icon">🌱</div>
-                <small>Growth</small>
-                <strong>Growing</strong>
-                <p>Keep checking for new leaves.</p>
-            </div>
-
-            <div class="info-card">
-                <div class="info-icon">🩺</div>
-                <small>Last check</small>
-                <strong id="lastCheck">None</strong>
-                <p>Your latest plant check.</p>
-            </div>
-
+        <div class="stat">
+            <div class="stat-icon">💧</div>
+            <strong id="waterCount">0</strong>
+            <span>Watered today</span>
         </div>
 
-
-        <div class="health-box">
-
-            <div class="health-ring">
-                <div class="health-ring-inner">83</div>
-            </div>
-
-            <div>
-                <strong>Plant health score</strong>
-                <p>
-                    Your care looks good. Keep watching the leaves,
-                    soil and amount of sunlight.
-                </p>
-            </div>
-
+        <div class="stat">
+            <div class="stat-icon">❤️</div>
+            <strong id="favCount">0</strong>
+            <span>Favourites</span>
         </div>
 
+        <div class="stat">
+            <div class="stat-icon">🩺</div>
+            <strong id="checkCount">0</strong>
+            <span>Plant checks</span>
+        </div>
+    </div>
 
-        <h2 class="section-title">Find a plant</h2>
+    <div class="section-title">
+        <h2>What do you want to do?</h2>
+    </div>
 
-        <div class="search-box">
-            <input
-                id="homeSearch"
-                type="text"
-                placeholder="Search for a plant..."
-                oninput="searchPlants('homeSearch','homeResults')"
-            >
-            <button class="search-btn">Search</button>
+    <div class="grid">
+
+        <div class="card action-card" onclick="showSection('check')">
+            <div class="big-icon">🩺</div>
+            <h3>Check a plant</h3>
+            <p>Tell Plant Doctor what is wrong and get simple care advice.</p>
         </div>
 
-        <div id="homeResults" class="plant-results"></div>
+        <div class="card action-card" onclick="showSection('plants')">
+            <div class="big-icon">🌿</div>
+            <h3>My Plants</h3>
+            <p>Add plants and keep track of their care.</p>
+        </div>
 
+        <div class="card action-card" onclick="showSection('care')">
+            <div class="big-icon">💧</div>
+            <h3>Care Centre</h3>
+            <p>Learn about water, sunlight, soil, pests and more.</p>
+        </div>
+
+        <div class="card action-card" onclick="showSection('calendar')">
+            <div class="big-icon">📅</div>
+            <h3>Care Calendar</h3>
+            <p>See your watering days and build a care streak.</p>
+        </div>
+
+        <div class="card action-card" onclick="showSection('library')">
+            <div class="big-icon">📚</div>
+            <h3>Plant Library</h3>
+            <p>Search plants and learn how to look after them.</p>
+        </div>
+
+        <div class="card action-card" onclick="showSection('history')">
+            <div class="big-icon">🕘</div>
+            <h3>Check History</h3>
+            <p>Look back at the plant problems you checked.</p>
+        </div>
+
+    </div>
+
+    <div class="section-title">
+        <h2>Today's plant tip 🌞</h2>
+    </div>
+
+    <div class="card tip">
+        <h3>🌱 Give your plant the right amount of water</h3>
+        <p>
+            Before watering, touch the top of the soil.
+            If it is still wet, your plant may not need more water yet.
+        </p>
     </div>
 
 </section>
 
 
 <!-- CHECK -->
+<section id="check" style="display:none">
 
-<section id="checkPage" class="page">
-
-    <div class="page-header">
-        <h1>Check your plant</h1>
-        <p>Take a clear picture of the leaves and the whole plant.</p>
+    <div class="section-title">
+        <h2>🩺 Plant Health Check</h2>
     </div>
 
-    <div class="check-layout">
+    <div class="card">
+        <h3>📸 Check with a photo</h3>
+        <p>
+            You can take a photo or choose one from your device.
+            Plant Doctor will keep the photo with your check, but it does not use AI.
+        </p>
 
-        <div class="camera-box">
+        <div class="camera-box" style="margin-top:18px">
 
-            <video id="cameraVideo" autoplay playsinline></video>
+            <video id="camera"></video>
 
-            <div class="camera-placeholder" id="cameraPlaceholder">
-                <div class="camera-icon">📷</div>
-                <h2>Plant camera</h2>
-                <p>Use your camera or choose a photo.</p>
+            <div id="cameraPlaceholder" class="camera-placeholder">
+                <div>📷</div>
+                <strong>Plant camera</strong>
+                <p style="color:#b9c9c0;margin-top:6px">
+                    Take a clear picture of the plant.
+                </p>
             </div>
 
-            <div class="camera-guide" id="cameraGuide"></div>
+            <div class="camera-buttons">
+                <button onclick="startCamera()">📷 Start Camera</button>
+                <button onclick="takePhoto()">⭕ Take Photo</button>
 
-        </div>
+                <label for="photoInput" style="
+                    background:white;
+                    color:#123225;
+                    padding:12px 15px;
+                    border-radius:12px;
+                    font-weight:bold;
+                    cursor:pointer;
+                ">
+                    🖼️ Choose Photo
+                </label>
 
-        <div class="camera-controls">
+                <input id="photoInput" type="file" accept="image/*" capture="environment">
 
-            <button class="control-btn green" onclick="startCamera()">
-                🎥 Start camera
-            </button>
-
-            <button class="control-btn green" onclick="takePicture()">
-                📸 Take picture
-            </button>
-
-            <button class="control-btn" onclick="phoneCamera.click()">
-                📱 Phone camera
-            </button>
-
-            <button class="control-btn" onclick="galleryInput.click()">
-                🖼️ Choose photo
-            </button>
-
-            <button class="control-btn red" onclick="stopCamera()">
-                Stop camera
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- REVIEW -->
-
-<section id="reviewPage" class="page">
-
-    <div class="page-header">
-        <h1>Check the picture</h1>
-        <p>Make sure your plant is easy to see.</p>
-    </div>
-
-    <div class="review-card">
-
-        <img id="reviewImage" alt="Plant photo">
-
-        <div class="review-info">
-
-            <h2>Does this picture look good?</h2>
-
-            <p>
-                Try to show the leaves clearly. Good lighting makes it
-                easier to spot common problems.
-            </p>
-
-            <div class="camera-controls">
-
-                <button class="control-btn green" onclick="runPlantCheck()">
-                    🩺 Check plant
+                <button onclick="stopCamera()" style="background:#df5a52;color:white">
+                    Stop
                 </button>
-
-                <button class="control-btn" onclick="showPage('checkPage')">
-                    📷 Take another
-                </button>
-
             </div>
-
         </div>
 
+        <div id="photoStatus" style="margin-top:15px;color:var(--green2);font-weight:bold"></div>
+    </div>
+
+    <div class="section-title">
+        <h2>Or choose the problem</h2>
+    </div>
+
+    <div class="card">
+        <p style="margin-bottom:17px">
+            You do not need a photo. Pick what you see on your plant.
+        </p>
+
+        <div class="problem-grid">
+
+            <button class="problem" onclick="checkProblem('yellow')">
+                <span>🍂</span>
+                <strong>Yellow leaves</strong>
+                <small>Leaves are turning yellow</small>
+            </button>
+
+            <button class="problem" onclick="checkProblem('brown')">
+                <span>🍁</span>
+                <strong>Brown leaves</strong>
+                <small>Leaves have brown areas</small>
+            </button>
+
+            <button class="problem" onclick="checkProblem('wilting')">
+                <span>🥀</span>
+                <strong>Wilting</strong>
+                <small>The plant looks weak</small>
+            </button>
+
+            <button class="problem" onclick="checkProblem('bugs')">
+                <span>🐛</span>
+                <strong>Bugs</strong>
+                <small>You see insects</small>
+            </button>
+
+            <button class="problem" onclick="checkProblem('spots')">
+                <span>🔴</span>
+                <strong>Leaf spots</strong>
+                <small>Spots are appearing</small>
+            </button>
+
+            <button class="problem" onclick="checkProblem('burnt')">
+                <span>☀️</span>
+                <strong>Burnt leaves</strong>
+                <small>Leaves look damaged by heat</small>
+            </button>
+
+            <button class="problem" onclick="checkProblem('notgrowing')">
+                <span>📉</span>
+                <strong>Not growing</strong>
+                <small>The plant is growing slowly</small>
+            </button>
+
+            <button class="problem" onclick="checkProblem('drooping')">
+                <span>🌿</span>
+                <strong>Drooping</strong>
+                <small>Leaves are hanging down</small>
+            </button>
+
+        </div>
     </div>
 
 </section>
 
 
 <!-- RESULT -->
+<section id="result" class="result">
 
-<section id="resultPage" class="page">
+    <div class="section-title">
+        <h2>🩺 Plant Doctor Report</h2>
+    </div>
 
-    <div class="result-wrap">
+    <div class="result-head">
 
-        <div class="page-header">
-            <h1>Plant Doctor report</h1>
-            <p>Here is a simple check based on common plant problems.</p>
-        </div>
-
-        <div class="result-top">
-
-            <div class="result-icon">🌿</div>
+        <div class="score">
+            <div class="score-circle" id="healthScore">78</div>
 
             <div>
-                <h2 id="resultTitle">Plant check complete</h2>
-                <p id="resultSubtitle">
-                    Your plant has some things worth checking.
+                <p style="color:var(--green2);font-weight:bold">
+                    PLANT HEALTH CHECK
+                </p>
+
+                <h2 id="resultTitle">Yellow leaves</h2>
+
+                <p id="resultCause" style="margin-top:7px">
+                    Your plant may be getting too much water.
                 </p>
             </div>
-
         </div>
 
+    </div>
 
-        <div class="result-grid">
+    <div class="advice-grid">
 
-            <div class="result-card">
-                <h3>🌱 What might be wrong</h3>
-                <p id="problemText">
-                    Some leaves may be getting too little or too much water.
-                </p>
-            </div>
-
-            <div class="result-card">
-                <h3>💧 Water</h3>
-                <p id="waterText">
-                    Check the top of the soil. Water when it feels dry.
-                </p>
-            </div>
-
-            <div class="result-card">
-                <h3>☀️ Light</h3>
-                <p id="lightText">
-                    Give the plant bright light that suits its type.
-                </p>
-            </div>
-
-            <div class="result-card">
-                <h3>🌿 Plant type</h3>
-                <p id="plantText">
-                    Choose your plant below to get more specific care tips.
-                </p>
-            </div>
-
-            <div class="result-card full">
-
-                <h3>✅ What you can do</h3>
-
-                <ul class="advice-list">
-
-                    <li>Check the soil before watering.</li>
-                    <li>Look at the leaves for yellow or brown spots.</li>
-                    <li>Make sure the plant gets enough light.</li>
-                    <li>Remove badly damaged leaves if needed.</li>
-                    <li>Check the plant again after a few days.</li>
-
-                </ul>
-
-            </div>
-
+        <div class="advice">
+            <div class="advice-icon">💧</div>
+            <h3>Water</h3>
+            <p id="resultWater"></p>
         </div>
 
-
-        <div class="camera-controls">
-
-            <button class="control-btn green" onclick="showPage('carePage')">
-                🌿 Plant care
-            </button>
-
-            <button class="control-btn" onclick="showPage('checkPage')">
-                📷 Check another
-            </button>
-
+        <div class="advice">
+            <div class="advice-icon">☀️</div>
+            <h3>Light</h3>
+            <p id="resultLight"></p>
         </div>
 
+        <div class="advice">
+            <div class="advice-icon">🌱</div>
+            <h3>Care</h3>
+            <p id="resultCare"></p>
+        </div>
+
+    </div>
+
+    <div class="card" style="margin-top:18px">
+        <h3>✅ What to do</h3>
+        <ul id="resultActions" class="action-list"></ul>
+    </div>
+
+    <div class="hero-buttons" style="margin-top:18px">
+        <button class="green-btn" onclick="saveCurrentCheck()">💾 Save Check</button>
+        <button class="small-btn" onclick="showSection('check')">🩺 Check Again</button>
+        <button class="small-btn" onclick="showSection('history')">🕘 History</button>
     </div>
 
 </section>
 
 
-<!-- CARE -->
+<!-- MY PLANTS -->
+<section id="plants" style="display:none">
 
-<section id="carePage" class="page">
-
-    <div class="page-header">
-        <h1>Plant care</h1>
-        <p>Simple things that help your plant stay healthy.</p>
+    <div class="section-title">
+        <h2>🌿 My Plants</h2>
+        <button onclick="addPlant()">＋ Add Plant</button>
     </div>
 
-    <div class="care-grid">
+    <div id="plantList" class="grid"></div>
 
-        <div class="care-card">
+</section>
+
+
+<!-- LIBRARY -->
+<section id="library" style="display:none">
+
+    <div class="section-title">
+        <h2>📚 Plant Library</h2>
+    </div>
+
+    <div class="search-box">
+        <input
+            id="plantSearch"
+            placeholder="Search tomato, banana, rose..."
+            oninput="searchPlants()"
+        >
+        <button class="green-btn" onclick="searchPlants()">Search</button>
+    </div>
+
+    <div id="libraryList" class="library"></div>
+
+</section>
+
+
+<!-- CARE -->
+<section id="care" style="display:none">
+
+    <div class="section-title">
+        <h2>🌱 Care Centre</h2>
+    </div>
+
+    <div class="grid">
+
+        <div class="card">
             <div class="big-icon">💧</div>
-            <h3>Water</h3>
+            <h3>Watering</h3>
             <p>
-                Do not water just because the calendar says so.
-                Check the soil first. If the top feels dry, your plant
-                may need water.
+                Check the soil before watering. Different plants need different amounts.
             </p>
-            <div class="progress"><span style="width:70%"></span></div>
         </div>
 
-        <div class="care-card">
+        <div class="card">
             <div class="big-icon">☀️</div>
             <h3>Sunlight</h3>
             <p>
-                Plants need different amounts of light. Keep your plant
-                somewhere that matches what it needs.
+                Some plants need bright light while others prefer less direct sunlight.
             </p>
-            <div class="progress"><span style="width:85%"></span></div>
         </div>
 
-        <div class="care-card">
-            <div class="big-icon">🌱</div>
-            <h3>Growth</h3>
-            <p>
-                New leaves are a good sign. Check your plant every few
-                days and look for changes.
-            </p>
-            <div class="progress"><span style="width:65%"></span></div>
-        </div>
-
-        <div class="care-card">
+        <div class="card">
             <div class="big-icon">🪴</div>
-            <h3>Pot & soil</h3>
+            <h3>Soil</h3>
             <p>
-                Your pot should let extra water escape. Soil should not
-                stay soaked for a long time.
+                Good soil should hold some water but also let extra water drain away.
             </p>
-            <div class="progress"><span style="width:80%"></span></div>
+        </div>
+
+        <div class="card">
+            <div class="big-icon">🐛</div>
+            <h3>Pests</h3>
+            <p>
+                Check the underside of leaves because small insects can hide there.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="big-icon">✂️</div>
+            <h3>Trimming</h3>
+            <p>
+                Remove damaged leaves with clean tools so the plant can focus on healthy growth.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="big-icon">🌡️</div>
+            <h3>Temperature</h3>
+            <p>
+                Avoid sudden temperature changes and keep plants away from very hot surfaces.
+            </p>
         </div>
 
     </div>
 
+    <div class="section-title">
+        <h2>📝 My Plant Notes</h2>
+    </div>
 
-    <div class="notes-box">
+    <div class="card">
+        <textarea id="notes" class="note" placeholder="Write something about your plants..."></textarea>
 
-        <h3>📝 My plant notes</h3>
-
-        <p style="color:#6d7772; margin:7px 0 14px; font-size:14px;">
-            Write something about your plant.
-        </p>
-
-        <textarea
-            id="plantNotes"
-            placeholder="Example: Watered my tomato plant today..."
-        ></textarea>
-
-        <button class="control-btn green" style="margin-top:12px;" onclick="saveNotes()">
-            Save notes
+        <button class="green-btn" style="margin-top:12px" onclick="saveNotes()">
+            💾 Save Notes
         </button>
+    </div>
 
+</section>
+
+
+<!-- CALENDAR -->
+<section id="calendar" style="display:none">
+
+    <div class="section-title">
+        <h2>📅 Care Calendar</h2>
+    </div>
+
+    <div class="card">
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:15px;
+        ">
+            <h3 id="calendarTitle"></h3>
+
+            <button class="green-btn" onclick="waterToday()">
+                💧 Water Today
+            </button>
+        </div>
+
+        <div class="calendar" id="calendarGrid"></div>
+
+    </div>
+
+    <div class="section-title">
+        <h2>🔥 Care Streak</h2>
+    </div>
+
+    <div class="card">
+        <div style="font-size:45px">🔥</div>
+        <h2 id="streakNumber">0 days</h2>
+        <p>
+            Keep checking and caring for your plants.
+        </p>
     </div>
 
 </section>
 
 
 <!-- HISTORY -->
+<section id="history" style="display:none">
 
-<section id="historyPage" class="page">
-
-    <div class="page-header">
-        <h1>Plant history</h1>
-        <p>Keep track of your recent plant checks.</p>
+    <div class="section-title">
+        <h2>🕘 Check History</h2>
+        <button onclick="clearHistory()">Clear</button>
     </div>
 
-    <div id="historyList" class="history-list"></div>
+    <div class="card">
+        <div id="historyList"></div>
+    </div>
 
 </section>
 
 
-<!-- SEARCH -->
+<!-- FAVOURITES -->
+<section id="favourites" style="display:none">
 
-<section id="searchPage" class="page">
-
-    <div class="page-header">
-        <h1>Plant library</h1>
-        <p>Search for a plant and learn the basics.</p>
+    <div class="section-title">
+        <h2>❤️ Favourite Plants</h2>
     </div>
 
-    <div class="search-box" style="max-width:900px; margin:auto;">
-        <input
-            id="librarySearch"
-            type="text"
-            placeholder="Search tomato, banana, rose..."
-            oninput="searchPlants('librarySearch','libraryResults')"
-        >
-        <button class="search-btn">Search</button>
-    </div>
-
-    <div id="libraryResults" class="plant-results" style="max-width:900px; margin-left:auto; margin-right:auto;"></div>
+    <div id="favouriteList" class="grid"></div>
 
 </section>
+
+
+<!-- SETTINGS -->
+<section id="settings" style="display:none">
+
+    <div class="section-title">
+        <h2>⚙️ Settings</h2>
+    </div>
+
+    <div class="card">
+
+        <div class="settings-row">
+            <div>
+                <strong>🌙 Dark mode</strong>
+                <p>Make the app darker at night.</p>
+            </div>
+
+            <div id="darkSwitch" class="switch" onclick="toggleDark()">
+                <span></span>
+            </div>
+        </div>
+
+        <div class="settings-row">
+            <div>
+                <strong>🔔 Care reminders</strong>
+                <p>Turn your care reminder setting on or off.</p>
+            </div>
+
+            <div id="reminderSwitch" class="switch" onclick="toggleReminders()">
+                <span></span>
+            </div>
+        </div>
+
+        <div class="settings-row">
+            <div>
+                <strong>🌿 Plant Doctor</strong>
+                <p>Science Week Project • 2026</p>
+            </div>
+        </div>
+
+        <div style="margin-top:20px">
+            <button class="green-btn" onclick="resetApp()">
+                Reset App
+            </button>
+        </div>
+
+    </div>
+
+</section>
+
+</main>
 
 
 <footer>
-    <strong>Plant Doctor</strong> • Science Week Project 🌿<br><br>
-    Made by Matt Bradley Mwesigye<br>
+    <strong>Plant Doctor • Science Week Project 🌿</strong>
+    <br><br>
+    Made by Matt Bradley Mwesigye
+    <br>
     © 2026 Matt Bradley Mwesigye
 </footer>
 
 
-<!-- BOTTOM NAV -->
-
 <nav class="bottom-nav">
 
-    <button class="nav-btn active" onclick="showPage('homePage',this)">
+    <button class="nav-btn active" id="navHome" onclick="showSection('home')">
         <span>🏠</span>
         Home
     </button>
 
-    <button class="nav-btn" onclick="showPage('checkPage',this)">
-        <span>📷</span>
+    <button class="nav-btn" id="navCheck" onclick="showSection('check')">
+        <span>🩺</span>
         Check
     </button>
 
-    <button class="nav-btn" onclick="showPage('searchPage',this)">
-        <span>🔎</span>
+    <button class="nav-btn" id="navPlants" onclick="showSection('plants')">
+        <span>🌿</span>
         Plants
     </button>
 
-    <button class="nav-btn" onclick="showPage('historyPage',this)">
-        <span>📋</span>
-        History
+    <button class="nav-btn" id="navLibrary" onclick="showSection('library')">
+        <span>📚</span>
+        Library
+    </button>
+
+    <button class="nav-btn" id="navMore" onclick="showSection('care')">
+        <span>✨</span>
+        More
     </button>
 
 </nav>
 
+<div id="toast" class="toast"></div>
+
 </div>
-
-
-<!-- HIDDEN INPUTS -->
-
-<input
-    id="phoneCamera"
-    type="file"
-    accept="image/*"
-    capture="environment"
-    style="display:none;"
->
-
-<input
-    id="galleryInput"
-    type="file"
-    accept="image/*"
-    style="display:none;"
->
 
 
 <script>
 
-/* =========================
-   PLANT DATA
-========================= */
+const problems = {
 
-const plants = [
-
-    {
-        name: "Tomato",
-        icon: "🍅",
-        water: "Water when the top of the soil starts to feel dry.",
-        light: "Give tomato plants lots of bright sunlight.",
-        care: "Keep the leaves dry when watering and give the plant support."
+    yellow:{
+        icon:"🍂",
+        title:"Yellow Leaves",
+        score:72,
+        cause:"This can happen when the plant gets too much water, not enough light, or when the soil is missing nutrients.",
+        water:"Check the soil first. If it is wet, wait before watering again.",
+        light:"Give the plant enough bright light for its type.",
+        care:"Remove badly damaged leaves and check the roots and soil.",
+        actions:[
+            "Check the soil before watering.",
+            "Make sure extra water can drain away.",
+            "Move the plant to a suitable light area."
+        ]
     },
 
-    {
-        name: "Banana",
-        icon: "🍌",
-        water: "Bananas like regular watering, especially in hot weather.",
-        light: "Give the plant plenty of bright sunlight.",
-        care: "Keep the soil moist but do not leave it soaked."
+    brown:{
+        icon:"🍁",
+        title:"Brown Leaves",
+        score:70,
+        cause:"Brown leaves can happen because of dry soil, very dry air, too much sun, or damaged roots.",
+        water:"Check whether the soil is very dry.",
+        light:"Avoid very strong direct sunlight if the leaves are getting burnt.",
+        care:"Remove badly damaged leaves and keep the plant conditions steady.",
+        actions:[
+            "Check the soil moisture.",
+            "Look for very strong sunlight.",
+            "Check the plant for dry or damaged roots."
+        ]
     },
 
-    {
-        name: "Maize",
-        icon: "🌽",
-        water: "Water regularly while the plant is growing.",
-        light: "Maize needs plenty of sunlight.",
-        care: "Give the plant enough space and keep weeds away."
+    wilting:{
+        icon:"🥀",
+        title:"Wilting",
+        score:58,
+        cause:"The plant may be thirsty, stressed by heat, or having a root problem.",
+        water:"Check the soil. If it is dry, give the plant the amount of water it normally needs.",
+        light:"Protect it from very strong heat while it recovers.",
+        care:"Check the roots and make sure the pot can drain water.",
+        actions:[
+            "Check the soil moisture.",
+            "Move it away from extreme heat.",
+            "Check that the pot has drainage."
+        ]
     },
 
-    {
-        name: "Potato",
-        icon: "🥔",
-        water: "Keep the soil slightly moist.",
-        light: "Give potatoes plenty of sunlight.",
-        care: "Do not let the soil stay too wet."
+    bugs:{
+        icon:"🐛",
+        title:"Possible Pests",
+        score:60,
+        cause:"Small insects may be feeding on the plant.",
+        water:"Keep watering normally. Do not flood the soil.",
+        light:"Keep the plant in its normal light.",
+        care:"Check both sides of the leaves and remove visible pests carefully.",
+        actions:[
+            "Look under the leaves.",
+            "Separate a badly affected plant from other plants.",
+            "Clean the leaves gently."
+        ]
     },
 
-    {
-        name: "Bean",
-        icon: "🫘",
-        water: "Water when the soil begins to dry.",
-        light: "Beans grow well with good sunlight.",
-        care: "Give the plant support when it starts growing taller."
+    spots:{
+        icon:"🔴",
+        title:"Leaf Spots",
+        score:64,
+        cause:"Leaf spots can come from pests, plant diseases, water on leaves, or other stress.",
+        water:"Water the soil rather than leaving water sitting on the leaves.",
+        light:"Give the plant suitable light and airflow.",
+        care:"Remove badly affected leaves and watch for new spots.",
+        actions:[
+            "Check both sides of the leaves.",
+            "Avoid keeping leaves constantly wet.",
+            "Remove badly damaged leaves."
+        ]
     },
 
-    {
-        name: "Rose",
-        icon: "🌹",
-        water: "Water the soil when the top starts to dry.",
-        light: "Roses like plenty of sunlight.",
-        care: "Remove dead flowers and damaged leaves."
+    burnt:{
+        icon:"☀️",
+        title:"Burnt Leaves",
+        score:61,
+        cause:"The plant may be getting too much strong direct sunlight or heat.",
+        water:"Keep the soil at a suitable moisture level.",
+        light:"Move it away from harsh direct sunlight if needed.",
+        care:"Remove badly damaged leaves and let new growth develop.",
+        actions:[
+            "Reduce harsh direct sunlight.",
+            "Check the soil.",
+            "Watch new leaves for further damage."
+        ]
     },
 
-    {
-        name: "Apple",
-        icon: "🍎",
-        water: "Water deeply when the soil becomes dry.",
-        light: "Apple trees need plenty of sunlight.",
-        care: "Give the tree enough room to grow."
+    notgrowing:{
+        icon:"📉",
+        title:"Slow Growth",
+        score:68,
+        cause:"Slow growth can happen because of low light, poor soil, temperature changes, or lack of nutrients.",
+        water:"Make sure the plant is not staying too wet or becoming very dry.",
+        light:"Give it enough light for its plant type.",
+        care:"Check the soil, pot size and general plant condition.",
+        actions:[
+            "Check the amount of light.",
+            "Look at the soil condition.",
+            "Give the plant enough space to grow."
+        ]
     },
 
-    {
-        name: "Cassava",
-        icon: "🌿",
-        water: "Cassava can handle dry periods but needs water while growing.",
-        light: "Give cassava lots of sunlight.",
-        care: "Keep the area around the plant free from weeds."
-    },
-
-    {
-        name: "Avocado",
-        icon: "🥑",
-        water: "Water when the soil begins to dry.",
-        light: "Give avocado plants bright light.",
-        care: "Good drainage is important because the roots do not like standing water."
+    drooping:{
+        icon:"🌿",
+        title:"Drooping Leaves",
+        score:63,
+        cause:"Drooping can happen because of dry soil, heat, too much water, or stress.",
+        water:"Check the soil before watering.",
+        light:"Avoid extreme heat and very strong sunlight.",
+        care:"Check the roots and drainage.",
+        actions:[
+            "Touch the soil to check moisture.",
+            "Check the pot drainage.",
+            "Watch the plant for the next few days."
+        ]
     }
+};
 
+
+const plantsData = [
+    {
+        name:"Tomato",
+        icon:"🍅",
+        light:"6–8 hours of sunlight",
+        water:"Water when the top soil starts to dry.",
+        soil:"Rich, well-draining soil",
+        fact:"Tomatoes grow best with plenty of sunlight."
+    },
+    {
+        name:"Banana",
+        icon:"🍌",
+        light:"Bright sunlight",
+        water:"Keep soil moist but not flooded.",
+        soil:"Rich soil with good drainage",
+        fact:"Banana plants like warmth and plenty of water."
+    },
+    {
+        name:"Maize",
+        icon:"🌽",
+        light:"Full sunlight",
+        water:"Water regularly while growing.",
+        soil:"Fertile soil",
+        fact:"Maize needs sunlight, water and nutrients to grow well."
+    },
+    {
+        name:"Bean",
+        icon:"🫘",
+        light:"Good sunlight",
+        water:"Keep soil slightly moist.",
+        soil:"Loose, well-draining soil",
+        fact:"Beans can grow quickly when they have good conditions."
+    },
+    {
+        name:"Rose",
+        icon:"🌹",
+        light:"Several hours of sunlight",
+        water:"Water the soil when it starts getting dry.",
+        soil:"Rich, well-draining soil",
+        fact:"Roses need light and good airflow."
+    },
+    {
+        name:"Potato",
+        icon:"🥔",
+        light:"Full sunlight",
+        water:"Keep soil evenly moist.",
+        soil:"Loose soil",
+        fact:"Potatoes grow underground from special stems called tubers."
+    },
+    {
+        name:"Apple",
+        icon:"🍎",
+        light:"Full sunlight",
+        water:"Water regularly while young.",
+        soil:"Deep, well-draining soil",
+        fact:"Apple trees can live and produce fruit for many years."
+    },
+    {
+        name:"Avocado",
+        icon:"🥑",
+        light:"Bright sunlight",
+        water:"Water deeply but avoid flooding.",
+        soil:"Well-draining soil",
+        fact:"Avocado trees need good drainage."
+    },
+    {
+        name:"Cassava",
+        icon:"🌿",
+        light:"Full sunlight",
+        water:"Water during dry periods.",
+        soil:"Loose soil",
+        fact:"Cassava is an important root crop in many countries."
+    }
 ];
 
 
-/* =========================
-   PAGE SYSTEM
-========================= */
+let currentProblem = null;
+let cameraStream = null;
 
-function showPage(pageId, button) {
 
-    document.querySelectorAll(".page").forEach(page => {
-        page.classList.remove("active");
+function getData(key, fallback){
+    try{
+        return JSON.parse(localStorage.getItem(key)) || fallback;
+    }catch{
+        return fallback;
+    }
+}
+
+
+function saveData(key,value){
+    localStorage.setItem(key,JSON.stringify(value));
+}
+
+
+function toast(message){
+
+    const box=document.getElementById("toast");
+
+    box.textContent=message;
+    box.classList.add("show");
+
+    setTimeout(()=>{
+        box.classList.remove("show");
+    },2500);
+}
+
+
+function showSection(id){
+
+    const sections=[
+        "home",
+        "check",
+        "result",
+        "plants",
+        "library",
+        "care",
+        "calendar",
+        "history",
+        "favourites",
+        "settings"
+    ];
+
+    sections.forEach(section=>{
+        const el=document.getElementById(section);
+
+        if(el){
+            el.style.display =
+                section===id ? "block" : "none";
+        }
     });
 
-    document.getElementById(pageId).classList.add("active");
-
-    document.querySelectorAll(".nav-btn").forEach(btn => {
+    document.querySelectorAll(".nav-btn").forEach(btn=>{
         btn.classList.remove("active");
     });
 
-    if (button) {
-        button.classList.add("active");
+    const map={
+        home:"navHome",
+        check:"navCheck",
+        plants:"navPlants",
+        library:"navLibrary"
+    };
+
+    if(map[id]){
+        document.getElementById(map[id]).classList.add("active");
     }
 
     window.scrollTo({
-        top: 0,
-        behavior: "smooth"
+        top:0,
+        behavior:"smooth"
     });
 
-    if (pageId === "historyPage") {
-        loadHistory();
-    }
-
-    if (pageId === "homePage") {
-        updateLastCheck();
-    }
+    if(id==="plants") renderPlants();
+    if(id==="library") renderLibrary();
+    if(id==="history") renderHistory();
+    if(id==="calendar") renderCalendar();
+    if(id==="favourites") renderFavourites();
+    if(id==="home") updateDashboard();
 }
 
 
-/* =========================
-   CAMERA
-========================= */
-
-let cameraStream = null;
-let currentImage = null;
-
-const cameraVideo = document.getElementById("cameraVideo");
-const cameraPlaceholder = document.getElementById("cameraPlaceholder");
-const cameraGuide = document.getElementById("cameraGuide");
-
-async function startCamera() {
-
-    try {
-
-        cameraStream = await navigator.mediaDevices.getUserMedia({
-            video: {
-                facingMode: "environment",
-                width: { ideal: 1280 },
-                height: { ideal: 720 }
-            },
-            audio: false
-        });
-
-        cameraVideo.srcObject = cameraStream;
-        cameraVideo.style.display = "block";
-        cameraPlaceholder.style.display = "none";
-        cameraGuide.style.display = "block";
-
-    } catch (error) {
-
-        alert(
-            "Camera could not start. Make sure your browser has camera permission."
-        );
-
-    }
-
+function goHome(){
+    showSection("home");
 }
 
 
-function stopCamera() {
+function checkProblem(key){
 
-    if (cameraStream) {
+    const data=problems[key];
 
-        cameraStream.getTracks().forEach(track => track.stop());
+    if(!data) return;
 
-        cameraStream = null;
-    }
+    currentProblem={
+        key,
+        ...data,
+        time:new Date().toLocaleString()
+    };
 
-    cameraVideo.srcObject = null;
-    cameraVideo.style.display = "none";
-    cameraPlaceholder.style.display = "block";
-    cameraGuide.style.display = "none";
+    document.getElementById("resultTitle").textContent=data.icon+" "+data.title;
+    document.getElementById("resultCause").textContent=data.cause;
+    document.getElementById("resultWater").textContent=data.water;
+    document.getElementById("resultLight").textContent=data.light;
+    document.getElementById("resultCare").textContent=data.care;
+    document.getElementById("healthScore").textContent=data.score;
+
+    document.getElementById("resultActions").innerHTML=
+        data.actions.map(item=>`<li>✅ ${item}</li>`).join("");
+
+    showSection("result");
 }
 
 
-function takePicture() {
+function saveCurrentCheck(){
 
-    if (!cameraStream) {
-        alert("Start the camera first.");
+    if(!currentProblem){
         return;
     }
 
-    const canvas = document.createElement("canvas");
-
-    canvas.width = cameraVideo.videoWidth;
-    canvas.height = cameraVideo.videoHeight;
-
-    const context = canvas.getContext("2d");
-
-    context.drawImage(
-        cameraVideo,
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    currentImage = canvas.toDataURL("image/jpeg", .9);
-
-    showReview(currentImage);
-}
-
-
-/* =========================
-   PHOTO INPUTS
-========================= */
-
-const phoneCamera = document.getElementById("phoneCamera");
-const galleryInput = document.getElementById("galleryInput");
-
-phoneCamera.addEventListener("change", handleFile);
-
-galleryInput.addEventListener("change", handleFile);
-
-
-function handleFile(event) {
-
-    const file = event.target.files[0];
-
-    if (!file) return;
-
-    const reader = new FileReader();
-
-    reader.onload = function(e) {
-
-        currentImage = e.target.result;
-
-        showReview(currentImage);
-
-    };
-
-    reader.readAsDataURL(file);
-}
-
-
-function showReview(image) {
-
-    document.getElementById("reviewImage").src = image;
-
-    stopCamera();
-
-    showPage("reviewPage");
-
-}
-
-
-/* =========================
-   PLANT CHECK
-========================= */
-
-function runPlantCheck() {
-
-    const checks = [
-
-        {
-            title: "Your plant looks worth watching",
-            subtitle: "A few simple care checks can help keep it healthy.",
-            problem: "The leaves may be reacting to water, light, or normal plant stress.",
-            water: "Check the top of the soil before watering. Avoid leaving the soil soaked.",
-            light: "Give the plant enough natural light for its type."
-        },
-
-        {
-            title: "Check the leaves",
-            subtitle: "Your plant may need a little extra care.",
-            problem: "Yellow or brown leaves can happen when a plant gets the wrong amount of water or light.",
-            water: "Only water when the soil needs it. Too much water can cause problems.",
-            light: "Move the plant to a brighter place if it is not getting enough light."
-        },
-
-        {
-            title: "Keep watching your plant",
-            subtitle: "Your plant may simply need better care conditions.",
-            problem: "Changes in leaves can come from water, light, soil, temperature, or normal growth.",
-            water: "Feel the soil first. If it is dry near the top, it may be time to water.",
-            light: "Make sure the plant gets the amount of light it normally needs."
-        }
-
-    ];
-
-    const check = checks[Math.floor(Math.random() * checks.length)];
-
-    document.getElementById("resultTitle").textContent = check.title;
-    document.getElementById("resultSubtitle").textContent = check.subtitle;
-    document.getElementById("problemText").textContent = check.problem;
-    document.getElementById("waterText").textContent = check.water;
-    document.getElementById("lightText").textContent = check.light;
-
-    saveHistory(check.title);
-
-    showPage("resultPage");
-
-}
-
-
-/* =========================
-   HISTORY
-========================= */
-
-function saveHistory(title) {
-
-    let history = JSON.parse(
-        localStorage.getItem("plantDoctorHistory") || "[]"
-    );
-
-    const now = new Date();
+    const history=getData("plantHistory",[]);
 
     history.unshift({
-        title: title,
-        date: now.toLocaleDateString(),
-        time: now.toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit"
-        })
+        icon:currentProblem.icon,
+        title:currentProblem.title,
+        score:currentProblem.score,
+        time:new Date().toLocaleString()
     });
 
-    history = history.slice(0, 12);
+    saveData("plantHistory",history.slice(0,50));
 
-    localStorage.setItem(
-        "plantDoctorHistory",
-        JSON.stringify(history)
-    );
+    updateDashboard();
 
-    updateLastCheck();
+    toast("Plant check saved 🌿");
 }
 
 
-function loadHistory() {
+async function startCamera(){
 
-    const historyList = document.getElementById("historyList");
+    const video=document.getElementById("camera");
+    const placeholder=document.getElementById("cameraPlaceholder");
 
-    const history = JSON.parse(
-        localStorage.getItem("plantDoctorHistory") || "[]"
-    );
+    try{
 
-    if (history.length === 0) {
+        cameraStream=await navigator.mediaDevices.getUserMedia({
+            video:{facingMode:"environment"},
+            audio:false
+        });
 
-        historyList.innerHTML = `
-            <div class="empty-history">
-                <div style="font-size:45px;">🌱</div>
-                <h3 style="margin:12px 0 6px;">No checks yet</h3>
-                <p>Your plant checks will appear here.</p>
+        video.srcObject=cameraStream;
+        video.style.display="block";
+        placeholder.style.display="none";
+
+        await video.play();
+
+        toast("Camera started 📷");
+
+    }catch(error){
+
+        toast("Camera could not start");
+    }
+}
+
+
+function stopCamera(){
+
+    if(cameraStream){
+
+        cameraStream.getTracks().forEach(track=>track.stop());
+        cameraStream=null;
+    }
+
+    document.getElementById("camera").style.display="none";
+    document.getElementById("cameraPlaceholder").style.display="flex";
+}
+
+
+function takePhoto(){
+
+    const video=document.getElementById("camera");
+
+    if(!cameraStream || video.style.display==="none"){
+        toast("Start the camera first");
+        return;
+    }
+
+    const canvas=document.createElement("canvas");
+
+    canvas.width=video.videoWidth;
+    canvas.height=video.videoHeight;
+
+    const ctx=canvas.getContext("2d");
+
+    ctx.drawImage(video,0,0);
+
+    canvas.toBlob(blob=>{
+
+        document.getElementById("photoStatus").textContent=
+            "✅ Photo captured and ready.";
+
+        toast("Photo taken 📸");
+
+    },"image/jpeg");
+}
+
+
+document.getElementById("photoInput").addEventListener("change",function(){
+
+    if(this.files.length){
+
+        const file=this.files[0];
+
+        document.getElementById("photoStatus").textContent=
+            "✅ Photo selected: "+file.name;
+
+        toast("Photo added 🌱");
+    }
+});
+
+
+function addPlant(){
+
+    const name=prompt("What is your plant called?");
+
+    if(!name) return;
+
+    const plants=getData("myPlants",[]);
+
+    plants.push({
+        id:Date.now(),
+        name:name,
+        icon:"🌱",
+        watered:false,
+        favourite:false,
+        progress:10
+    });
+
+    saveData("myPlants",plants);
+
+    renderPlants();
+    updateDashboard();
+
+    toast(name+" added 🌿");
+}
+
+
+function renderPlants(){
+
+    const container=document.getElementById("plantList");
+
+    const plants=getData("myPlants",[]);
+
+    if(!plants.length){
+
+        container.innerHTML=`
+            <div class="card empty" style="grid-column:1/-1">
+                <div style="font-size:60px">🌱</div>
+                <h3>No plants yet</h3>
+                <p>Add your first plant to start your plant collection.</p>
+                <button class="green-btn" style="margin-top:15px" onclick="addPlant()">
+                    ＋ Add My First Plant
+                </button>
             </div>
         `;
 
         return;
     }
 
-    historyList.innerHTML = history.map(item => `
+    container.innerHTML=plants.map(plant=>`
 
-        <div class="history-item">
+        <div class="card plant-card">
 
-            <div class="history-icon">🩺</div>
+            <button class="fav" onclick="toggleFavourite(${plant.id})">
+                ${plant.favourite?"❤️":"♡"}
+            </button>
 
-            <div>
-                <strong>${item.title}</strong>
-                <span>${item.date} • ${item.time}</span>
+            <div class="plant-icon">${plant.icon}</div>
+
+            <h3>${escapeHTML(plant.name)}</h3>
+
+            <p>
+                ${plant.watered
+                    ? "Watered today 💧"
+                    : "Needs a care check"}
+            </p>
+
+            <div class="progress">
+                <span style="width:${plant.progress}%"></span>
+            </div>
+
+            <small style="color:var(--muted)">
+                Growth progress: ${plant.progress}%
+            </small>
+
+            <div class="plant-buttons" style="margin-top:15px">
+
+                <button class="small-btn"
+                    onclick="waterPlant(${plant.id})">
+                    💧 Water
+                </button>
+
+                <button class="small-btn"
+                    onclick="plantProgress(${plant.id})">
+                    📈 Grow
+                </button>
+
+                <button class="small-btn"
+                    onclick="checkPlant('${escapeHTML(plant.name)}')">
+                    🩺 Check
+                </button>
+
+                <button class="small-btn"
+                    onclick="deletePlant(${plant.id})">
+                    🗑️
+                </button>
+
             </div>
 
         </div>
 
     `).join("");
-
 }
 
 
-function updateLastCheck() {
+function escapeHTML(text){
 
-    const history = JSON.parse(
-        localStorage.getItem("plantDoctorHistory") || "[]"
-    );
+    return text
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
 
-    const lastCheck = document.getElementById("lastCheck");
 
-    if (history.length > 0) {
-        lastCheck.textContent = history[0].date;
-    } else {
-        lastCheck.textContent = "None";
+function waterPlant(id){
+
+    const plants=getData("myPlants",[]);
+
+    const plant=plants.find(p=>p.id===id);
+
+    if(!plant) return;
+
+    plant.watered=true;
+
+    saveData("myPlants",plants);
+
+    const days=getData("waterDays",[]);
+
+    const today=new Date().toISOString().split("T")[0];
+
+    if(!days.includes(today)){
+        days.push(today);
     }
 
+    saveData("waterDays",days);
+
+    renderPlants();
+    updateDashboard();
+    renderCalendar();
+
+    toast("Plant watered 💧");
 }
 
 
-/* =========================
-   SEARCH
-========================= */
+function plantProgress(id){
 
-function searchPlants(inputId, resultId) {
+    const plants=getData("myPlants",[]);
 
-    const input = document.getElementById(inputId);
+    const plant=plants.find(p=>p.id===id);
 
-    const results = document.getElementById(resultId);
+    if(!plant) return;
 
-    const search = input.value.toLowerCase().trim();
+    plant.progress=Math.min(100,plant.progress+10);
 
-    if (!search) {
+    saveData("myPlants",plants);
 
-        results.innerHTML = "";
+    renderPlants();
+
+    toast("Growth updated 📈");
+}
+
+
+function toggleFavourite(id){
+
+    const plants=getData("myPlants",[]);
+
+    const plant=plants.find(p=>p.id===id);
+
+    if(!plant) return;
+
+    plant.favourite=!plant.favourite;
+
+    saveData("myPlants",plants);
+
+    renderPlants();
+    renderFavourites();
+    updateDashboard();
+
+    toast(
+        plant.favourite
+        ? "Added to favourites ❤️"
+        : "Removed from favourites"
+    );
+}
+
+
+function deletePlant(id){
+
+    if(!confirm("Remove this plant?")) return;
+
+    let plants=getData("myPlants",[]);
+
+    plants=plants.filter(p=>p.id!==id);
+
+    saveData("myPlants",plants);
+
+    renderPlants();
+    renderFavourites();
+    updateDashboard();
+
+    toast("Plant removed");
+}
+
+
+function checkPlant(name){
+
+    showSection("check");
+
+    toast("Checking "+name+" 🌿");
+}
+
+
+function renderFavourites(){
+
+    const container=document.getElementById("favouriteList");
+
+    const plants=getData("myPlants",[]).filter(p=>p.favourite);
+
+    if(!plants.length){
+
+        container.innerHTML=`
+            <div class="card empty" style="grid-column:1/-1">
+                ❤️
+                <h3>No favourites yet</h3>
+                <p>Tap the heart on a plant to save it here.</p>
+            </div>
+        `;
 
         return;
     }
 
-    const matches = plants.filter(plant =>
-        plant.name.toLowerCase().includes(search)
+    container.innerHTML=plants.map(plant=>`
+
+        <div class="card plant-card">
+
+            <div class="plant-icon">${plant.icon}</div>
+
+            <h3>${escapeHTML(plant.name)}</h3>
+
+            <p>Favourite plant ❤️</p>
+
+            <button class="green-btn"
+                style="margin-top:15px"
+                onclick="checkPlant('${escapeHTML(plant.name)}')">
+                🩺 Check Plant
+            </button>
+
+        </div>
+
+    `).join("");
+}
+
+
+function renderLibrary(){
+
+    const query=(document.getElementById("plantSearch")?.value || "").toLowerCase();
+
+    const filtered=plantsData.filter(plant=>
+        plant.name.toLowerCase().includes(query)
     );
 
-    if (matches.length === 0) {
+    const container=document.getElementById("libraryList");
 
-        results.innerHTML = `
-            <div class="empty-history" style="grid-column:1/-1;">
-                <div style="font-size:35px;">🔎</div>
-                <h3 style="margin:10px;">No plant found</h3>
+    if(!filtered.length){
+
+        container.innerHTML=`
+            <div class="card empty" style="grid-column:1/-1">
+                🌱
+                <h3>No plant found</h3>
                 <p>Try another plant name.</p>
             </div>
         `;
@@ -1796,92 +2069,316 @@ function searchPlants(inputId, resultId) {
         return;
     }
 
-    results.innerHTML = matches.map(plant => `
+    container.innerHTML=filtered.map((plant,index)=>`
 
-        <div class="plant-card" onclick="showPlantInfo('${plant.name}')">
+        <div class="card library-card" onclick="showPlantInfo(${index})">
 
             <div class="plant-icon">${plant.icon}</div>
 
-            <strong>${plant.name}</strong>
+            <h3>${plant.name}</h3>
 
-            <span>Tap to see care tips</span>
+            <p>${plant.fact}</p>
+
+            <button class="small-btn" style="margin-top:12px">
+                View care →
+            </button>
 
         </div>
 
     `).join("");
-
 }
 
 
-function showPlantInfo(name) {
+function searchPlants(){
+    renderLibrary();
+}
 
-    const plant = plants.find(
-        p => p.name === name
+
+function showPlantInfo(index){
+
+    const plant=plantsData[index];
+
+    alert(
+        plant.name+
+        "\\n\\n☀️ Light: "+plant.light+
+        "\\n💧 Water: "+plant.water+
+        "\\n🪴 Soil: "+plant.soil+
+        "\\n\\n🌱 Fact: "+plant.fact
     );
-
-    if (!plant) return;
-
-    document.getElementById("plantText").textContent =
-        `${plant.name}: ${plant.care}`;
-
-    document.getElementById("waterText").textContent =
-        plant.water;
-
-    document.getElementById("lightText").textContent =
-        plant.light;
-
-    document.getElementById("problemText").textContent =
-        "Keep watching the leaves and soil for changes.";
-
-    document.getElementById("resultTitle").textContent =
-        `${plant.icon} ${plant.name}`;
-
-    document.getElementById("resultSubtitle").textContent =
-        "Basic Plant Doctor care guide";
-
-    showPage("resultPage");
-
 }
 
 
-/* =========================
-   NOTES
-========================= */
+function saveNotes(){
 
-function saveNotes() {
+    const notes=document.getElementById("notes").value;
 
-    const notes = document.getElementById("plantNotes").value;
+    saveData("plantNotes",notes);
 
-    localStorage.setItem(
-        "plantDoctorNotes",
-        notes
+    toast("Notes saved 📝");
+}
+
+
+function loadNotes(){
+
+    const notes=getData("plantNotes","");
+
+    document.getElementById("notes").value=notes;
+}
+
+
+function waterToday(){
+
+    const days=getData("waterDays",[]);
+
+    const today=new Date().toISOString().split("T")[0];
+
+    if(!days.includes(today)){
+        days.push(today);
+    }
+
+    saveData("waterDays",days);
+
+    const plants=getData("myPlants",[]);
+
+    plants.forEach(p=>p.watered=true);
+
+    saveData("myPlants",plants);
+
+    renderCalendar();
+    renderPlants();
+    updateDashboard();
+
+    toast("Today is marked as watered 💧");
+}
+
+
+function renderCalendar(){
+
+    const date=new Date();
+
+    const year=date.getFullYear();
+    const month=date.getMonth();
+
+    const first=new Date(year,month,1).getDay();
+    const total=new Date(year,month+1,0).getDate();
+
+    document.getElementById("calendarTitle").textContent=
+        date.toLocaleString("default",{month:"long",year:"numeric"});
+
+    const days=getData("waterDays",[]);
+
+    const today=new Date().toISOString().split("T")[0];
+
+    let html="";
+
+    for(let i=0;i<first;i++){
+
+        html+=`<div class="day" style="opacity:0"></div>`;
+    }
+
+    for(let day=1;day<=total;day++){
+
+        const key=
+            year+"-"+
+            String(month+1).padStart(2,"0")+"-"+
+            String(day).padStart(2,"0");
+
+        const watered=days.includes(key);
+        const isToday=key===today;
+
+        html+=`
+            <div class="day ${watered?"watered":""} ${isToday?"today":""}">
+                <strong>${day}</strong>
+                <small>
+                    ${watered?"💧":" "}
+                </small>
+            </div>
+        `;
+    }
+
+    document.getElementById("calendarGrid").innerHTML=html;
+
+    calculateStreak();
+}
+
+
+function calculateStreak(){
+
+    const days=getData("waterDays",[]);
+
+    let streak=0;
+
+    const date=new Date();
+
+    while(true){
+
+        const key=date.toISOString().split("T")[0];
+
+        if(days.includes(key)){
+
+            streak++;
+
+            date.setDate(date.getDate()-1);
+
+        }else{
+
+            break;
+        }
+    }
+
+    document.getElementById("streakNumber").textContent=
+        streak+" day"+(streak===1?"":"s");
+}
+
+
+function renderHistory(){
+
+    const container=document.getElementById("historyList");
+
+    const history=getData("plantHistory",[]);
+
+    if(!history.length){
+
+        container.innerHTML=`
+            <div class="empty">
+                <div style="font-size:55px">🩺</div>
+                <h3>No checks yet</h3>
+                <p>Your saved plant checks will appear here.</p>
+            </div>
+        `;
+
+        return;
+    }
+
+    container.innerHTML=history.map(item=>`
+
+        <div class="history-item">
+
+            <div class="history-icon">${item.icon}</div>
+
+            <div style="flex:1">
+                <strong>${escapeHTML(item.title)}</strong>
+                <p>${item.time}</p>
+            </div>
+
+            <strong style="color:var(--green2)">
+                ${item.score}%
+            </strong>
+
+        </div>
+
+    `).join("");
+}
+
+
+function clearHistory(){
+
+    if(!confirm("Clear all plant check history?")) return;
+
+    localStorage.removeItem("plantHistory");
+
+    renderHistory();
+    updateDashboard();
+
+    toast("History cleared");
+}
+
+
+function updateDashboard(){
+
+    const plants=getData("myPlants",[]);
+    const history=getData("plantHistory",[]);
+
+    const today=new Date().toISOString().split("T")[0];
+
+    const watered=plants.filter(p=>p.watered).length;
+
+    const fav=plants.filter(p=>p.favourite).length;
+
+    document.getElementById("plantCount").textContent=plants.length;
+    document.getElementById("waterCount").textContent=watered;
+    document.getElementById("favCount").textContent=fav;
+    document.getElementById("checkCount").textContent=history.length;
+}
+
+
+function toggleDark(){
+
+    document.body.classList.toggle("dark");
+
+    const enabled=document.body.classList.contains("dark");
+
+    localStorage.setItem("darkMode",enabled);
+
+    updateDarkSwitch();
+}
+
+
+function updateDarkSwitch(){
+
+    const enabled=document.body.classList.contains("dark");
+
+    const sw=document.getElementById("darkSwitch");
+
+    if(sw){
+        sw.classList.toggle("active",enabled);
+    }
+}
+
+
+function toggleReminders(){
+
+    const current=localStorage.getItem("reminders")==="true";
+
+    localStorage.setItem("reminders",!current);
+
+    updateReminderSwitch();
+
+    toast(
+        !current
+        ? "Care reminders turned on 🔔"
+        : "Care reminders turned off"
     );
-
-    alert("Your notes have been saved.");
-
 }
 
 
-function loadNotes() {
+function updateReminderSwitch(){
 
-    const notes =
-        localStorage.getItem("plantDoctorNotes") || "";
+    const enabled=localStorage.getItem("reminders")==="true";
 
-    document.getElementById("plantNotes").value = notes;
+    const sw=document.getElementById("reminderSwitch");
 
+    if(sw){
+        sw.classList.toggle("active",enabled);
+    }
 }
 
 
-/* =========================
-   STARTUP
-========================= */
+function resetApp(){
 
-document.addEventListener("DOMContentLoaded", () => {
+    if(!confirm("Reset all Plant Doctor data?")) return;
 
-    updateLastCheck();
+    localStorage.clear();
 
-    loadHistory();
+    location.reload();
+}
 
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    if(localStorage.getItem("darkMode")==="true"){
+        document.body.classList.add("dark");
+    }
+
+    updateDarkSwitch();
+    updateReminderSwitch();
+
+    renderPlants();
+    renderLibrary();
+    renderHistory();
+    renderCalendar();
+    renderFavourites();
+    updateDashboard();
     loadNotes();
 
 });
