@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Plant Doctor 🌱</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #e8f7ee, #f7fff9);
+    color: #173b27;
+}
+
+.app {
+    width: min(430px, 100%);
+    min-height: 100vh;
+    margin: auto;
+    background: white;
+    box-shadow: 0 0 30px rgba(0,0,0,0.08);
+}
+
+/* HEADER */
+
+header {
+    padding: 30px 22px 24px;
+    background: linear-gradient(135deg, #197a45, #42b96f);
+    color: white;
+    border-radius: 0 0 28px 28px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+header p {
+    margin: 8px 0 0;
+    opacity: 0.9;
+}
+
+/* MAIN */
+
+main {
+    padding: 22px;
+}
+
+.card {
+    background: #f4fbf6;
+    border: 1px solid #dcefe2;
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 16px;
+}
+
+.card h2 {
+    margin: 0 0 8px;
+    font-size: 20px;
+}
+
+.small {
+    font-size: 13px;
+    color: #587060;
+    line-height: 1.5;
+}
+
+/* BUTTONS */
+
+button {
+    width: 100%;
+    border: none;
+    border-radius: 15px;
+    padding: 15px;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.primary {
+    background: #197a45;
+    color: white;
+}
+
+.secondary {
+    background: #dff4e6;
+    color: #176438;
+}
+
+.problem {
+    text-align: left;
+    background: white;
+    border: 1px solid #d9eadf;
+    color: #173b27;
+}
+
+/* CAMERA */
+
+#cameraPreview {
+    width: 100%;
+    min-height: 220px;
+    object-fit: cover;
+    border-radius: 18px;
+    background: #111;
+    margin-top: 12px;
+}
+
+/* PHOTO */
+
+#preview {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 18px;
+    margin-top: 15px;
+}
+
+/* RESULT */
+
+.result {
+    border-left: 5px solid #42a765;
+    background: #effaf2;
+}
+
+.badge {
+    display: inline-block;
+    background: #dff4e6;
+    color: #176438;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* HIDDEN */
+
+.hidden {
+    display: none;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 20px 22px 28px;
+    color: #789081;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+footer strong {
+    color: #176438;
+    font-size: 13px;
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="app">
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <h1>🌱 Plant Doctor</h1>
+
+    <p>
+        Check your plant's health.
+    </p>
+
+</header>
+
+
+<main>
+
+
+<!-- =========================
+     HOME SCREEN
+========================= -->
+
+<section id="home">
+
+    <div class="card">
+
+        <h2>📸 Check Your Plant</h2>
+
+        <p class="small">
+            Use your computer camera, phone camera,
+            or choose a photo.
+        </p>
+
+
+        <!-- START COMPUTER CAMERA -->
+
+        <button
+            class="primary"
+            onclick="startCamera()"
+        >
+            🎥 Start Camera
+        </button>
+
+
+        <!-- LIVE CAMERA -->
+
+        <video
+            id="cameraPreview"
+            autoplay
+            playsinline
+        ></video>
+
+
+        <!-- TAKE PHOTO -->
+
+        <button
+            class="primary"
+            onclick="takePicture()"
+        >
+            📸 Take Picture
+        </button>
+
+
+        <!-- STOP CAMERA -->
+
+        <button
+            class="secondary"
+            onclick="stopCamera()"
+        >
+            ✖ Stop Camera
+        </button>
+
+
+        <!-- PHONE CAMERA -->
+
+        <button
+            class="secondary"
+            onclick="openPhoneCamera()"
+        >
+            📱 Phone Camera
+        </button>
+
+
+        <input
+            id="phoneCameraInput"
+            type="file"
+            accept="image/*"
+            capture="environment"
+            style="display:none"
+        >
+
+
+        <!-- CHOOSE PHOTO -->
+
+        <button
+            class="secondary"
+            onclick="openGallery()"
+        >
+            🖼️ Choose Photo
+        </button>
+
+
+        <input
+            id="galleryInput"
+            type="file"
+            accept="image/*"
+            style="display:none"
+        >
+
+
+        <!-- HIDDEN CANVAS -->
+
+        <canvas
+            id="photoCanvas"
+            style="display:none;"
+        ></canvas>
+
+    </div>
+
+
+
+    <!-- =========================
+         QUICK CHECK
+    ========================= -->
+
+    <div class="card">
+
+        <h2>🔎 Quick Check</h2>
+
+        <p class="small">
+            Don't have a photo?
+            Choose the symptom you can see.
+        </p>
+
+
+        <button
+            class="problem"
+            onclick="showProblem('yellow')"
+        >
+            🟡 Yellow Leaves
+        </button>
+
+
+        <button
+            class="problem"
+            onclick="showProblem('brown')"
+        >
+            🟤 Brown Spots
+        </button>
+
+
+        <button
+            class="problem"
+            onclick="showProblem('wilt')"
+        >
+            🥀 Wilting
+        </button>
+
+
+        <button
+            class="problem"
+            onclick="showProblem('pests')"
+        >
+            🐛 Insects or Pests
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     PHOTO SCREEN
+========================= -->
+
+<section
+    id="photoSection"
+    class="hidden"
+>
+
+    <div class="card">
+
+        <span class="badge">
+            PHOTO READY
+        </span>
+
+
+        <img
+            id="preview"
+            alt="Plant photo"
+        >
+
+
+        <button
+            class="primary"
+            onclick="analyzePhoto()"
+        >
+            🔬 Analyze Plant
+        </button>
+
+
+        <button
+            class="secondary"
+            onclick="goHome()"
+        >
+            ← Back
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     RESULT SCREEN
+========================= -->
+
+<section
+    id="resultSection"
+    class="hidden"
+>
+
+    <div class="card result">
+
+        <span class="badge">
+            PLANT DOCTOR RESULT
+        </span>
+
+
+        <h2 id="resultTitle">
+            🌿 Plant Result
+        </h2>
+
+
+        <p>
+            <strong>Possible cause:</strong>
+        </p>
+
+
+        <p id="resultCause"></p>
+
+
+        <p>
+            <strong>What you can try:</strong>
+        </p>
+
+
+        <p id="resultAdvice"></p>
+
+
+        <p class="small">
+
+            ⚠️ This is an educational guide,
+            not a professional plant diagnosis.
+
+        </p>
+
+    </div>
+
+
+    <button
+        class="primary"
+        onclick="goHome()"
+    >
+        🏠 Back to Home
+    </button>
+
+</section>
+
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div>
+        Plant Doctor • Science Week Project 🌿
+    </div>
+
+    <div>
+        <strong>
+            Made by Matt Bradley Mwesigye
+        </strong>
+    </div>
+
+    <div>
+        &copy; 2026 Matt Bradley Mwesigye
+    </div>
+
+</footer>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =================================
+   ELEMENTS
+================================= */
+
+const cameraPreview =
+    document.getElementById("cameraPreview");
+
+const photoCanvas =
+    document.getElementById("photoCanvas");
+
+const preview =
+    document.getElementById("preview");
+
+const galleryInput =
+    document.getElementById("galleryInput");
+
+const phoneCameraInput =
+    document.getElementById("phoneCameraInput");
+
+
+/* =================================
+   CAMERA STREAM
+================================= */
+
+let cameraStream = null;
+
+
+
+/* =================================
+   START COMPUTER CAMERA
+================================= */
+
+async function startCamera() {
+
+    try {
+
+        cameraStream =
+            await navigator.mediaDevices.getUserMedia({
+
+                video: {
+                    facingMode: "user"
+                },
+
+                audio: false
+
+            });
+
+
+        cameraPreview.srcObject =
+            cameraStream;
+
+
+    } catch (error) {
+
+        alert(
+            "Camera access was blocked. Please allow camera permission and try again."
+        );
+
+        console.error(error);
+
+    }
+
+}
+
+
+
+/* =================================
+   TAKE PICTURE
+================================= */
+
+function takePicture() {
+
+    if (!cameraStream) {
+
+        alert(
+            "Please click Start Camera first."
+        );
+
+        return;
+
+    }
+
+
+    photoCanvas.width =
+        cameraPreview.videoWidth;
+
+    photoCanvas.height =
+        cameraPreview.videoHeight;
+
+
+    const context =
+        photoCanvas.getContext("2d");
+
+
+    context.drawImage(
+        cameraPreview,
+        0,
+        0,
+        photoCanvas.width,
+        photoCanvas.height
+    );
+
+
+    const picture =
+        photoCanvas.toDataURL("image/png");
+
+
+    preview.src =
+        picture;
+
+
+    stopCamera();
+
+
+    document
+        .getElementById("home")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("resultSection")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("photoSection")
+        .classList.remove("hidden");
+
+}
+
+
+
+/* =================================
+   STOP CAMERA
+================================= */
+
+function stopCamera() {
+
+    if (cameraStream) {
+
+        cameraStream
+            .getTracks()
+            .forEach(function(track) {
+
+                track.stop();
+
+            });
+
+
+        cameraStream = null;
+
+    }
+
+
+    cameraPreview.srcObject = null;
+
+}
+
+
+
+/* =================================
+   PHONE CAMERA
+================================= */
+
+function openPhoneCamera() {
+
+    phoneCameraInput.click();
+
+}
+
+
+
+/* =================================
+   GALLERY
+================================= */
+
+function openGallery() {
+
+    galleryInput.click();
+
+}
+
+
+
+/* =================================
+   PHONE PHOTO
+================================= */
+
+phoneCameraInput.addEventListener(
+    "change",
+    handlePhoto
+);
+
+
+
+/* =================================
+   GALLERY PHOTO
+================================= */
+
+galleryInput.addEventListener(
+    "change",
+    handlePhoto
+);
+
+
+
+/* =================================
+   HANDLE PHOTO
+================================= */
+
+function handlePhoto(event) {
+
+    const file =
+        event.target.files[0];
+
+
+    if (!file) {
+
+        return;
+
+    }
+
+
+    preview.src =
+        URL.createObjectURL(file);
+
+
+    document
+        .getElementById("home")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("resultSection")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("photoSection")
+        .classList.remove("hidden");
+
+}
+
+
+
+/* =================================
+   ANALYZE PHOTO
+================================= */
+
+function analyzePhoto() {
+
+    /*
+       DEMO MODE
+
+       The photo is captured and displayed,
+       but no AI vision model is connected yet.
+    */
+
+
+    document
+        .getElementById("photoSection")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("resultSection")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("resultTitle")
+        .textContent =
+        "🌿 Possible Plant Stress";
+
+
+    document
+        .getElementById("resultCause")
+        .textContent =
+        "The plant should be checked for visible signs such as yellowing, brown spots, wilting, pests, or unusual growth.";
+
+
+    document
+        .getElementById("resultAdvice")
+        .textContent =
+        "Check the soil moisture, lighting, leaves, and drainage. Compare the symptoms with a trusted plant-care guide.";
+
+}
+
+
+
+/* =================================
+   QUICK SYMPTOM CHECKER
+================================= */
+
+function showProblem(type) {
+
+
+    const problems = {
+
+
+        yellow: {
+
+            title:
+                "🟡 Yellow Leaves",
+
+            cause:
+                "Overwatering, underwatering, poor nutrition, or natural ageing can cause yellow leaves.",
+
+            advice:
+                "Check the soil before watering. Make sure the pot drains properly and that the plant gets suitable light."
+
+        },
+
+
+        brown: {
+
+            title:
+                "🟤 Brown Spots",
+
+            cause:
+                "Brown spots can be caused by water stress, leaf damage, fungal problems, or too much direct sunlight.",
+
+            advice:
+                "Check the leaves and soil carefully. Avoid keeping leaves constantly wet and make sure the plant gets the right amount of light."
+
+        },
+
+
+        wilt: {
+
+            title:
+                "🥀 Wilting",
+
+            cause:
+                "Wilting can happen when a plant lacks water, has damaged roots, or is under environmental stress.",
+
+            advice:
+                "Check the soil moisture and drainage. If the soil is dry, water appropriately. If it is very wet, check that water can drain away."
+
+        },
+
+
+        pests: {
+
+            title:
+                "🐛 Possible Pests",
+
+            cause:
+                "Small insects, holes, sticky residue, or damaged leaves can be signs of pests.",
+
+            advice:
+                "Inspect the underside of leaves and separate badly affected plants if necessary. Ask an adult or gardening expert about a suitable treatment."
+
+        }
+
+    };
+
+
+    const result =
+        problems[type];
+
+
+    document
+        .getElementById("home")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("photoSection")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("resultSection")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("resultTitle")
+        .textContent =
+        result.title;
+
+
+    document
+        .getElementById("resultCause")
+        .textContent =
+        result.cause;
+
+
+    document
+        .getElementById("resultAdvice")
+        .textContent =
+        result.advice;
+
+}
+
+
+
+/* =================================
+   HOME
+================================= */
+
+function goHome() {
+
+    stopCamera();
+
+
+    document
+        .getElementById("home")
+        .classList.remove("hidden");
+
+
+    document
+        .getElementById("photoSection")
+        .classList.add("hidden");
+
+
+    document
+        .getElementById("resultSection")
+        .classList.add("hidden");
+
+
+    galleryInput.value = "";
+
+    phoneCameraInput.value = "";
+
+    preview.src = "";
+
+}
+
+</script>
+
+</body>
+</html>
