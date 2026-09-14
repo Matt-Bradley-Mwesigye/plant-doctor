@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,2384 +7,2650 @@
 <title>Plant Doctor</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
 :root{
-    --green:#126b3a;
-    --green2:#1c8a4d;
-    --lightgreen:#eaf7ef;
-    --dark:#123225;
-    --text:#20342a;
-    --muted:#718078;
-    --white:#ffffff;
-    --bg:#f4f8f5;
-    --card:#ffffff;
-    --border:#e2ebe5;
-    --yellow:#f4b942;
-    --red:#df5a52;
-    --blue:#4d91d9;
-    --shadow:0 8px 25px rgba(18,107,58,.08);
+  --green:#126b3a;
+  --green2:#1c8a4d;
+  --lightgreen:#eaf7ef;
+  --dark:#123225;
+  --text:#20342a;
+  --muted:#718078;
+  --white:#ffffff;
+  --bg:#f4f8f5;
+  --card:#ffffff;
+  --border:#e2ebe5;
+  --yellow:#f4b942;
+  --red:#df5a52;
+  --blue:#4d91d9;
+  --shadow:0 8px 25px rgba(18,107,58,.08);
 }
 
-body.dark{
-    --bg:#101914;
-    --card:#17231c;
-    --white:#17231c;
-    --text:#eef7f1;
-    --dark:#eef7f1;
-    --muted:#a5b5ac;
-    --border:#293a30;
-    --lightgreen:#193a28;
-    --shadow:0 8px 25px rgba(0,0,0,.25);
+*{
+  box-sizing:border-box;
 }
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    transition:.25s;
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:var(--text);
 }
 
-button,input{
-    font:inherit;
+button,input,textarea{
+  font-family:inherit;
 }
 
 button{
-    cursor:pointer;
-}
-
-.app{
-    width:100%;
-    min-height:100vh;
+  cursor:pointer;
 }
 
 .topbar{
-    position:sticky;
-    top:0;
-    z-index:50;
-    background:var(--card);
-    border-bottom:1px solid var(--border);
-    height:72px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 5%;
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  padding:14px 18px;
+}
+
+.topbar-inner{
+  max-width:1200px;
+  margin:auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
 }
 
 .brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
 .logo{
-    width:44px;
-    height:44px;
-    border-radius:14px;
-    background:var(--green);
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:24px;
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  background:var(--green);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
 }
 
 .brand h1{
-    font-size:20px;
-    color:var(--dark);
+  margin:0;
+  font-size:20px;
 }
 
 .brand small{
-    color:var(--muted);
+  color:var(--muted);
 }
 
 .top-actions{
-    display:flex;
-    gap:10px;
+  display:flex;
+  gap:8px;
 }
 
 .icon-btn{
-    width:42px;
-    height:42px;
-    border-radius:13px;
-    border:1px solid var(--border);
-    background:var(--card);
-    color:var(--text);
+  width:40px;
+  height:40px;
+  border:1px solid var(--border);
+  background:var(--card);
+  border-radius:12px;
+  font-size:18px;
 }
 
-.main{
-    width:90%;
-    max-width:1250px;
-    margin:auto;
-    padding:30px 0 100px;
+.container{
+  width:min(1200px,94%);
+  margin:auto;
+  padding:24px 0 110px;
+}
+
+.section{
+  display:none;
+}
+
+.section.active{
+  display:block;
 }
 
 .hero{
-    background:linear-gradient(135deg,#0d6334,#219653);
-    color:white;
-    border-radius:28px;
-    padding:34px;
-    display:grid;
-    grid-template-columns:1.5fr 1fr;
-    gap:25px;
-    overflow:hidden;
-    position:relative;
-}
-
-.hero:after{
-    content:"🌿";
-    position:absolute;
-    right:35px;
-    bottom:-20px;
-    font-size:150px;
-    opacity:.13;
+  background:linear-gradient(135deg,var(--green),var(--green2));
+  color:white;
+  border-radius:25px;
+  padding:30px;
+  box-shadow:var(--shadow);
+  margin-bottom:22px;
 }
 
 .hero h2{
-    font-size:clamp(30px,5vw,52px);
-    margin-bottom:12px;
+  margin:0 0 8px;
+  font-size:32px;
 }
 
 .hero p{
-    line-height:1.6;
-    max-width:600px;
-    color:#e3f6ea;
-}
-
-.hero-buttons{
-    display:flex;
-    gap:12px;
-    margin-top:25px;
-    flex-wrap:wrap;
-}
-
-.primary{
-    background:white;
-    color:var(--green);
-    border:0;
-    padding:13px 19px;
-    border-radius:13px;
-    font-weight:bold;
-}
-
-.secondary{
-    background:rgba(255,255,255,.14);
-    color:white;
-    border:1px solid rgba(255,255,255,.35);
-    padding:13px 19px;
-    border-radius:13px;
-    font-weight:bold;
-}
-
-.section-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin:32px 0 15px;
-}
-
-.section-title h2{
-    font-size:23px;
-}
-
-.section-title button{
-    border:0;
-    background:none;
-    color:var(--green2);
-    font-weight:bold;
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-    margin-top:22px;
-}
-
-.stat{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:20px;
-    box-shadow:var(--shadow);
-}
-
-.stat-icon{
-    font-size:26px;
-    margin-bottom:12px;
-}
-
-.stat strong{
-    display:block;
-    font-size:27px;
-    color:var(--dark);
-}
-
-.stat span{
-    color:var(--muted);
-    font-size:14px;
+  margin:0;
+  opacity:.92;
+  max-width:700px;
+  line-height:1.5;
 }
 
 .grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin-bottom:22px;
 }
 
 .card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:20px;
-    box-shadow:var(--shadow);
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:var(--shadow);
 }
 
 .card h3{
-    color:var(--dark);
-    margin-bottom:7px;
+  margin:0 0 8px;
 }
 
-.card p{
-    color:var(--muted);
-    line-height:1.5;
+.stat{
+  font-size:30px;
+  font-weight:bold;
+  color:var(--green);
 }
 
-.action-card{
-    cursor:pointer;
-    transition:.2s;
+.muted{
+  color:var(--muted);
 }
 
-.action-card:hover{
-    transform:translateY(-4px);
+.button{
+  border:0;
+  background:var(--green);
+  color:white;
+  padding:12px 17px;
+  border-radius:12px;
+  font-weight:bold;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  transition:.2s;
 }
 
-.big-icon{
-    font-size:38px;
-    margin-bottom:14px;
+.button:hover{
+  transform:translateY(-1px);
+  filter:brightness(.97);
 }
 
-.search-box{
-    display:flex;
-    gap:10px;
-    margin-bottom:18px;
+.button.secondary{
+  background:var(--lightgreen);
+  color:var(--green);
 }
 
-.search-box input{
-    flex:1;
-    padding:14px 16px;
-    border:1px solid var(--border);
-    border-radius:14px;
-    background:var(--card);
-    color:var(--text);
-    outline:none;
+.button.blue{
+  background:var(--blue);
 }
 
-.green-btn{
-    background:var(--green);
-    color:white;
-    border:0;
-    border-radius:13px;
-    padding:12px 17px;
-    font-weight:bold;
+.button.outline{
+  background:transparent;
+  border:1px solid var(--border);
+  color:var(--text);
 }
 
-.problem-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
+.button.red{
+  background:var(--red);
 }
 
-.problem{
-    border:1px solid var(--border);
-    background:var(--card);
-    border-radius:18px;
-    padding:17px;
-    text-align:left;
-    color:var(--text);
-    transition:.2s;
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
 }
 
-.problem:hover{
-    transform:translateY(-3px);
-    border-color:var(--green2);
+.quick-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
 }
 
-.problem span{
-    font-size:30px;
-    display:block;
-    margin-bottom:9px;
+.quick-btn{
+  border:1px solid var(--border);
+  background:var(--card);
+  padding:17px 12px;
+  border-radius:16px;
+  text-align:left;
+  color:var(--text);
+  transition:.2s;
 }
 
-.problem strong{
-    display:block;
-    margin-bottom:4px;
+.quick-btn:hover{
+  border-color:var(--green);
+  transform:translateY(-2px);
 }
 
-.problem small{
-    color:var(--muted);
+.quick-icon{
+  font-size:27px;
+  display:block;
+  margin-bottom:8px;
+}
+
+.quick-btn strong{
+  display:block;
+  margin-bottom:4px;
+}
+
+.quick-btn span{
+  color:var(--muted);
+  font-size:13px;
 }
 
 .camera-box{
-    background:#102019;
-    border-radius:24px;
-    padding:18px;
-    overflow:hidden;
-}
-
-video{
-    width:100%;
-    max-height:440px;
-    object-fit:cover;
-    border-radius:18px;
-    background:#08100c;
-    display:none;
+  background:#10251b;
+  border-radius:22px;
+  min-height:330px;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  margin-bottom:15px;
 }
 
 .camera-placeholder{
-    min-height:300px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    color:white;
-    text-align:center;
-    border:1px dashed #496456;
-    border-radius:18px;
+  color:white;
+  text-align:center;
+  padding:25px;
 }
 
 .camera-placeholder div{
-    font-size:65px;
-    margin-bottom:12px;
+  font-size:55px;
+  margin-bottom:10px;
 }
 
-.camera-buttons{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    margin-top:15px;
+#camera{
+  width:100%;
+  height:100%;
+  max-height:550px;
+  object-fit:cover;
+  display:none;
 }
 
-.camera-buttons button{
-    border:0;
-    border-radius:12px;
-    padding:12px 15px;
-    font-weight:bold;
+#capturedPhoto{
+  width:100%;
+  max-height:550px;
+  object-fit:contain;
+  display:none;
 }
 
-input[type=file]{
-    display:none;
+.camera-controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
 }
 
-.result{
-    display:none;
+input[type="file"]{
+  display:none;
 }
 
-.result-head{
-    background:linear-gradient(135deg,#eaf8ef,#ffffff);
-    border:1px solid #d7eadd;
-    border-radius:24px;
-    padding:25px;
+.status{
+  margin-top:12px;
+  padding:12px;
+  background:var(--lightgreen);
+  color:var(--green);
+  border-radius:12px;
+  display:none;
 }
 
-body.dark .result-head{
-    background:#193025;
-    border-color:#294637;
+.status.show{
+  display:block;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.result-header{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin-bottom:18px;
+}
+
+.result-icon{
+  width:65px;
+  height:65px;
+  border-radius:18px;
+  background:var(--lightgreen);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:34px;
 }
 
 .score{
-    display:flex;
-    align-items:center;
-    gap:20px;
-}
-
-.score-circle{
-    width:100px;
-    height:100px;
-    border-radius:50%;
-    background:var(--green);
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:28px;
-    font-weight:bold;
+  font-size:38px;
+  font-weight:bold;
+  color:var(--green);
 }
 
 .advice-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-    margin-top:18px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
 }
 
 .advice{
-    padding:20px;
-    border-radius:18px;
-    background:var(--card);
-    border:1px solid var(--border);
+  border-radius:18px;
+  padding:18px;
+  background:var(--lightgreen);
 }
 
-.advice-icon{
-    font-size:30px;
-    margin-bottom:10px;
+.advice strong{
+  display:block;
+  margin-bottom:8px;
 }
 
-.advice h3{
-    margin-bottom:7px;
-}
-
-.advice p{
-    color:var(--muted);
-    line-height:1.5;
-}
-
-.action-list{
-    list-style:none;
-    margin-top:12px;
-}
-
-.action-list li{
-    padding:10px 0;
-    border-bottom:1px solid var(--border);
-}
-
-.action-list li:last-child{
-    border:0;
+.plant-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
 }
 
 .plant-card{
-    position:relative;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:var(--shadow);
 }
 
 .plant-icon{
-    width:65px;
-    height:65px;
-    border-radius:20px;
-    background:var(--lightgreen);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:36px;
-    margin-bottom:14px;
+  font-size:45px;
 }
 
-.fav{
-    position:absolute;
-    top:15px;
-    right:15px;
-    border:0;
-    background:none;
-    font-size:22px;
+.plant-card h3{
+  margin:10px 0 5px;
+}
+
+.search{
+  width:100%;
+  padding:15px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  outline:none;
+  margin-bottom:18px;
+}
+
+.search:focus{
+  border-color:var(--green);
+}
+
+.note-box{
+  width:100%;
+  min-height:150px;
+  resize:vertical;
+  padding:15px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
 }
 
 .progress{
-    width:100%;
-    height:8px;
-    background:var(--border);
-    border-radius:20px;
-    margin:12px 0;
-    overflow:hidden;
+  height:10px;
+  background:var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:10px;
 }
 
-.progress span{
-    display:block;
-    height:100%;
-    background:var(--green2);
-    border-radius:20px;
-}
-
-.plant-buttons{
-    display:flex;
-    gap:7px;
-    flex-wrap:wrap;
-}
-
-.small-btn{
-    border:1px solid var(--border);
-    background:var(--card);
-    color:var(--text);
-    padding:8px 11px;
-    border-radius:10px;
-    font-size:13px;
-}
-
-.library{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-}
-
-.library-card{
-    cursor:pointer;
+.progress div{
+  height:100%;
+  width:65%;
+  background:var(--green);
+  border-radius:20px;
 }
 
 .calendar{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    gap:7px;
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:8px;
 }
 
 .day{
-    min-height:65px;
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:8px;
-    background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px 5px;
+  text-align:center;
+  background:var(--card);
 }
 
-.day.today{
-    border:2px solid var(--green2);
-}
-
-.day.watered{
-    background:var(--lightgreen);
-}
-
-.day small{
-    display:block;
-    color:var(--muted);
-}
-
-.tip{
-    background:linear-gradient(135deg,#fff7db,#fffdf4);
-    border:1px solid #f1dfa3;
-}
-
-body.dark .tip{
-    background:#332d18;
-    border-color:#514820;
-}
-
-.note{
-    width:100%;
-    min-height:130px;
-    padding:15px;
-    border:1px solid var(--border);
-    border-radius:14px;
-    background:var(--card);
-    color:var(--text);
-    resize:vertical;
+.day.done{
+  background:var(--lightgreen);
+  color:var(--green);
 }
 
 .history-item{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    border-bottom:1px solid var(--border);
-    padding:15px 0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  border-bottom:1px solid var(--border);
+  padding:15px 0;
 }
 
 .history-item:last-child{
-    border:0;
+  border-bottom:0;
 }
 
-.history-icon{
-    width:48px;
-    height:48px;
-    border-radius:15px;
-    background:var(--lightgreen);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:24px;
+.toggle{
+  width:55px;
+  height:30px;
+  border-radius:30px;
+  background:#bbb;
+  position:relative;
+  border:0;
 }
 
-.settings-row{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:17px 0;
-    border-bottom:1px solid var(--border);
+.toggle::after{
+  content:"";
+  position:absolute;
+  width:24px;
+  height:24px;
+  border-radius:50%;
+  background:white;
+  top:3px;
+  left:3px;
+  transition:.2s;
 }
 
-.switch{
-    width:48px;
-    height:26px;
-    background:#aab8b0;
-    border-radius:20px;
-    padding:3px;
-    cursor:pointer;
+.toggle.on{
+  background:var(--green);
 }
 
-.switch span{
-    width:20px;
-    height:20px;
-    background:white;
-    display:block;
-    border-radius:50%;
-    transition:.2s;
-}
-
-.switch.active{
-    background:var(--green2);
-}
-
-.switch.active span{
-    transform:translateX(22px);
-}
-
-.toast{
-    position:fixed;
-    right:20px;
-    bottom:25px;
-    background:#123225;
-    color:white;
-    padding:14px 18px;
-    border-radius:14px;
-    box-shadow:0 10px 30px rgba(0,0,0,.2);
-    transform:translateY(100px);
-    opacity:0;
-    transition:.3s;
-    z-index:100;
-}
-
-.toast.show{
-    transform:translateY(0);
-    opacity:1;
-}
-
-.empty{
-    text-align:center;
-    padding:35px;
-    color:var(--muted);
-}
-
-footer{
-    text-align:center;
-    color:var(--muted);
-    padding:30px 10px 100px;
-    font-size:13px;
+.toggle.on::after{
+  left:28px;
 }
 
 .bottom-nav{
-    position:fixed;
-    bottom:0;
-    left:50%;
-    transform:translateX(-50%);
-    width:min(700px,94%);
-    height:70px;
-    background:var(--card);
-    border:1px solid var(--border);
-    box-shadow:0 -5px 25px rgba(0,0,0,.08);
-    border-radius:22px 22px 0 0;
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-    z-index:40;
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:60;
+  background:var(--card);
+  border-top:1px solid var(--border);
+  padding:8px;
+}
+
+.nav-inner{
+  max-width:700px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
 }
 
 .nav-btn{
-    border:0;
-    background:none;
-    color:var(--muted);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:4px;
-    font-size:11px;
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  padding:8px 3px;
+  border-radius:12px;
+  font-size:12px;
 }
 
 .nav-btn span{
-    font-size:22px;
+  display:block;
+  font-size:20px;
+  margin-bottom:3px;
 }
 
 .nav-btn.active{
-    color:var(--green2);
-    font-weight:bold;
+  color:var(--green);
+  background:var(--lightgreen);
+}
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:35px 0 20px;
+  font-size:13px;
 }
 
 @media(max-width:900px){
-    .hero{
-        grid-template-columns:1fr;
-    }
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-    }
+  .quick-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 
-    .grid,
-    .library{
-        grid-template-columns:repeat(2,1fr);
-    }
+  .plant-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
 
-    .problem-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .advice-grid{
-        grid-template-columns:1fr;
-    }
+  .advice-grid{
+    grid-template-columns:1fr;
+  }
 }
 
 @media(max-width:600px){
-    .topbar{
-        padding:0 4%;
-        height:65px;
-    }
+  .container{
+    width:92%;
+    padding-top:17px;
+  }
 
-    .brand h1{
-        font-size:17px;
-    }
+  .hero{
+    padding:23px;
+    border-radius:20px;
+  }
 
-    .brand small{
-        display:none;
-    }
+  .hero h2{
+    font-size:26px;
+  }
 
-    .main{
-        width:92%;
-        padding-top:20px;
-    }
+  .grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+  }
 
-    .hero{
-        padding:25px;
-        border-radius:22px;
-    }
+  .card{
+    padding:16px;
+  }
 
-    .hero h2{
-        font-size:32px;
-    }
+  .stat{
+    font-size:25px;
+  }
 
-    .stats{
-        gap:9px;
-    }
+  .quick-grid{
+    grid-template-columns:repeat(2,1fr);
+    gap:9px;
+  }
 
-    .stat{
-        padding:15px;
-    }
+  .quick-btn{
+    padding:14px 10px;
+  }
 
-    .stat strong{
-        font-size:22px;
-    }
+  .plant-grid{
+    grid-template-columns:1fr;
+  }
 
-    .grid,
-    .library{
-        grid-template-columns:1fr;
-    }
+  .camera-box{
+    min-height:270px;
+  }
 
-    .problem-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
+  .camera-controls .button{
+    flex:1 1 45%;
+  }
 
-    .problem{
-        padding:13px;
-    }
+  .calendar{
+    gap:5px;
+  }
 
-    .calendar{
-        gap:4px;
-    }
+  .day{
+    padding:9px 3px;
+    font-size:12px;
+  }
 
-    .day{
-        min-height:50px;
-        padding:5px;
-        font-size:12px;
-    }
+  .brand h1{
+    font-size:18px;
+  }
+}
 
-    .bottom-nav{
-        height:66px;
-    }
+/* DARK MODE */
+
+body.dark{
+  --bg:#0d1712;
+  --card:#14231b;
+  --text:#edf7f0;
+  --muted:#9aaba1;
+  --border:#294035;
+  --lightgreen:#183b29;
+  --dark:#edf7f0;
+  --shadow:0 8px 25px rgba(0,0,0,.2);
+}
+
+body.dark .button.outline{
+  color:var(--text);
+}
+
+body.dark .camera-box{
+  background:#07100b;
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
-
 <header class="topbar">
-    <div class="brand" onclick="goHome()">
-        <div class="logo">🌿</div>
-        <div>
-            <h1>Plant Doctor</h1>
-            <small>Your plant care helper</small>
-        </div>
+  <div class="topbar-inner">
+    <div class="brand">
+      <div class="logo">🌿</div>
+      <div>
+        <h1>Plant Doctor</h1>
+        <small>Plant care made simple</small>
+      </div>
     </div>
 
     <div class="top-actions">
-        <button class="icon-btn" onclick="toggleDark()" title="Dark mode">🌙</button>
-        <button class="icon-btn" onclick="showSection('settings')" title="Settings">⚙️</button>
+      <button class="icon-btn" onclick="toggleDarkMode()" title="Dark mode">🌙</button>
+      <button class="icon-btn" onclick="showSection('settings')" title="Settings">⚙️</button>
     </div>
+  </div>
 </header>
 
-<main class="main">
+
+<main class="container">
 
 <!-- HOME -->
-<section id="home">
 
-    <div class="hero">
-        <div>
-            <h2>Keep your plants happy. 🌱</h2>
-            <p>
-                Check plant problems, learn how to care for plants,
-                track watering and keep your little green family organised.
-            </p>
+<section id="home" class="section active">
 
-            <div class="hero-buttons">
-                <button class="primary" onclick="showSection('check')">
-                    🩺 Check a Plant
-                </button>
+  <div class="hero">
+    <h2>Welcome to Plant Doctor 🌿</h2>
+    <p>
+      Look after your plants, learn what they need and keep track of their care.
+      Plant Doctor makes plant care simple.
+    </p>
 
-                <button class="secondary" onclick="showSection('library')">
-                    📚 Explore Plants
-                </button>
-            </div>
-        </div>
+    <div class="actions" style="margin-top:18px;">
+      <button class="button" onclick="showSection('check')">
+        🌱 Check a Plant
+      </button>
+
+      <button class="button secondary" onclick="showSection('library')">
+        📚 Plant Library
+      </button>
+    </div>
+  </div>
+
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="muted">Plants</div>
+      <div class="stat" id="plantCount">0</div>
+      <small>My plants</small>
     </div>
 
-    <div class="stats">
-        <div class="stat">
-            <div class="stat-icon">🌱</div>
-            <strong id="plantCount">0</strong>
-            <span>My plants</span>
-        </div>
-
-        <div class="stat">
-            <div class="stat-icon">💧</div>
-            <strong id="waterCount">0</strong>
-            <span>Watered today</span>
-        </div>
-
-        <div class="stat">
-            <div class="stat-icon">❤️</div>
-            <strong id="favCount">0</strong>
-            <span>Favourites</span>
-        </div>
-
-        <div class="stat">
-            <div class="stat-icon">🩺</div>
-            <strong id="checkCount">0</strong>
-            <span>Plant checks</span>
-        </div>
+    <div class="card">
+      <div class="muted">Checks</div>
+      <div class="stat" id="checkCount">0</div>
+      <small>Plant checks</small>
     </div>
 
-    <div class="section-title">
-        <h2>What do you want to do?</h2>
+    <div class="card">
+      <div class="muted">Water</div>
+      <div class="stat" id="waterCount">0</div>
+      <small>Times watered</small>
     </div>
 
-    <div class="grid">
-
-        <div class="card action-card" onclick="showSection('check')">
-            <div class="big-icon">🩺</div>
-            <h3>Check a plant</h3>
-            <p>Tell Plant Doctor what is wrong and get simple care advice.</p>
-        </div>
-
-        <div class="card action-card" onclick="showSection('plants')">
-            <div class="big-icon">🌿</div>
-            <h3>My Plants</h3>
-            <p>Add plants and keep track of their care.</p>
-        </div>
-
-        <div class="card action-card" onclick="showSection('care')">
-            <div class="big-icon">💧</div>
-            <h3>Care Centre</h3>
-            <p>Learn about water, sunlight, soil, pests and more.</p>
-        </div>
-
-        <div class="card action-card" onclick="showSection('calendar')">
-            <div class="big-icon">📅</div>
-            <h3>Care Calendar</h3>
-            <p>See your watering days and build a care streak.</p>
-        </div>
-
-        <div class="card action-card" onclick="showSection('library')">
-            <div class="big-icon">📚</div>
-            <h3>Plant Library</h3>
-            <p>Search plants and learn how to look after them.</p>
-        </div>
-
-        <div class="card action-card" onclick="showSection('history')">
-            <div class="big-icon">🕘</div>
-            <h3>Check History</h3>
-            <p>Look back at the plant problems you checked.</p>
-        </div>
-
+    <div class="card">
+      <div class="muted">Streak</div>
+      <div class="stat" id="streakCount">0</div>
+      <small>Care days</small>
     </div>
 
-    <div class="section-title">
-        <h2>Today's plant tip 🌞</h2>
+  </div>
+
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>💧 Water tracker</h3>
+      <p class="muted">Have you watered your plants today?</p>
+
+      <div class="actions">
+        <button class="button" onclick="waterPlant()">💧 Watered</button>
+        <button class="button outline" onclick="undoWater()">Undo</button>
+      </div>
+
+      <div class="progress">
+        <div id="waterProgress"></div>
+      </div>
     </div>
 
-    <div class="card tip">
-        <h3>🌱 Give your plant the right amount of water</h3>
-        <p>
-            Before watering, touch the top of the soil.
-            If it is still wet, your plant may not need more water yet.
-        </p>
+
+    <div class="card">
+      <h3>☀️ Light check</h3>
+      <p class="muted">Most plants need the right amount of light.</p>
+
+      <div class="actions">
+        <button class="button secondary" onclick="showLightTip()">
+          ☀️ Get light tip
+        </button>
+      </div>
+
+      <p id="lightTip" class="muted"></p>
     </div>
+
+
+    <div class="card">
+      <h3>📝 My notes</h3>
+      <p class="muted">Write something about your plants.</p>
+
+      <button class="button secondary" onclick="showSection('settings')">
+        Open notes
+      </button>
+    </div>
+
+
+    <div class="card">
+      <h3>🕘 Recent check</h3>
+      <p id="recentCheck" class="muted">No checks yet.</p>
+
+      <button class="button outline" onclick="showSection('history')">
+        View history
+      </button>
+    </div>
+
+  </div>
+
+
+  <div class="card">
+    <h3>⭐ Quick actions</h3>
+
+    <div class="actions">
+      <button class="button" onclick="showSection('check')">📷 Check plant</button>
+      <button class="button secondary" onclick="showSection('plants')">🌱 My plants</button>
+      <button class="button secondary" onclick="showSection('care')">💚 Care Centre</button>
+      <button class="button secondary" onclick="showSection('calendar')">📅 Calendar</button>
+      <button class="button secondary" onclick="showSection('history')">🕘 History</button>
+      <button class="button secondary" onclick="showSection('favourites')">⭐ Favourites</button>
+    </div>
+  </div>
 
 </section>
 
 
 <!-- CHECK -->
-<section id="check" style="display:none">
 
-    <div class="section-title">
-        <h2>🩺 Plant Health Check</h2>
+<section id="check" class="section">
+
+  <div class="card">
+    <h2>🌿 Plant Health Check</h2>
+    <p class="muted">
+      Take a photo or choose a problem below. Plant Doctor will give you simple care advice.
+    </p>
+  </div>
+
+
+  <div class="card" style="margin-top:15px;">
+
+    <h3>📷 Take a photo</h3>
+
+    <div class="camera-box">
+
+      <div id="cameraPlaceholder" class="camera-placeholder">
+        <div>📷</div>
+        <strong>Your plant photo will appear here</strong>
+        <p>Take a photo or choose one from your device.</p>
+      </div>
+
+      <video id="camera" autoplay playsinline></video>
+
+      <img id="capturedPhoto" alt="Plant photo">
+
     </div>
 
-    <div class="card">
-        <h3>📸 Check with a photo</h3>
-        <p>
-            You can take a photo or choose one from your device.
-            Plant Doctor will keep the photo with your check, but it does not use AI.
-        </p>
 
-        <div class="camera-box" style="margin-top:18px">
+    <div class="camera-controls">
 
-            <video id="camera"></video>
+      <button class="button" onclick="startCamera()">
+        📷 Start Camera
+      </button>
 
-            <div id="cameraPlaceholder" class="camera-placeholder">
-                <div>📷</div>
-                <strong>Plant camera</strong>
-                <p style="color:#b9c9c0;margin-top:6px">
-                    Take a clear picture of the plant.
-                </p>
-            </div>
+      <button class="button blue" onclick="takePhoto()">
+        ⭕ Take Photo
+      </button>
 
-            <div class="camera-buttons">
-                <button onclick="startCamera()">📷 Start Camera</button>
-                <button onclick="takePhoto()">⭕ Take Photo</button>
+      <label class="button secondary" for="photoInput">
+        🖼️ Choose Photo
+      </label>
 
-                <label for="photoInput" style="
-                    background:white;
-                    color:#123225;
-                    padding:12px 15px;
-                    border-radius:12px;
-                    font-weight:bold;
-                    cursor:pointer;
-                ">
-                    🖼️ Choose Photo
-                </label>
+      <input
+        id="photoInput"
+        type="file"
+        accept="image/*"
+        capture="environment"
+      >
 
-                <input id="photoInput" type="file" accept="image/*" capture="environment">
+      <button class="button outline" onclick="stopCamera()">
+        Stop Camera
+      </button>
 
-                <button onclick="stopCamera()" style="background:#df5a52;color:white">
-                    Stop
-                </button>
-            </div>
-        </div>
-
-        <div id="photoStatus" style="margin-top:15px;color:var(--green2);font-weight:bold"></div>
     </div>
 
-    <div class="section-title">
-        <h2>Or choose the problem</h2>
+
+    <div id="photoStatus" class="status"></div>
+
+
+    <div id="photoActions" class="actions hidden" style="margin-top:12px;">
+
+      <button class="button" onclick="goToProblems()">
+        🌿 Choose a Problem
+      </button>
+
+      <button class="button outline" onclick="clearPhoto()">
+        🔄 Choose Another
+      </button>
+
     </div>
 
-    <div class="card">
-        <p style="margin-bottom:17px">
-            You do not need a photo. Pick what you see on your plant.
-        </p>
+  </div>
 
-        <div class="problem-grid">
 
-            <button class="problem" onclick="checkProblem('yellow')">
-                <span>🍂</span>
-                <strong>Yellow leaves</strong>
-                <small>Leaves are turning yellow</small>
-            </button>
+  <div class="card" style="margin-top:15px;" id="quickProblems">
 
-            <button class="problem" onclick="checkProblem('brown')">
-                <span>🍁</span>
-                <strong>Brown leaves</strong>
-                <small>Leaves have brown areas</small>
-            </button>
+    <h3>🌱 Quick Problem Check</h3>
 
-            <button class="problem" onclick="checkProblem('wilting')">
-                <span>🥀</span>
-                <strong>Wilting</strong>
-                <small>The plant looks weak</small>
-            </button>
+    <p class="muted">
+      You do not need a photo. Pick the problem you can see.
+    </p>
 
-            <button class="problem" onclick="checkProblem('bugs')">
-                <span>🐛</span>
-                <strong>Bugs</strong>
-                <small>You see insects</small>
-            </button>
 
-            <button class="problem" onclick="checkProblem('spots')">
-                <span>🔴</span>
-                <strong>Leaf spots</strong>
-                <small>Spots are appearing</small>
-            </button>
+    <div class="quick-grid">
 
-            <button class="problem" onclick="checkProblem('burnt')">
-                <span>☀️</span>
-                <strong>Burnt leaves</strong>
-                <small>Leaves look damaged by heat</small>
-            </button>
+      <button class="quick-btn" onclick="showProblem('yellow')">
+        <span class="quick-icon">🍂</span>
+        <strong>Yellow Leaves</strong>
+        <span>Leaves turning yellow</span>
+      </button>
 
-            <button class="problem" onclick="checkProblem('notgrowing')">
-                <span>📉</span>
-                <strong>Not growing</strong>
-                <small>The plant is growing slowly</small>
-            </button>
+      <button class="quick-btn" onclick="showProblem('brown')">
+        <span class="quick-icon">🍁</span>
+        <strong>Brown Leaves</strong>
+        <span>Brown or dry leaves</span>
+      </button>
 
-            <button class="problem" onclick="checkProblem('drooping')">
-                <span>🌿</span>
-                <strong>Drooping</strong>
-                <small>Leaves are hanging down</small>
-            </button>
+      <button class="quick-btn" onclick="showProblem('wilting')">
+        <span class="quick-icon">🥀</span>
+        <strong>Wilting</strong>
+        <span>Plant looks weak</span>
+      </button>
 
-        </div>
+      <button class="quick-btn" onclick="showProblem('bugs')">
+        <span class="quick-icon">🐜</span>
+        <strong>Bugs</strong>
+        <span>Small insects on plant</span>
+      </button>
+
+      <button class="quick-btn" onclick="showProblem('spots')">
+        <span class="quick-icon">🔴</span>
+        <strong>Leaf Spots</strong>
+        <span>Spots on the leaves</span>
+      </button>
+
+      <button class="quick-btn" onclick="showProblem('burnt')">
+        <span class="quick-icon">🔥</span>
+        <strong>Burnt Leaves</strong>
+        <span>Dry edges or patches</span>
+      </button>
+
+      <button class="quick-btn" onclick="showProblem('notgrowing')">
+        <span class="quick-icon">🌱</span>
+        <strong>Not Growing</strong>
+        <span>Very slow growth</span>
+      </button>
+
+      <button class="quick-btn" onclick="showProblem('drooping')">
+        <span class="quick-icon">🌿</span>
+        <strong>Drooping</strong>
+        <span>Leaves hanging down</span>
+      </button>
+
     </div>
+
+  </div>
 
 </section>
 
 
 <!-- RESULT -->
-<section id="result" class="result">
 
-    <div class="section-title">
-        <h2>🩺 Plant Doctor Report</h2>
-    </div>
+<section id="result" class="section">
 
-    <div class="result-head">
+  <div class="card">
 
-        <div class="score">
-            <div class="score-circle" id="healthScore">78</div>
+    <div class="result-header">
 
-            <div>
-                <p style="color:var(--green2);font-weight:bold">
-                    PLANT HEALTH CHECK
-                </p>
+      <div class="result-icon" id="resultIcon">🌿</div>
 
-                <h2 id="resultTitle">Yellow leaves</h2>
-
-                <p id="resultCause" style="margin-top:7px">
-                    Your plant may be getting too much water.
-                </p>
-            </div>
-        </div>
+      <div>
+        <h2 id="resultTitle">Plant Check</h2>
+        <div id="resultScore" class="score">--</div>
+      </div>
 
     </div>
 
-    <div class="advice-grid">
 
-        <div class="advice">
-            <div class="advice-icon">💧</div>
-            <h3>Water</h3>
-            <p id="resultWater"></p>
-        </div>
+    <div id="resultPhotoBox" class="hidden" style="margin-bottom:18px;">
+      <img
+        id="resultPhoto"
+        style="width:100%;max-height:400px;object-fit:contain;border-radius:18px;"
+      >
+    </div>
 
-        <div class="advice">
-            <div class="advice-icon">☀️</div>
-            <h3>Light</h3>
-            <p id="resultLight"></p>
-        </div>
 
-        <div class="advice">
-            <div class="advice-icon">🌱</div>
-            <h3>Care</h3>
-            <p id="resultCare"></p>
-        </div>
+    <div class="card" style="background:var(--lightgreen);box-shadow:none;">
+      <h3>🔎 What may be happening</h3>
+      <p id="resultCause"></p>
+    </div>
+
+
+    <div class="advice-grid" style="margin-top:15px;">
+
+      <div class="advice">
+        <strong>💧 Water</strong>
+        <span id="resultWater"></span>
+      </div>
+
+      <div class="advice">
+        <strong>☀️ Light</strong>
+        <span id="resultLight"></span>
+      </div>
+
+      <div class="advice">
+        <strong>🌱 Care</strong>
+        <span id="resultCare"></span>
+      </div>
 
     </div>
 
-    <div class="card" style="margin-top:18px">
-        <h3>✅ What to do</h3>
-        <ul id="resultActions" class="action-list"></ul>
+
+    <div class="card" style="margin-top:15px;">
+
+      <h3>✅ What to do</h3>
+
+      <ul id="resultActions"></ul>
+
     </div>
 
-    <div class="hero-buttons" style="margin-top:18px">
-        <button class="green-btn" onclick="saveCurrentCheck()">💾 Save Check</button>
-        <button class="small-btn" onclick="showSection('check')">🩺 Check Again</button>
-        <button class="small-btn" onclick="showSection('history')">🕘 History</button>
+
+    <div class="card" style="margin-top:15px;">
+
+      <h3>📸 Photo</h3>
+
+      <p id="photoResultText" class="muted">
+        No photo was used for this check.
+      </p>
+
     </div>
+
+
+    <div class="actions" style="margin-top:18px;">
+
+      <button class="button" onclick="showSection('check')">
+        🌿 Check Another
+      </button>
+
+      <button class="button secondary" onclick="showSection('home')">
+        🏠 Home
+      </button>
+
+      <button class="button outline" onclick="showSection('history')">
+        🕘 View History
+      </button>
+
+    </div>
+
+  </div>
 
 </section>
 
 
 <!-- MY PLANTS -->
-<section id="plants" style="display:none">
 
-    <div class="section-title">
-        <h2>🌿 My Plants</h2>
-        <button onclick="addPlant()">＋ Add Plant</button>
+<section id="plants" class="section">
+
+  <div class="hero">
+    <h2>🌱 My Plants</h2>
+    <p>Keep a simple list of the plants you are looking after.</p>
+  </div>
+
+
+  <div class="card">
+
+    <h3>Add a plant</h3>
+
+    <div class="actions">
+
+      <input
+        id="newPlantName"
+        class="search"
+        style="margin:0;max-width:450px;"
+        placeholder="Example: My Tomato Plant"
+      >
+
+      <button class="button" onclick="addPlant()">
+        ➕ Add Plant
+      </button>
+
     </div>
 
-    <div id="plantList" class="grid"></div>
+  </div>
+
+
+  <div id="myPlantsList" class="plant-grid" style="margin-top:15px;"></div>
 
 </section>
 
 
 <!-- LIBRARY -->
-<section id="library" style="display:none">
 
-    <div class="section-title">
-        <h2>📚 Plant Library</h2>
-    </div>
+<section id="library" class="section">
 
-    <div class="search-box">
-        <input
-            id="plantSearch"
-            placeholder="Search tomato, banana, rose..."
-            oninput="searchPlants()"
-        >
-        <button class="green-btn" onclick="searchPlants()">Search</button>
-    </div>
+  <div class="hero">
+    <h2>📚 Plant Library</h2>
+    <p>Search for plants and learn the basics of caring for them.</p>
+  </div>
 
-    <div id="libraryList" class="library"></div>
+
+  <input
+    id="plantSearch"
+    class="search"
+    placeholder="🔎 Search for a plant..."
+    oninput="renderLibrary()"
+  >
+
+
+  <div id="libraryGrid" class="plant-grid"></div>
 
 </section>
 
 
 <!-- CARE -->
-<section id="care" style="display:none">
 
-    <div class="section-title">
-        <h2>🌱 Care Centre</h2>
-    </div>
+<section id="care" class="section">
 
-    <div class="grid">
+  <div class="hero">
+    <h2>💚 Care Centre</h2>
+    <p>Simple plant care tips for everyday use.</p>
+  </div>
 
-        <div class="card">
-            <div class="big-icon">💧</div>
-            <h3>Watering</h3>
-            <p>
-                Check the soil before watering. Different plants need different amounts.
-            </p>
-        </div>
 
-        <div class="card">
-            <div class="big-icon">☀️</div>
-            <h3>Sunlight</h3>
-            <p>
-                Some plants need bright light while others prefer less direct sunlight.
-            </p>
-        </div>
+  <div class="grid">
 
-        <div class="card">
-            <div class="big-icon">🪴</div>
-            <h3>Soil</h3>
-            <p>
-                Good soil should hold some water but also let extra water drain away.
-            </p>
-        </div>
-
-        <div class="card">
-            <div class="big-icon">🐛</div>
-            <h3>Pests</h3>
-            <p>
-                Check the underside of leaves because small insects can hide there.
-            </p>
-        </div>
-
-        <div class="card">
-            <div class="big-icon">✂️</div>
-            <h3>Trimming</h3>
-            <p>
-                Remove damaged leaves with clean tools so the plant can focus on healthy growth.
-            </p>
-        </div>
-
-        <div class="card">
-            <div class="big-icon">🌡️</div>
-            <h3>Temperature</h3>
-            <p>
-                Avoid sudden temperature changes and keep plants away from very hot surfaces.
-            </p>
-        </div>
-
-    </div>
-
-    <div class="section-title">
-        <h2>📝 My Plant Notes</h2>
+    <div class="card">
+      <h3>💧 Water</h3>
+      <p class="muted">
+        Check the soil before watering. If the top feels dry, the plant may need water.
+      </p>
     </div>
 
     <div class="card">
-        <textarea id="notes" class="note" placeholder="Write something about your plants..."></textarea>
-
-        <button class="green-btn" style="margin-top:12px" onclick="saveNotes()">
-            💾 Save Notes
-        </button>
+      <h3>☀️ Light</h3>
+      <p class="muted">
+        Give your plant the amount of sunlight it needs. Too much or too little can cause problems.
+      </p>
     </div>
+
+    <div class="card">
+      <h3>🌱 Soil</h3>
+      <p class="muted">
+        Good soil should allow water to drain while still giving the plant support.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>🪴 Space</h3>
+      <p class="muted">
+        Plants need enough space for their roots and leaves to grow.
+      </p>
+    </div>
+
+  </div>
+
+
+  <div class="card">
+
+    <h3>🌿 General Care Checklist</h3>
+
+    <label style="display:block;margin:13px 0;">
+      <input type="checkbox"> Check the soil
+    </label>
+
+    <label style="display:block;margin:13px 0;">
+      <input type="checkbox"> Check the leaves
+    </label>
+
+    <label style="display:block;margin:13px 0;">
+      <input type="checkbox"> Check for bugs
+    </label>
+
+    <label style="display:block;margin:13px 0;">
+      <input type="checkbox"> Check the light
+    </label>
+
+    <label style="display:block;margin:13px 0;">
+      <input type="checkbox"> Remove dead leaves
+    </label>
+
+  </div>
 
 </section>
 
 
 <!-- CALENDAR -->
-<section id="calendar" style="display:none">
 
-    <div class="section-title">
-        <h2>📅 Care Calendar</h2>
+<section id="calendar" class="section">
+
+  <div class="hero">
+    <h2>📅 Water Calendar</h2>
+    <p>Keep track of the days you watered your plants.</p>
+  </div>
+
+
+  <div class="card">
+
+    <h3>This week</h3>
+
+    <div class="calendar">
+
+      <div class="day" id="day0">Mon</div>
+      <div class="day" id="day1">Tue</div>
+      <div class="day" id="day2">Wed</div>
+      <div class="day" id="day3">Thu</div>
+      <div class="day" id="day4">Fri</div>
+      <div class="day" id="day5">Sat</div>
+      <div class="day" id="day6">Sun</div>
+
     </div>
 
-    <div class="card">
 
-        <div style="
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            margin-bottom:15px;
-        ">
-            <h3 id="calendarTitle"></h3>
+    <div class="actions" style="margin-top:18px;">
 
-            <button class="green-btn" onclick="waterToday()">
-                💧 Water Today
-            </button>
-        </div>
+      <button class="button" onclick="waterPlant()">
+        💧 Mark Today
+      </button>
 
-        <div class="calendar" id="calendarGrid"></div>
+      <button class="button outline" onclick="clearWaterHistory()">
+        Clear
+      </button>
 
     </div>
 
-    <div class="section-title">
-        <h2>🔥 Care Streak</h2>
-    </div>
-
-    <div class="card">
-        <div style="font-size:45px">🔥</div>
-        <h2 id="streakNumber">0 days</h2>
-        <p>
-            Keep checking and caring for your plants.
-        </p>
-    </div>
+  </div>
 
 </section>
 
 
 <!-- HISTORY -->
-<section id="history" style="display:none">
 
-    <div class="section-title">
-        <h2>🕘 Check History</h2>
-        <button onclick="clearHistory()">Clear</button>
-    </div>
+<section id="history" class="section">
 
-    <div class="card">
-        <div id="historyList"></div>
-    </div>
+  <div class="hero">
+    <h2>🕘 Plant Health History</h2>
+    <p>See your previous plant checks.</p>
+  </div>
+
+
+  <div class="card">
+
+    <div id="historyList"></div>
+
+    <p id="noHistory" class="muted">
+      You have not checked a plant yet.
+    </p>
+
+  </div>
 
 </section>
 
 
 <!-- FAVOURITES -->
-<section id="favourites" style="display:none">
 
-    <div class="section-title">
-        <h2>❤️ Favourite Plants</h2>
-    </div>
+<section id="favourites" class="section">
 
-    <div id="favouriteList" class="grid"></div>
+  <div class="hero">
+    <h2>⭐ Favourites</h2>
+    <p>Save plants you want to find quickly.</p>
+  </div>
+
+
+  <div id="favouriteList" class="plant-grid"></div>
 
 </section>
 
 
 <!-- SETTINGS -->
-<section id="settings" style="display:none">
 
-    <div class="section-title">
-        <h2>⚙️ Settings</h2>
-    </div>
+<section id="settings" class="section">
 
-    <div class="card">
+  <div class="hero">
+    <h2>⚙️ Settings</h2>
+    <p>Change your Plant Doctor settings.</p>
+  </div>
 
-        <div class="settings-row">
-            <div>
-                <strong>🌙 Dark mode</strong>
-                <p>Make the app darker at night.</p>
-            </div>
 
-            <div id="darkSwitch" class="switch" onclick="toggleDark()">
-                <span></span>
-            </div>
-        </div>
+  <div class="card">
 
-        <div class="settings-row">
-            <div>
-                <strong>🔔 Care reminders</strong>
-                <p>Turn your care reminder setting on or off.</p>
-            </div>
+    <h3>🌙 Dark Mode</h3>
 
-            <div id="reminderSwitch" class="switch" onclick="toggleReminders()">
-                <span></span>
-            </div>
-        </div>
+    <div class="actions">
 
-        <div class="settings-row">
-            <div>
-                <strong>🌿 Plant Doctor</strong>
-                <p>Science Week Project • 2026</p>
-            </div>
-        </div>
+      <button
+        id="darkToggle"
+        class="toggle"
+        onclick="toggleDarkMode()"
+      ></button>
 
-        <div style="margin-top:20px">
-            <button class="green-btn" onclick="resetApp()">
-                Reset App
-            </button>
-        </div>
+      <span class="muted">Make Plant Doctor darker at night.</span>
 
     </div>
+
+  </div>
+
+
+  <div class="card" style="margin-top:15px;">
+
+    <h3>🔔 Care reminders</h3>
+
+    <div class="actions">
+
+      <button
+        id="reminderToggle"
+        class="toggle"
+        onclick="toggleReminders()"
+      ></button>
+
+      <span id="reminderText" class="muted">
+        Reminders are off.
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="card" style="margin-top:15px;">
+
+    <h3>📝 My Plant Notes</h3>
+
+    <textarea
+      id="notes"
+      class="note-box"
+      placeholder="Write notes about your plants..."
+    ></textarea>
+
+    <div class="actions" style="margin-top:10px;">
+
+      <button class="button" onclick="saveNotes()">
+        💾 Save Notes
+      </button>
+
+      <button class="button outline" onclick="clearNotes()">
+        Clear Notes
+      </button>
+
+    </div>
+
+    <p id="noteStatus" class="muted"></p>
+
+  </div>
+
+
+  <div class="card" style="margin-top:15px;">
+
+    <h3>🌿 About Plant Doctor</h3>
+
+    <p class="muted">
+      Plant Doctor is a Science Week project made to help people understand
+      common plant problems and learn simple ways to care for plants.
+    </p>
+
+  </div>
 
 </section>
+
+
+<footer>
+  <strong>Plant Doctor • Science Week Project 🌿</strong>
+  <br>
+  Made by Matt Bradley Mwesigye
+  <br>
+  © 2026 Matt Bradley Mwesigye
+</footer>
 
 </main>
 
 
-<footer>
-    <strong>Plant Doctor • Science Week Project 🌿</strong>
-    <br><br>
-    Made by Matt Bradley Mwesigye
-    <br>
-    © 2026 Matt Bradley Mwesigye
-</footer>
-
+<!-- BOTTOM NAV -->
 
 <nav class="bottom-nav">
 
-    <button class="nav-btn active" id="navHome" onclick="showSection('home')">
-        <span>🏠</span>
-        Home
+  <div class="nav-inner">
+
+    <button class="nav-btn active" onclick="showSection('home',this)">
+      <span>🏠</span>
+      Home
     </button>
 
-    <button class="nav-btn" id="navCheck" onclick="showSection('check')">
-        <span>🩺</span>
-        Check
+    <button class="nav-btn" onclick="showSection('check',this)">
+      <span>🌿</span>
+      Check
     </button>
 
-    <button class="nav-btn" id="navPlants" onclick="showSection('plants')">
-        <span>🌿</span>
-        Plants
+    <button class="nav-btn" onclick="showSection('plants',this)">
+      <span>🪴</span>
+      Plants
     </button>
 
-    <button class="nav-btn" id="navLibrary" onclick="showSection('library')">
-        <span>📚</span>
-        Library
+    <button class="nav-btn" onclick="showSection('library',this)">
+      <span>📚</span>
+      Library
     </button>
 
-    <button class="nav-btn" id="navMore" onclick="showSection('care')">
-        <span>✨</span>
-        More
+    <button class="nav-btn" onclick="showSection('care',this)">
+      <span>💚</span>
+      Care
     </button>
+
+  </div>
 
 </nav>
-
-<div id="toast" class="toast"></div>
-
-</div>
 
 
 <script>
 
 const problems = {
 
-    yellow:{
-        icon:"🍂",
-        title:"Yellow Leaves",
-        score:72,
-        cause:"This can happen when the plant gets too much water, not enough light, or when the soil is missing nutrients.",
-        water:"Check the soil first. If it is wet, wait before watering again.",
-        light:"Give the plant enough bright light for its type.",
-        care:"Remove badly damaged leaves and check the roots and soil.",
-        actions:[
-            "Check the soil before watering.",
-            "Make sure extra water can drain away.",
-            "Move the plant to a suitable light area."
-        ]
-    },
+  yellow:{
+    icon:"🍂",
+    title:"Yellow Leaves",
+    score:"72%",
+    cause:"Yellow leaves can happen when a plant gets too much water, not enough light, or has a problem with its roots.",
+    water:"Check the soil before watering. Avoid keeping the soil soaked.",
+    light:"Make sure the plant gets enough light for its type.",
+    care:"Remove badly damaged leaves and watch the new growth.",
+    actions:[
+      "Check if the soil is very wet.",
+      "Move the plant to a suitable light area.",
+      "Make sure the pot can drain water.",
+      "Watch the plant for a few days."
+    ]
+  },
 
-    brown:{
-        icon:"🍁",
-        title:"Brown Leaves",
-        score:70,
-        cause:"Brown leaves can happen because of dry soil, very dry air, too much sun, or damaged roots.",
-        water:"Check whether the soil is very dry.",
-        light:"Avoid very strong direct sunlight if the leaves are getting burnt.",
-        care:"Remove badly damaged leaves and keep the plant conditions steady.",
-        actions:[
-            "Check the soil moisture.",
-            "Look for very strong sunlight.",
-            "Check the plant for dry or damaged roots."
-        ]
-    },
+  brown:{
+    icon:"🍁",
+    title:"Brown Leaves",
+    score:"68%",
+    cause:"Brown leaves can be caused by dry soil, low humidity, too much sunlight, or old leaves.",
+    water:"Check the soil. Water when it is dry enough for the plant.",
+    light:"Avoid strong direct sunlight if the leaves look scorched.",
+    care:"Remove very damaged leaves and keep checking new growth.",
+    actions:[
+      "Check the soil moisture.",
+      "Check whether the plant is getting very strong sunlight.",
+      "Make sure the plant is not too close to a hot window.",
+      "Remove badly damaged leaves."
+    ]
+  },
 
-    wilting:{
-        icon:"🥀",
-        title:"Wilting",
-        score:58,
-        cause:"The plant may be thirsty, stressed by heat, or having a root problem.",
-        water:"Check the soil. If it is dry, give the plant the amount of water it normally needs.",
-        light:"Protect it from very strong heat while it recovers.",
-        care:"Check the roots and make sure the pot can drain water.",
-        actions:[
-            "Check the soil moisture.",
-            "Move it away from extreme heat.",
-            "Check that the pot has drainage."
-        ]
-    },
+  wilting:{
+    icon:"🥀",
+    title:"Wilting",
+    score:"64%",
+    cause:"Wilting can happen when a plant needs water, has too much water, or is under stress.",
+    water:"Check the soil before watering. Do not automatically add more water.",
+    light:"Keep the plant in suitable light.",
+    care:"Check the roots, soil and leaves if the wilting continues.",
+    actions:[
+      "Check whether the soil is dry or soaked.",
+      "Give water if the plant actually needs it.",
+      "Check that water can drain from the pot.",
+      "Watch the plant over the next day."
+    ]
+  },
 
-    bugs:{
-        icon:"🐛",
-        title:"Possible Pests",
-        score:60,
-        cause:"Small insects may be feeding on the plant.",
-        water:"Keep watering normally. Do not flood the soil.",
-        light:"Keep the plant in its normal light.",
-        care:"Check both sides of the leaves and remove visible pests carefully.",
-        actions:[
-            "Look under the leaves.",
-            "Separate a badly affected plant from other plants.",
-            "Clean the leaves gently."
-        ]
-    },
+  bugs:{
+    icon:"🐜",
+    title:"Bugs",
+    score:"61%",
+    cause:"Small insects may be feeding on the leaves or stems.",
+    water:"Keep normal watering. Do not overwater because of bugs.",
+    light:"Keep the plant in its normal light conditions.",
+    care:"Check both sides of the leaves and remove visible pests carefully.",
+    actions:[
+      "Look under the leaves.",
+      "Remove visible bugs if possible.",
+      "Separate the plant from badly affected plants.",
+      "Keep checking the plant."
+    ]
+  },
 
-    spots:{
-        icon:"🔴",
-        title:"Leaf Spots",
-        score:64,
-        cause:"Leaf spots can come from pests, plant diseases, water on leaves, or other stress.",
-        water:"Water the soil rather than leaving water sitting on the leaves.",
-        light:"Give the plant suitable light and airflow.",
-        care:"Remove badly affected leaves and watch for new spots.",
-        actions:[
-            "Check both sides of the leaves.",
-            "Avoid keeping leaves constantly wet.",
-            "Remove badly damaged leaves."
-        ]
-    },
+  spots:{
+    icon:"🔴",
+    title:"Leaf Spots",
+    score:"59%",
+    cause:"Leaf spots can have different causes, including stress, insects, watering problems or leaf diseases.",
+    water:"Avoid keeping leaves constantly wet.",
+    light:"Give the plant the correct amount of light.",
+    care:"Remove badly damaged leaves and keep an eye on new spots.",
+    actions:[
+      "Check when the spots first appeared.",
+      "Look for insects around the leaves.",
+      "Avoid watering directly onto the leaves.",
+      "Remove badly damaged leaves."
+    ]
+  },
 
-    burnt:{
-        icon:"☀️",
-        title:"Burnt Leaves",
-        score:61,
-        cause:"The plant may be getting too much strong direct sunlight or heat.",
-        water:"Keep the soil at a suitable moisture level.",
-        light:"Move it away from harsh direct sunlight if needed.",
-        care:"Remove badly damaged leaves and let new growth develop.",
-        actions:[
-            "Reduce harsh direct sunlight.",
-            "Check the soil.",
-            "Watch new leaves for further damage."
-        ]
-    },
+  burnt:{
+    icon:"🔥",
+    title:"Burnt Leaves",
+    score:"57%",
+    cause:"Dry brown edges or patches can happen when leaves receive too much strong sunlight or become very dry.",
+    water:"Keep the soil at a suitable moisture level.",
+    light:"Move the plant away from very strong direct sunlight if needed.",
+    care:"Protect new leaves from the same conditions.",
+    actions:[
+      "Check whether the plant is in strong direct sunlight.",
+      "Check the soil.",
+      "Move it to suitable light if needed.",
+      "Remove badly damaged leaves."
+    ]
+  },
 
-    notgrowing:{
-        icon:"📉",
-        title:"Slow Growth",
-        score:68,
-        cause:"Slow growth can happen because of low light, poor soil, temperature changes, or lack of nutrients.",
-        water:"Make sure the plant is not staying too wet or becoming very dry.",
-        light:"Give it enough light for its plant type.",
-        care:"Check the soil, pot size and general plant condition.",
-        actions:[
-            "Check the amount of light.",
-            "Look at the soil condition.",
-            "Give the plant enough space to grow."
-        ]
-    },
+  notgrowing:{
+    icon:"🌱",
+    title:"Not Growing",
+    score:"66%",
+    cause:"Slow growth can happen because of low light, poor soil, lack of water or the plant's natural growth speed.",
+    water:"Keep watering regular but avoid soaking the soil.",
+    light:"Make sure the plant receives enough light.",
+    care:"Give the plant suitable soil and enough space.",
+    actions:[
+      "Check the amount of light.",
+      "Check the soil.",
+      "Make sure the roots have enough space.",
+      "Give the plant time to grow."
+    ]
+  },
 
-    drooping:{
-        icon:"🌿",
-        title:"Drooping Leaves",
-        score:63,
-        cause:"Drooping can happen because of dry soil, heat, too much water, or stress.",
-        water:"Check the soil before watering.",
-        light:"Avoid extreme heat and very strong sunlight.",
-        care:"Check the roots and drainage.",
-        actions:[
-            "Touch the soil to check moisture.",
-            "Check the pot drainage.",
-            "Watch the plant for the next few days."
-        ]
-    }
+  drooping:{
+    icon:"🌿",
+    title:"Drooping",
+    score:"63%",
+    cause:"Drooping leaves can be caused by dry soil, too much water, heat or other stress.",
+    water:"Check the soil before watering.",
+    light:"Keep the plant away from extreme heat.",
+    care:"Look at the leaves, soil and pot drainage.",
+    actions:[
+      "Check the soil.",
+      "Check the temperature around the plant.",
+      "Make sure water can drain.",
+      "Watch for changes after care."
+    ]
+  }
+
 };
 
 
 const plantsData = [
-    {
-        name:"Tomato",
-        icon:"🍅",
-        light:"6–8 hours of sunlight",
-        water:"Water when the top soil starts to dry.",
-        soil:"Rich, well-draining soil",
-        fact:"Tomatoes grow best with plenty of sunlight."
-    },
-    {
-        name:"Banana",
-        icon:"🍌",
-        light:"Bright sunlight",
-        water:"Keep soil moist but not flooded.",
-        soil:"Rich soil with good drainage",
-        fact:"Banana plants like warmth and plenty of water."
-    },
-    {
-        name:"Maize",
-        icon:"🌽",
-        light:"Full sunlight",
-        water:"Water regularly while growing.",
-        soil:"Fertile soil",
-        fact:"Maize needs sunlight, water and nutrients to grow well."
-    },
-    {
-        name:"Bean",
-        icon:"🫘",
-        light:"Good sunlight",
-        water:"Keep soil slightly moist.",
-        soil:"Loose, well-draining soil",
-        fact:"Beans can grow quickly when they have good conditions."
-    },
-    {
-        name:"Rose",
-        icon:"🌹",
-        light:"Several hours of sunlight",
-        water:"Water the soil when it starts getting dry.",
-        soil:"Rich, well-draining soil",
-        fact:"Roses need light and good airflow."
-    },
-    {
-        name:"Potato",
-        icon:"🥔",
-        light:"Full sunlight",
-        water:"Keep soil evenly moist.",
-        soil:"Loose soil",
-        fact:"Potatoes grow underground from special stems called tubers."
-    },
-    {
-        name:"Apple",
-        icon:"🍎",
-        light:"Full sunlight",
-        water:"Water regularly while young.",
-        soil:"Deep, well-draining soil",
-        fact:"Apple trees can live and produce fruit for many years."
-    },
-    {
-        name:"Avocado",
-        icon:"🥑",
-        light:"Bright sunlight",
-        water:"Water deeply but avoid flooding.",
-        soil:"Well-draining soil",
-        fact:"Avocado trees need good drainage."
-    },
-    {
-        name:"Cassava",
-        icon:"🌿",
-        light:"Full sunlight",
-        water:"Water during dry periods.",
-        soil:"Loose soil",
-        fact:"Cassava is an important root crop in many countries."
-    }
+
+  {
+    name:"Tomato",
+    icon:"🍅",
+    light:"6–8 hours of sunlight",
+    water:"Keep soil slightly moist.",
+    soil:"Rich soil with good drainage.",
+    fact:"Tomatoes need plenty of light to grow well."
+  },
+
+  {
+    name:"Banana",
+    icon:"🍌",
+    light:"Bright sunlight",
+    water:"Water regularly when soil starts drying.",
+    soil:"Rich and well-drained soil.",
+    fact:"Banana plants like warmth and plenty of water."
+  },
+
+  {
+    name:"Maize",
+    icon:"🌽",
+    light:"Full sunlight",
+    water:"Water regularly during growth.",
+    soil:"Fertile soil.",
+    fact:"Maize grows best with enough sunlight and water."
+  },
+
+  {
+    name:"Bean",
+    icon:"🫘",
+    light:"Full sunlight",
+    water:"Keep soil from becoming completely dry.",
+    soil:"Loose, well-drained soil.",
+    fact:"Beans can grow quickly when they have good conditions."
+  },
+
+  {
+    name:"Rose",
+    icon:"🌹",
+    light:"Around 6 hours of sunlight",
+    water:"Water the soil, not the flowers.",
+    soil:"Rich soil with good drainage.",
+    fact:"Roses need light and regular care."
+  },
+
+  {
+    name:"Potato",
+    icon:"🥔",
+    light:"Full sunlight",
+    water:"Keep soil evenly moist.",
+    soil:"Loose soil.",
+    fact:"Potatoes grow underground from parts called tubers."
+  },
+
+  {
+    name:"Apple",
+    icon:"🍎",
+    light:"Full sunlight",
+    water:"Water when the soil starts becoming dry.",
+    soil:"Well-drained soil.",
+    fact:"Apple trees need enough space to grow."
+  },
+
+  {
+    name:"Avocado",
+    icon:"🥑",
+    light:"Bright sunlight",
+    water:"Water deeply but avoid constantly wet soil.",
+    soil:"Well-drained soil.",
+    fact:"Avocado roots do not like sitting in water."
+  },
+
+  {
+    name:"Cassava",
+    icon:"🌿",
+    light:"Full sunlight",
+    water:"Water during dry periods.",
+    soil:"Loose and well-drained soil.",
+    fact:"Cassava is an important root crop in many countries."
+  }
+
 ];
 
 
-let currentProblem = null;
-let cameraStream = null;
+let cameraStream=null;
+let capturedPhotoData=null;
+let currentProblem=null;
+
+let historyData=JSON.parse(
+  localStorage.getItem("plantDoctorHistory") || "[]"
+);
+
+let myPlants=JSON.parse(
+  localStorage.getItem("plantDoctorPlants") || "[]"
+);
+
+let favourites=JSON.parse(
+  localStorage.getItem("plantDoctorFavourites") || "[]"
+);
+
+let waterData=JSON.parse(
+  localStorage.getItem("plantDoctorWater") || "[]"
+);
 
 
-function getData(key, fallback){
-    try{
-        return JSON.parse(localStorage.getItem(key)) || fallback;
-    }catch{
-        return fallback;
-    }
-}
+/* NAVIGATION */
 
+function showSection(id, button){
 
-function saveData(key,value){
-    localStorage.setItem(key,JSON.stringify(value));
-}
+  document.querySelectorAll(".section").forEach(section=>{
+    section.classList.remove("active");
+  });
 
+  const target=document.getElementById(id);
 
-function toast(message){
+  if(target){
+    target.classList.add("active");
+  }
 
-    const box=document.getElementById("toast");
+  document.querySelectorAll(".nav-btn").forEach(btn=>{
+    btn.classList.remove("active");
+  });
 
-    box.textContent=message;
-    box.classList.add("show");
-
-    setTimeout(()=>{
-        box.classList.remove("show");
-    },2500);
-}
-
-
-function showSection(id){
-
-    const sections=[
-        "home",
-        "check",
-        "result",
-        "plants",
-        "library",
-        "care",
-        "calendar",
-        "history",
-        "favourites",
-        "settings"
-    ];
-
-    sections.forEach(section=>{
-        const el=document.getElementById(section);
-
-        if(el){
-            el.style.display =
-                section===id ? "block" : "none";
-        }
-    });
-
+  if(button){
+    button.classList.add("active");
+  }else{
     document.querySelectorAll(".nav-btn").forEach(btn=>{
-        btn.classList.remove("active");
+      const text=btn.textContent.toLowerCase();
+
+      if(
+        (id==="home" && text.includes("home")) ||
+        (id==="check" && text.includes("check")) ||
+        (id==="plants" && text.includes("plants")) ||
+        (id==="library" && text.includes("library")) ||
+        (id==="care" && text.includes("care"))
+      ){
+        btn.classList.add("active");
+      }
     });
+  }
 
-    const map={
-        home:"navHome",
-        check:"navCheck",
-        plants:"navPlants",
-        library:"navLibrary"
-    };
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
-    if(map[id]){
-        document.getElementById(map[id]).classList.add("active");
-    }
+  if(id==="history") renderHistory();
+  if(id==="plants") renderMyPlants();
+  if(id==="library") renderLibrary();
+  if(id==="favourites") renderFavourites();
+  if(id==="calendar") renderCalendar();
 
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
-
-    if(id==="plants") renderPlants();
-    if(id==="library") renderLibrary();
-    if(id==="history") renderHistory();
-    if(id==="calendar") renderCalendar();
-    if(id==="favourites") renderFavourites();
-    if(id==="home") updateDashboard();
 }
 
 
-function goHome(){
-    showSection("home");
-}
-
-
-function checkProblem(key){
-
-    const data=problems[key];
-
-    if(!data) return;
-
-    currentProblem={
-        key,
-        ...data,
-        time:new Date().toLocaleString()
-    };
-
-    document.getElementById("resultTitle").textContent=data.icon+" "+data.title;
-    document.getElementById("resultCause").textContent=data.cause;
-    document.getElementById("resultWater").textContent=data.water;
-    document.getElementById("resultLight").textContent=data.light;
-    document.getElementById("resultCare").textContent=data.care;
-    document.getElementById("healthScore").textContent=data.score;
-
-    document.getElementById("resultActions").innerHTML=
-        data.actions.map(item=>`<li>✅ ${item}</li>`).join("");
-
-    showSection("result");
-}
-
-
-function saveCurrentCheck(){
-
-    if(!currentProblem){
-        return;
-    }
-
-    const history=getData("plantHistory",[]);
-
-    history.unshift({
-        icon:currentProblem.icon,
-        title:currentProblem.title,
-        score:currentProblem.score,
-        time:new Date().toLocaleString()
-    });
-
-    saveData("plantHistory",history.slice(0,50));
-
-    updateDashboard();
-
-    toast("Plant check saved 🌿");
-}
-
+/* CAMERA */
 
 async function startCamera(){
 
-    const video=document.getElementById("camera");
-    const placeholder=document.getElementById("cameraPlaceholder");
+  try{
 
-    try{
+    stopCamera();
 
-        cameraStream=await navigator.mediaDevices.getUserMedia({
-            video:{facingMode:"environment"},
-            audio:false
-        });
+    cameraStream=await navigator.mediaDevices.getUserMedia({
+      video:{
+        facingMode:{
+          ideal:"environment"
+        }
+      },
+      audio:false
+    });
 
-        video.srcObject=cameraStream;
-        video.style.display="block";
-        placeholder.style.display="none";
+    const camera=document.getElementById("camera");
 
-        await video.play();
+    camera.srcObject=cameraStream;
+    camera.style.display="block";
 
-        toast("Camera started 📷");
+    document.getElementById("cameraPlaceholder").style.display="none";
+    document.getElementById("capturedPhoto").style.display="none";
 
-    }catch(error){
+    showStatus("Camera is ready. Point it at your plant.");
 
-        toast("Camera could not start");
-    }
-}
+  }catch(error){
 
+    showStatus(
+      "The camera could not be opened. You can still use Choose Photo."
+    );
 
-function stopCamera(){
+  }
 
-    if(cameraStream){
-
-        cameraStream.getTracks().forEach(track=>track.stop());
-        cameraStream=null;
-    }
-
-    document.getElementById("camera").style.display="none";
-    document.getElementById("cameraPlaceholder").style.display="flex";
 }
 
 
 function takePhoto(){
 
-    const video=document.getElementById("camera");
+  const camera=document.getElementById("camera");
 
-    if(!cameraStream || video.style.display==="none"){
-        toast("Start the camera first");
-        return;
-    }
+  if(
+    !camera.srcObject ||
+    camera.readyState<2
+  ){
 
-    const canvas=document.createElement("canvas");
+    showStatus("Start the camera first.");
 
-    canvas.width=video.videoWidth;
-    canvas.height=video.videoHeight;
+    return;
+  }
 
-    const ctx=canvas.getContext("2d");
+  const canvas=document.createElement("canvas");
 
-    ctx.drawImage(video,0,0);
+  canvas.width=camera.videoWidth;
+  canvas.height=camera.videoHeight;
 
-    canvas.toBlob(blob=>{
+  const ctx=canvas.getContext("2d");
 
-        document.getElementById("photoStatus").textContent=
-            "✅ Photo captured and ready.";
+  ctx.drawImage(
+    camera,
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
 
-        toast("Photo taken 📸");
+  capturedPhotoData=canvas.toDataURL("image/jpeg",0.9);
 
-    },"image/jpeg");
+  displayCapturedPhoto();
+
+  stopCamera();
+
+  showStatus(
+    "Photo captured successfully. Now choose the problem you can see."
+  );
+
 }
 
 
-document.getElementById("photoInput").addEventListener("change",function(){
+function stopCamera(){
 
-    if(this.files.length){
+  if(cameraStream){
 
-        const file=this.files[0];
+    cameraStream.getTracks().forEach(track=>{
+      track.stop();
+    });
 
-        document.getElementById("photoStatus").textContent=
-            "✅ Photo selected: "+file.name;
+    cameraStream=null;
 
-        toast("Photo added 🌱");
-    }
+  }
+
+  const camera=document.getElementById("camera");
+
+  if(camera){
+    camera.srcObject=null;
+    camera.style.display="none";
+  }
+
+}
+
+
+document
+.getElementById("photoInput")
+.addEventListener("change",function(event){
+
+  const file=event.target.files[0];
+
+  if(!file) return;
+
+  const reader=new FileReader();
+
+  reader.onload=function(e){
+
+    capturedPhotoData=e.target.result;
+
+    displayCapturedPhoto();
+
+    showStatus(
+      "Photo selected successfully. Now choose the problem you can see."
+    );
+
+  };
+
+  reader.readAsDataURL(file);
+
 });
 
 
+function displayCapturedPhoto(){
+
+  const photo=document.getElementById("capturedPhoto");
+
+  photo.src=capturedPhotoData;
+  photo.style.display="block";
+
+  document.getElementById("cameraPlaceholder").style.display="none";
+
+  document
+    .getElementById("photoActions")
+    .classList.remove("hidden");
+
+}
+
+
+function clearPhoto(){
+
+  capturedPhotoData=null;
+
+  const photo=document.getElementById("capturedPhoto");
+
+  photo.src="";
+  photo.style.display="none";
+
+  document.getElementById("cameraPlaceholder").style.display="flex";
+
+  document
+    .getElementById("photoActions")
+    .classList.add("hidden");
+
+  document.getElementById("photoInput").value="";
+
+  showStatus("Photo cleared.");
+
+}
+
+
+function goToProblems(){
+
+  const box=document.getElementById("quickProblems");
+
+  box.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+
+}
+
+
+/* STATUS */
+
+function showStatus(message){
+
+  const status=document.getElementById("photoStatus");
+
+  status.textContent=message;
+
+  status.classList.add("show");
+
+}
+
+
+/* PROBLEM CHECK */
+
+function showProblem(problemId){
+
+  const problem=problems[problemId];
+
+  if(!problem) return;
+
+  currentProblem=problemId;
+
+  document.getElementById("resultIcon").textContent=problem.icon;
+
+  document.getElementById("resultTitle").textContent=problem.title;
+
+  document.getElementById("resultScore").textContent=problem.score;
+
+  document.getElementById("resultCause").textContent=problem.cause;
+
+  document.getElementById("resultWater").textContent=problem.water;
+
+  document.getElementById("resultLight").textContent=problem.light;
+
+  document.getElementById("resultCare").textContent=problem.care;
+
+
+  const actions=document.getElementById("resultActions");
+
+  actions.innerHTML="";
+
+  problem.actions.forEach(action=>{
+
+    const li=document.createElement("li");
+
+    li.textContent=action;
+
+    li.style.marginBottom="9px";
+
+    actions.appendChild(li);
+
+  });
+
+
+  const resultPhotoBox=document.getElementById("resultPhotoBox");
+
+  const resultPhoto=document.getElementById("resultPhoto");
+
+  const photoResultText=document.getElementById("photoResultText");
+
+
+  if(capturedPhotoData){
+
+    resultPhoto.src=capturedPhotoData;
+
+    resultPhotoBox.classList.remove("hidden");
+
+    photoResultText.textContent=
+      "A photo was saved with this plant check. The advice is based on the problem you selected, not an AI diagnosis.";
+
+  }else{
+
+    resultPhotoBox.classList.add("hidden");
+
+    photoResultText.textContent=
+      "No photo was used for this check.";
+
+  }
+
+
+  saveHistory(problem);
+
+  showSection("result");
+
+}
+
+
+function saveHistory(problem){
+
+  const item={
+    title:problem.title,
+    icon:problem.icon,
+    date:new Date().toLocaleString(),
+    photo:capturedPhotoData || null
+  };
+
+  historyData.unshift(item);
+
+  historyData=historyData.slice(0,30);
+
+  localStorage.setItem(
+    "plantDoctorHistory",
+    JSON.stringify(historyData)
+  );
+
+  updateDashboard();
+
+}
+
+
+/* HISTORY */
+
+function renderHistory(){
+
+  const list=document.getElementById("historyList");
+  const empty=document.getElementById("noHistory");
+
+  list.innerHTML="";
+
+  if(historyData.length===0){
+
+    empty.style.display="block";
+    return;
+
+  }
+
+  empty.style.display="none";
+
+
+  historyData.forEach(item=>{
+
+    const row=document.createElement("div");
+
+    row.className="history-item";
+
+    row.innerHTML=`
+
+      <div>
+        <strong>${item.icon} ${item.title}</strong>
+        <br>
+        <small class="muted">${item.date}</small>
+      </div>
+
+      <span>
+        ${item.photo ? "📸" : "🌿"}
+      </span>
+
+    `;
+
+    list.appendChild(row);
+
+  });
+
+}
+
+
+/* MY PLANTS */
+
 function addPlant(){
 
-    const name=prompt("What is your plant called?");
+  const input=document.getElementById("newPlantName");
 
-    if(!name) return;
+  const name=input.value.trim();
 
-    const plants=getData("myPlants",[]);
+  if(!name){
 
-    plants.push({
-        id:Date.now(),
-        name:name,
-        icon:"🌱",
-        watered:false,
-        favourite:false,
-        progress:10
-    });
+    alert("Please type a plant name first.");
 
-    saveData("myPlants",plants);
+    return;
+  }
 
-    renderPlants();
-    updateDashboard();
+  myPlants.push({
+    name:name,
+    icon:"🌱",
+    date:new Date().toLocaleDateString()
+  });
 
-    toast(name+" added 🌿");
+  localStorage.setItem(
+    "plantDoctorPlants",
+    JSON.stringify(myPlants)
+  );
+
+  input.value="";
+
+  renderMyPlants();
+  updateDashboard();
+
 }
 
 
-function renderPlants(){
+function deletePlant(index){
 
-    const container=document.getElementById("plantList");
+  myPlants.splice(index,1);
 
-    const plants=getData("myPlants",[]);
+  localStorage.setItem(
+    "plantDoctorPlants",
+    JSON.stringify(myPlants)
+  );
 
-    if(!plants.length){
+  renderMyPlants();
+  updateDashboard();
 
-        container.innerHTML=`
-            <div class="card empty" style="grid-column:1/-1">
-                <div style="font-size:60px">🌱</div>
-                <h3>No plants yet</h3>
-                <p>Add your first plant to start your plant collection.</p>
-                <button class="green-btn" style="margin-top:15px" onclick="addPlant()">
-                    ＋ Add My First Plant
-                </button>
-            </div>
-        `;
-
-        return;
-    }
-
-    container.innerHTML=plants.map(plant=>`
-
-        <div class="card plant-card">
-
-            <button class="fav" onclick="toggleFavourite(${plant.id})">
-                ${plant.favourite?"❤️":"♡"}
-            </button>
-
-            <div class="plant-icon">${plant.icon}</div>
-
-            <h3>${escapeHTML(plant.name)}</h3>
-
-            <p>
-                ${plant.watered
-                    ? "Watered today 💧"
-                    : "Needs a care check"}
-            </p>
-
-            <div class="progress">
-                <span style="width:${plant.progress}%"></span>
-            </div>
-
-            <small style="color:var(--muted)">
-                Growth progress: ${plant.progress}%
-            </small>
-
-            <div class="plant-buttons" style="margin-top:15px">
-
-                <button class="small-btn"
-                    onclick="waterPlant(${plant.id})">
-                    💧 Water
-                </button>
-
-                <button class="small-btn"
-                    onclick="plantProgress(${plant.id})">
-                    📈 Grow
-                </button>
-
-                <button class="small-btn"
-                    onclick="checkPlant('${escapeHTML(plant.name)}')">
-                    🩺 Check
-                </button>
-
-                <button class="small-btn"
-                    onclick="deletePlant(${plant.id})">
-                    🗑️
-                </button>
-
-            </div>
-
-        </div>
-
-    `).join("");
 }
 
 
-function escapeHTML(text){
+function renderMyPlants(){
 
-    return text
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+  const container=document.getElementById("myPlantsList");
+
+  container.innerHTML="";
+
+  if(myPlants.length===0){
+
+    container.innerHTML=`
+      <div class="card">
+        <h3>🌱 No plants yet</h3>
+        <p class="muted">
+          Add your first plant above.
+        </p>
+      </div>
+    `;
+
+    return;
+  }
+
+
+  myPlants.forEach((plant,index)=>{
+
+    const card=document.createElement("div");
+
+    card.className="plant-card";
+
+    card.innerHTML=`
+
+      <div class="plant-icon">${plant.icon}</div>
+
+      <h3>${plant.name}</h3>
+
+      <p class="muted">
+        Added ${plant.date}
+      </p>
+
+      <div class="actions">
+
+        <button
+          class="button secondary"
+          onclick="showSection('check')"
+        >
+          🌿 Check
+        </button>
+
+        <button
+          class="button outline"
+          onclick="deletePlant(${index})"
+        >
+          Delete
+        </button>
+
+      </div>
+
+    `;
+
+    container.appendChild(card);
+
+  });
+
 }
 
 
-function waterPlant(id){
+/* LIBRARY */
 
-    const plants=getData("myPlants",[]);
+function renderLibrary(){
 
-    const plant=plants.find(p=>p.id===id);
+  const search=
+    document.getElementById("plantSearch").value.toLowerCase();
 
-    if(!plant) return;
+  const container=
+    document.getElementById("libraryGrid");
 
-    plant.watered=true;
+  container.innerHTML="";
 
-    saveData("myPlants",plants);
 
-    const days=getData("waterDays",[]);
+  const filtered=plantsData.filter(plant=>
+    plant.name.toLowerCase().includes(search)
+  );
 
-    const today=new Date().toISOString().split("T")[0];
 
-    if(!days.includes(today)){
-        days.push(today);
-    }
+  if(filtered.length===0){
 
-    saveData("waterDays",days);
+    container.innerHTML=`
+      <div class="card">
+        <h3>🌱 Plant not found</h3>
+        <p class="muted">
+          Try another plant name.
+        </p>
+      </div>
+    `;
 
-    renderPlants();
-    updateDashboard();
-    renderCalendar();
+    return;
+  }
 
-    toast("Plant watered 💧");
+
+  filtered.forEach((plant,index)=>{
+
+    const card=document.createElement("div");
+
+    card.className="plant-card";
+
+    const isFavourite=favourites.includes(plant.name);
+
+    card.innerHTML=`
+
+      <div class="plant-icon">${plant.icon}</div>
+
+      <h3>${plant.name}</h3>
+
+      <p>
+        <strong>☀️ Light:</strong><br>
+        ${plant.light}
+      </p>
+
+      <p>
+        <strong>💧 Water:</strong><br>
+        ${plant.water}
+      </p>
+
+      <p>
+        <strong>🌱 Soil:</strong><br>
+        ${plant.soil}
+      </p>
+
+      <p class="muted">
+        ${plant.fact}
+      </p>
+
+      <button
+        class="button ${isFavourite ? "" : "secondary"}"
+        onclick="toggleFavourite('${plant.name}')"
+      >
+        ${isFavourite ? "⭐ Favourite" : "☆ Add Favourite"}
+      </button>
+
+    `;
+
+    container.appendChild(card);
+
+  });
+
 }
 
 
-function plantProgress(id){
+/* FAVOURITES */
 
-    const plants=getData("myPlants",[]);
+function toggleFavourite(name){
 
-    const plant=plants.find(p=>p.id===id);
+  if(favourites.includes(name)){
 
-    if(!plant) return;
+    favourites=
+      favourites.filter(item=>item!==name);
 
-    plant.progress=Math.min(100,plant.progress+10);
+  }else{
 
-    saveData("myPlants",plants);
+    favourites.push(name);
 
-    renderPlants();
+  }
 
-    toast("Growth updated 📈");
-}
+  localStorage.setItem(
+    "plantDoctorFavourites",
+    JSON.stringify(favourites)
+  );
 
+  renderLibrary();
+  renderFavourites();
 
-function toggleFavourite(id){
-
-    const plants=getData("myPlants",[]);
-
-    const plant=plants.find(p=>p.id===id);
-
-    if(!plant) return;
-
-    plant.favourite=!plant.favourite;
-
-    saveData("myPlants",plants);
-
-    renderPlants();
-    renderFavourites();
-    updateDashboard();
-
-    toast(
-        plant.favourite
-        ? "Added to favourites ❤️"
-        : "Removed from favourites"
-    );
-}
-
-
-function deletePlant(id){
-
-    if(!confirm("Remove this plant?")) return;
-
-    let plants=getData("myPlants",[]);
-
-    plants=plants.filter(p=>p.id!==id);
-
-    saveData("myPlants",plants);
-
-    renderPlants();
-    renderFavourites();
-    updateDashboard();
-
-    toast("Plant removed");
-}
-
-
-function checkPlant(name){
-
-    showSection("check");
-
-    toast("Checking "+name+" 🌿");
 }
 
 
 function renderFavourites(){
 
-    const container=document.getElementById("favouriteList");
+  const container=
+    document.getElementById("favouriteList");
 
-    const plants=getData("myPlants",[]).filter(p=>p.favourite);
-
-    if(!plants.length){
-
-        container.innerHTML=`
-            <div class="card empty" style="grid-column:1/-1">
-                ❤️
-                <h3>No favourites yet</h3>
-                <p>Tap the heart on a plant to save it here.</p>
-            </div>
-        `;
-
-        return;
-    }
-
-    container.innerHTML=plants.map(plant=>`
-
-        <div class="card plant-card">
-
-            <div class="plant-icon">${plant.icon}</div>
-
-            <h3>${escapeHTML(plant.name)}</h3>
-
-            <p>Favourite plant ❤️</p>
-
-            <button class="green-btn"
-                style="margin-top:15px"
-                onclick="checkPlant('${escapeHTML(plant.name)}')">
-                🩺 Check Plant
-            </button>
-
-        </div>
-
-    `).join("");
-}
+  container.innerHTML="";
 
 
-function renderLibrary(){
-
-    const query=(document.getElementById("plantSearch")?.value || "").toLowerCase();
-
-    const filtered=plantsData.filter(plant=>
-        plant.name.toLowerCase().includes(query)
+  const favPlants=
+    plantsData.filter(plant=>
+      favourites.includes(plant.name)
     );
 
-    const container=document.getElementById("libraryList");
 
-    if(!filtered.length){
+  if(favPlants.length===0){
 
-        container.innerHTML=`
-            <div class="card empty" style="grid-column:1/-1">
-                🌱
-                <h3>No plant found</h3>
-                <p>Try another plant name.</p>
-            </div>
-        `;
+    container.innerHTML=`
+      <div class="card">
+        <h3>⭐ No favourites yet</h3>
+        <p class="muted">
+          Go to the Plant Library and add some favourites.
+        </p>
 
-        return;
-    }
+        <button
+          class="button"
+          onclick="showSection('library')"
+        >
+          📚 Open Library
+        </button>
+      </div>
+    `;
 
-    container.innerHTML=filtered.map((plant,index)=>`
+    return;
+  }
 
-        <div class="card library-card" onclick="showPlantInfo(${index})">
 
-            <div class="plant-icon">${plant.icon}</div>
+  favPlants.forEach(plant=>{
 
-            <h3>${plant.name}</h3>
+    const card=document.createElement("div");
 
-            <p>${plant.fact}</p>
+    card.className="plant-card";
 
-            <button class="small-btn" style="margin-top:12px">
-                View care →
-            </button>
+    card.innerHTML=`
 
-        </div>
+      <div class="plant-icon">${plant.icon}</div>
 
-    `).join("");
+      <h3>${plant.name}</h3>
+
+      <p>
+        ☀️ ${plant.light}
+      </p>
+
+      <p>
+        💧 ${plant.water}
+      </p>
+
+      <button
+        class="button secondary"
+        onclick="toggleFavourite('${plant.name}')"
+      >
+        ⭐ Remove Favourite
+      </button>
+
+    `;
+
+    container.appendChild(card);
+
+  });
+
 }
 
 
-function searchPlants(){
-    renderLibrary();
-}
+/* WATER TRACKER */
 
+function waterPlant(){
 
-function showPlantInfo(index){
+  const today=new Date().toISOString().split("T")[0];
 
-    const plant=plantsData[index];
+  if(!waterData.includes(today)){
 
-    alert(
-        plant.name+
-        "\\n\\n☀️ Light: "+plant.light+
-        "\\n💧 Water: "+plant.water+
-        "\\n🪴 Soil: "+plant.soil+
-        "\\n\\n🌱 Fact: "+plant.fact
+    waterData.push(today);
+
+    localStorage.setItem(
+      "plantDoctorWater",
+      JSON.stringify(waterData)
     );
+
+  }
+
+  updateDashboard();
+  renderCalendar();
+
 }
 
 
-function saveNotes(){
+function undoWater(){
 
-    const notes=document.getElementById("notes").value;
+  const today=new Date().toISOString().split("T")[0];
 
-    saveData("plantNotes",notes);
+  waterData=
+    waterData.filter(date=>date!==today);
 
-    toast("Notes saved 📝");
+  localStorage.setItem(
+    "plantDoctorWater",
+    JSON.stringify(waterData)
+  );
+
+  updateDashboard();
+  renderCalendar();
+
 }
 
 
-function loadNotes(){
+function clearWaterHistory(){
 
-    const notes=getData("plantNotes","");
+  waterData=[];
 
-    document.getElementById("notes").value=notes;
-}
+  localStorage.setItem(
+    "plantDoctorWater",
+    JSON.stringify(waterData)
+  );
 
+  updateDashboard();
+  renderCalendar();
 
-function waterToday(){
-
-    const days=getData("waterDays",[]);
-
-    const today=new Date().toISOString().split("T")[0];
-
-    if(!days.includes(today)){
-        days.push(today);
-    }
-
-    saveData("waterDays",days);
-
-    const plants=getData("myPlants",[]);
-
-    plants.forEach(p=>p.watered=true);
-
-    saveData("myPlants",plants);
-
-    renderCalendar();
-    renderPlants();
-    updateDashboard();
-
-    toast("Today is marked as watered 💧");
 }
 
 
 function renderCalendar(){
 
-    const date=new Date();
+  const today=new Date();
 
-    const year=date.getFullYear();
-    const month=date.getMonth();
+  const day=today.getDay();
 
-    const first=new Date(year,month,1).getDay();
-    const total=new Date(year,month+1,0).getDate();
+  const mondayOffset=
+    day===0 ? -6 : 1-day;
 
-    document.getElementById("calendarTitle").textContent=
-        date.toLocaleString("default",{month:"long",year:"numeric"});
+  const monday=new Date(today);
 
-    const days=getData("waterDays",[]);
+  monday.setDate(
+    today.getDate()+mondayOffset
+  );
 
-    const today=new Date().toISOString().split("T")[0];
 
-    let html="";
+  for(let i=0;i<7;i++){
 
-    for(let i=0;i<first;i++){
+    const date=new Date(monday);
 
-        html+=`<div class="day" style="opacity:0"></div>`;
+    date.setDate(
+      monday.getDate()+i
+    );
+
+    const key=date.toISOString().split("T")[0];
+
+    const element=
+      document.getElementById("day"+i);
+
+    if(!element) continue;
+
+    if(waterData.includes(key)){
+
+      element.classList.add("done");
+
+      element.textContent=
+        ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][i]
+        +" ✓";
+
+    }else{
+
+      element.classList.remove("done");
+
+      element.textContent=
+        ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"][i];
+
     }
 
-    for(let day=1;day<=total;day++){
+  }
 
-        const key=
-            year+"-"+
-            String(month+1).padStart(2,"0")+"-"+
-            String(day).padStart(2,"0");
+}
 
-        const watered=days.includes(key);
-        const isToday=key===today;
 
-        html+=`
-            <div class="day ${watered?"watered":""} ${isToday?"today":""}">
-                <strong>${day}</strong>
-                <small>
-                    ${watered?"💧":" "}
-                </small>
-            </div>
-        `;
-    }
+/* LIGHT TIP */
 
-    document.getElementById("calendarGrid").innerHTML=html;
+function showLightTip(){
 
+  const tips=[
+    "Most indoor plants prefer bright light without harsh direct sunlight.",
+    "If a plant is growing toward a window, it may need more light.",
+    "Too much strong sunlight can damage some leaves.",
+    "Turn your plant sometimes so different sides receive light."
+  ];
+
+  const random=
+    tips[Math.floor(Math.random()*tips.length)];
+
+  document.getElementById("lightTip").textContent=random;
+
+}
+
+
+/* NOTES */
+
+function saveNotes(){
+
+  const notes=
+    document.getElementById("notes").value;
+
+  localStorage.setItem(
+    "plantDoctorNotes",
+    notes
+  );
+
+  document.getElementById("noteStatus").textContent=
+    "Notes saved ✓";
+
+}
+
+
+function clearNotes(){
+
+  document.getElementById("notes").value="";
+
+  localStorage.removeItem(
+    "plantDoctorNotes"
+  );
+
+  document.getElementById("noteStatus").textContent=
+    "Notes cleared.";
+
+}
+
+
+/* DARK MODE */
+
+function toggleDarkMode(){
+
+  document.body.classList.toggle("dark");
+
+  const isDark=
+    document.body.classList.contains("dark");
+
+  localStorage.setItem(
+    "plantDoctorDark",
+    isDark ? "1" : "0"
+  );
+
+  updateDarkToggle();
+
+}
+
+
+function updateDarkToggle(){
+
+  const isDark=
+    document.body.classList.contains("dark");
+
+  const toggle=
+    document.getElementById("darkToggle");
+
+  if(toggle){
+
+    toggle.classList.toggle(
+      "on",
+      isDark
+    );
+
+  }
+
+}
+
+
+/* REMINDERS */
+
+function toggleReminders(){
+
+  const current=
+    localStorage.getItem("plantDoctorReminders")==="1";
+
+  const newValue=!current;
+
+  localStorage.setItem(
+    "plantDoctorReminders",
+    newValue ? "1" : "0"
+  );
+
+  updateReminderToggle();
+
+}
+
+
+function updateReminderToggle(){
+
+  const on=
+    localStorage.getItem("plantDoctorReminders")==="1";
+
+  const toggle=
+    document.getElementById("reminderToggle");
+
+  const text=
+    document.getElementById("reminderText");
+
+  if(toggle){
+
+    toggle.classList.toggle(
+      "on",
+      on
+    );
+
+  }
+
+  if(text){
+
+    text.textContent=
+      on
+      ? "Care reminders are on."
+      : "Reminders are off.";
+
+  }
+
+}
+
+
+/* DASHBOARD */
+
+function updateDashboard(){
+
+  document.getElementById("plantCount").textContent=
+    myPlants.length;
+
+  document.getElementById("checkCount").textContent=
+    historyData.length;
+
+  document.getElementById("waterCount").textContent=
+    waterData.length;
+
+  document.getElementById("streakCount").textContent=
     calculateStreak();
+
+
+  const progress=
+    Math.min(
+      100,
+      (waterData.length%7)/7*100
+    );
+
+  document.getElementById("waterProgress").style.width=
+    progress+"%";
+
+
+  const recent=
+    document.getElementById("recentCheck");
+
+  if(historyData.length>0){
+
+    recent.textContent=
+      historyData[0].icon+
+      " "+
+      historyData[0].title+
+      " • "+
+      historyData[0].date;
+
+  }else{
+
+    recent.textContent=
+      "No checks yet.";
+
+  }
+
 }
 
 
 function calculateStreak(){
 
-    const days=getData("waterDays",[]);
+  if(waterData.length===0) return 0;
 
-    let streak=0;
+  let streak=0;
 
-    const date=new Date();
+  const today=new Date();
 
-    while(true){
+  for(let i=0;i<30;i++){
 
-        const key=date.toISOString().split("T")[0];
+    const date=new Date(today);
 
-        if(days.includes(key)){
-
-            streak++;
-
-            date.setDate(date.getDate()-1);
-
-        }else{
-
-            break;
-        }
-    }
-
-    document.getElementById("streakNumber").textContent=
-        streak+" day"+(streak===1?"":"s");
-}
-
-
-function renderHistory(){
-
-    const container=document.getElementById("historyList");
-
-    const history=getData("plantHistory",[]);
-
-    if(!history.length){
-
-        container.innerHTML=`
-            <div class="empty">
-                <div style="font-size:55px">🩺</div>
-                <h3>No checks yet</h3>
-                <p>Your saved plant checks will appear here.</p>
-            </div>
-        `;
-
-        return;
-    }
-
-    container.innerHTML=history.map(item=>`
-
-        <div class="history-item">
-
-            <div class="history-icon">${item.icon}</div>
-
-            <div style="flex:1">
-                <strong>${escapeHTML(item.title)}</strong>
-                <p>${item.time}</p>
-            </div>
-
-            <strong style="color:var(--green2)">
-                ${item.score}%
-            </strong>
-
-        </div>
-
-    `).join("");
-}
-
-
-function clearHistory(){
-
-    if(!confirm("Clear all plant check history?")) return;
-
-    localStorage.removeItem("plantHistory");
-
-    renderHistory();
-    updateDashboard();
-
-    toast("History cleared");
-}
-
-
-function updateDashboard(){
-
-    const plants=getData("myPlants",[]);
-    const history=getData("plantHistory",[]);
-
-    const today=new Date().toISOString().split("T")[0];
-
-    const watered=plants.filter(p=>p.watered).length;
-
-    const fav=plants.filter(p=>p.favourite).length;
-
-    document.getElementById("plantCount").textContent=plants.length;
-    document.getElementById("waterCount").textContent=watered;
-    document.getElementById("favCount").textContent=fav;
-    document.getElementById("checkCount").textContent=history.length;
-}
-
-
-function toggleDark(){
-
-    document.body.classList.toggle("dark");
-
-    const enabled=document.body.classList.contains("dark");
-
-    localStorage.setItem("darkMode",enabled);
-
-    updateDarkSwitch();
-}
-
-
-function updateDarkSwitch(){
-
-    const enabled=document.body.classList.contains("dark");
-
-    const sw=document.getElementById("darkSwitch");
-
-    if(sw){
-        sw.classList.toggle("active",enabled);
-    }
-}
-
-
-function toggleReminders(){
-
-    const current=localStorage.getItem("reminders")==="true";
-
-    localStorage.setItem("reminders",!current);
-
-    updateReminderSwitch();
-
-    toast(
-        !current
-        ? "Care reminders turned on 🔔"
-        : "Care reminders turned off"
+    date.setDate(
+      today.getDate()-i
     );
-}
 
+    const key=
+      date.toISOString().split("T")[0];
 
-function updateReminderSwitch(){
+    if(waterData.includes(key)){
 
-    const enabled=localStorage.getItem("reminders")==="true";
+      streak++;
 
-    const sw=document.getElementById("reminderSwitch");
+    }else{
 
-    if(sw){
-        sw.classList.toggle("active",enabled);
-    }
-}
+      break;
 
-
-function resetApp(){
-
-    if(!confirm("Reset all Plant Doctor data?")) return;
-
-    localStorage.clear();
-
-    location.reload();
-}
-
-
-document.addEventListener("DOMContentLoaded",()=>{
-
-    if(localStorage.getItem("darkMode")==="true"){
-        document.body.classList.add("dark");
     }
 
-    updateDarkSwitch();
-    updateReminderSwitch();
+  }
 
-    renderPlants();
-    renderLibrary();
-    renderHistory();
-    renderCalendar();
-    renderFavourites();
-    updateDashboard();
-    loadNotes();
+  return streak;
 
-});
+}
+
+
+/* LOAD SAVED DATA */
+
+function loadSavedData(){
+
+  const dark=
+    localStorage.getItem("plantDoctorDark")==="1";
+
+  if(dark){
+
+    document.body.classList.add("dark");
+
+  }
+
+
+  const notes=
+    localStorage.getItem("plantDoctorNotes");
+
+  if(notes){
+
+    document.getElementById("notes").value=notes;
+
+  }
+
+
+  updateDashboard();
+  updateDarkToggle();
+  updateReminderToggle();
+  renderCalendar();
+
+}
+
+
+/* START */
+
+loadSavedData();
 
 </script>
 
 </body>
 </html>
+```
